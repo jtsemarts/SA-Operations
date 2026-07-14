@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Task Board — Semantic Arts (Otto)</title><style>
+:root{--navy:#1F3864;--line:#dce3ec;--bg:#f6f8fb;--muted:#6b7280;}
+*{box-sizing:border-box}body{margin:0;font:14px/1.5 -apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#1c2430;background:var(--bg)}
+header{background:var(--navy);color:#fff;padding:14px 20px}header h1{margin:0;font-size:18px}header .sub{opacity:.8;font-size:12px;margin-top:2px}
+.toolbar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#q{flex:1;min-width:180px;padding:8px 12px;border:1px solid #c4cede;border-radius:8px;font-size:14px}
+.chip{cursor:pointer;border:1px solid #c4cede;background:#fff;padding:3px 10px;border-radius:20px;font-size:12px;user-select:none}
+.chip.on{color:#fff;border-color:transparent}
+.chip.prio.on{background:#444}
+.grp{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.grp .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-right:2px}
+.btn{cursor:pointer;border:1px solid #c4cede;background:#fff;padding:6px 10px;border-radius:8px;font-size:12px}
+.cols{display:flex;gap:14px;padding:16px 20px;align-items:flex-start;overflow-x:auto}
+.col{flex:1;min-width:260px;background:#eef2f7;border-radius:12px;padding:10px}
+.col h2{margin:2px 4px 10px;font-size:13px;color:var(--navy);text-transform:uppercase;letter-spacing:.04em}
+.col h2 .n{color:var(--muted);font-weight:500}
+.card{background:#fff;border:1px solid var(--line);border-left:4px solid #c4cede;border-radius:9px;padding:9px 11px;margin:8px 0;box-shadow:0 1px 2px rgba(20,40,80,.05)}
+.card.done{opacity:.6}
+.card .title{font-weight:600;font-size:14px}
+.card.done .title{text-decoration:line-through;color:var(--muted)}
+.card .desc{color:#3a4453;font-size:12.5px;margin:4px 0}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
+.tag{font-size:11px;font-weight:600;color:#fff;padding:2px 8px;border-radius:20px}
+.due{font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:#eef1f6;color:#556}
+.due.over{background:#fde8e6;color:#b0281a}.due.soon{background:#fff3d6;color:#8a5a00}
+.owner{font-size:11px;color:var(--muted)}
+.subs{margin:6px 0 0;padding-left:16px}.subs li{font-size:12px;color:#4a5568;margin:1px 0}
+.pdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.empty{color:var(--muted);font-size:12px;padding:6px;font-style:italic}
+.viewbtn{cursor:pointer;border:1px solid #c4cede;background:#fff;padding:4px 10px;border-radius:8px;font-size:12px}
+.viewbtn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.list{display:block;padding:16px 20px;max-width:900px}
+.listgrp{margin-bottom:14px}
+.cathdr{font-size:13px;color:var(--navy);text-transform:uppercase;letter-spacing:.04em;border-left:4px solid #c4cede;padding-left:8px;margin:16px 0 6px}
+.cathdr .n{color:var(--muted);font-weight:500}
+.hide{display:none!important}
+.legend{font-size:11px;color:var(--muted);padding:0 20px 16px}
+</style></head><body>
+<header><h1>Task Board — Semantic Arts</h1><div class="sub">Enhanced view (tags · due dates · priority) &middot; source: TASKS.md &middot; generated July 10, 2026 09:49</div></header>
+<div class="toolbar">
+<input id="q" type="search" placeholder="Search tasks, tags, people…">
+<div class="grp"><span class="lbl">Tags</span><span id="tagfilters"></span></div>
+<div class="grp"><span class="lbl">Priority</span>
+<span class="chip prio" data-p="high">High</span><span class="chip prio" data-p="med">Med</span><span class="chip prio" data-p="low">Low</span></div>
+<div class="grp"><span class="lbl">View</span><span class="viewbtn on" data-v="board">Board</span><span class="viewbtn" data-v="due">Today &amp; Overdue</span><span class="viewbtn" data-v="category">By Category</span></div>
+<span class="btn" id="sortDue">Sort by due date</span>
+<span class="btn" id="hideDone">Hide completed</span>
+<span class="btn" id="clear">Clear</span>
+</div>
+<div class="cols" id="cols"></div>
+<div class="legend" id="legend"></div>
+<script>
+const TASKS=[{"section": "Active", "done": false, "title": "Run the 2-week Productivity + HR plugin trial", "desc": "connector-free; complete the go/no-go review.", "tags": ["Ops"], "due": "2026-07-17", "prio": "high", "owners": [], "subs": ["Compare against our SOP-driven workflows; capture time saved."]}, {"section": "Active", "done": false, "title": "Review revised Exec Roles / RACI with CEO & President", "desc": "set the threshold figures.", "tags": ["Governance"], "due": "2026-07-15", "prio": "high", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Make pay changes in Spark", "desc": "HR/payroll system.", "tags": ["HR"], "due": "2026-07-24", "prio": "high", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Talk to Dave about Brian Schulte", "desc": "SA HR.", "tags": ["HR"], "due": "2026-07-13", "prio": "med", "owners": ["Dave"], "subs": []}, {"section": "Active", "done": false, "title": "Colton baby gift", "desc": "team/HR gesture (confirmed SA).", "tags": ["HR"], "due": "2026-07-20", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Figure out the CAN accounting in QB and write out a plan", "desc": "Canada entity bookkeeping in QuickBooks.", "tags": ["Finance"], "due": "2026-07-13", "prio": "high", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Box quantity of each book", "desc": "inventory.", "tags": ["Ops"], "due": "2026-08-01", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Work with Lucas on the lead-nurturing plan", "desc": "SA Marketing.", "tags": ["Marketing"], "due": "2026-07-14", "prio": "med", "owners": ["Lucas"], "subs": []}, {"section": "Active", "done": false, "title": "Talk with Lucas on the pay-to-play position", "desc": "SA Marketing.", "tags": ["Marketing"], "due": "2026-07-14", "prio": "med", "owners": ["Lucas"], "subs": []}, {"section": "Active", "done": false, "title": "Talk with Lucas about semantic substrate", "desc": "SA Marketing.", "tags": ["Marketing"], "due": "2026-07-14", "prio": "med", "owners": ["Lucas"], "subs": []}, {"section": "Active", "done": false, "title": "Talk with Bill about Databricks with FedScale", "desc": "SA Sales.", "tags": ["Sales"], "due": "", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Set up the sales to-do list for the nurturing pipeline", "desc": "build out the nurturing-pipeline sales task list/process.", "tags": ["Sales"], "due": "", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Add projects to the nurturing pipeline", "desc": "accounts to move into nurturing.", "tags": ["Sales"], "due": "", "prio": "med", "owners": [], "subs": ["Factset; Eurofins; Broadridge; J&J; Bayer; Craxel (Mythos); ISG at MS; Threatconnect"]}, {"section": "Active", "done": false, "title": "Ask Rebecca about setting up OMICS", "desc": "SA Sales/Client.", "tags": ["Sales"], "due": "2026-07-13", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Active", "done": false, "title": "Check Zoho for tasks", "desc": "daily weekday check of Zoho CRM tasks/activities; recurring, from the calendar.", "tags": ["Sales"], "due": "2026-07-13", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Review AIM Services draft webpage content", "desc": "from AIM. Doc: Documents/AIM_Services_draft_webpage_content.docx", "tags": ["Sales"], "due": "2026-07-14", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Check and approve Expensify expense reports", "desc": "recurring (every pay cycle, Monday before payroll), from the calendar.", "tags": ["Finance"], "due": "2026-07-20", "prio": "high", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Draft slides for the company update", "desc": "governance/company update deck.", "tags": ["Governance"], "due": "2026-07-13", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Ask a coach to prepare 2 discussion questions", "desc": "for the 3rd-Friday coaches meeting; recurring, from the calendar.", "tags": ["HR"], "due": "2026-07-13", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Email the coaches agenda", "desc": "for the 3rd-Friday coaches meeting; recurring, from the calendar.", "tags": ["HR"], "due": "2026-07-16", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Work on the cash spreadsheet (checking & savings)", "desc": "update cash s/s to show checking and savings.", "tags": ["Finance"], "due": "2026-07-13", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Back up the Agents workspace to SharePoint", "desc": "monthly redundancy backup (iCloud is the primary backup).", "tags": ["IT"], "due": "2026-07-31", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Email Pride \u2014 planned remit", "desc": "recurring (weekly), from the calendar.", "tags": ["Finance"], "due": "2026-07-13", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Update the cash & staff plan", "desc": "recurring (weekly), from the calendar.", "tags": ["Governance"], "due": "2026-07-13", "prio": "high", "owners": [], "subs": []}, {"section": "Waiting On", "done": false, "title": "Ratify the executive decision-rights model", "desc": "final sign-off.", "tags": ["Governance"], "due": "", "prio": "high", "owners": ["CEO", "President"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Follow up: confirm commission assignment with Rebecca", "desc": "Rebecca off Friday; follow up Monday.", "tags": ["Sales"], "due": "2026-07-13", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Remind Dave to contact Abhi re: MS Map turnover after the rate increase", "desc": "SA Sales.", "tags": ["Sales"], "due": "2026-08-05", "prio": "med", "owners": ["Dave"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Lawyer information from Rebecca", "desc": "Rebecca off Friday; follow up Monday.", "tags": ["Governance"], "due": "2026-07-13", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Rebecca promo letter to Amanda", "desc": "promotion letter to hand to Amanda.", "tags": ["HR"], "due": "2026-07-13", "prio": "med", "owners": ["Amanda"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Nurturing pipeline from Lucas", "desc": "awaiting the nurturing pipeline.", "tags": ["Marketing"], "due": "2026-07-14", "prio": "med", "owners": ["Lucas"], "subs": []}, {"section": "Waiting On", "done": false, "title": "MQL nurturing from Lucas", "desc": "awaiting MQL nurturing.", "tags": ["Marketing"], "due": "2026-07-14", "prio": "med", "owners": ["Lucas"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Response from Paylocity", "desc": "awaiting reply.", "tags": ["HR"], "due": "2026-07-10", "prio": "med", "owners": ["Paylocity"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Rebecca to sign T-Mobile NDA", "desc": "awaiting signature.", "tags": ["Legal"], "due": "2026-07-10", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Records retention policy review", "desc": "draft sent for review; route legal questions to Legal.", "tags": ["Ops"], "due": "2026-07-16", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Draft the client-satisfaction email to CIS, share with Rebecca", "desc": "feeds the mid-contract client check-in SOP template.", "tags": ["Sales", "Client"], "due": "2026-07-16", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Email Bonnie re: Amanda open enrollment", "desc": "awaiting reply; follow up Monday.", "tags": ["HR"], "due": "2026-07-13", "prio": "high", "owners": ["Bonnie"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Margin queries from Dave", "desc": "awaiting Dave's margin questions/answers.", "tags": ["Finance"], "due": "2026-07-13", "prio": "med", "owners": ["Dave"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Hover domain transfer", "desc": "in progress; follow up Monday.", "tags": ["IT"], "due": "2026-07-13", "prio": "med", "owners": [], "subs": []}, {"section": "Waiting On", "done": false, "title": "Rebecca to decide on Microsoft integration", "desc": "read-only M365 (email/calendar/Teams) connection decision; follow up next Thursday.", "tags": ["IT"], "due": "2026-07-16", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Someday", "done": false, "title": "Populate remaining [DRAFT] SOP placeholders", "desc": "in the Operations Playbook.", "tags": ["Ops"], "due": "", "prio": "low", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "PCORI fees from Moody (done:2026-07-10) #Finance", "desc": "PCORI fees from Moody", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "QuickBooks export (done:2026-07-10) #Finance", "desc": "QuickBooks export", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Remit trust & trustee payments (quarterly) (done:2026-07-07) #Finance", "desc": "Remit trust & trustee payments (quarterly)", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Work on the evaluation spreadsheet (done:2026-07-06) #Ops", "desc": "Work on the evaluation spreadsheet", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "AIM partnership: website + joint materials (The Connected Customer) (done:2026-07-06) #Sales", "desc": "AIM partnership: website + joint materials (The Connected Customer)", "tags": ["Sales"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Research federal sales (done:2026-07-06) #Sales", "desc": "Research federal sales", "tags": ["Sales"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Update the evaluation spreadsheet (done:2026-07-06) #Ops", "desc": "Update the evaluation spreadsheet", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Pay policy document (done:2026-07-06) #HR", "desc": "Pay policy document", "tags": ["HR"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Close the NFR project (done:2026-07-06) #Finance", "desc": "Close the NFR project", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Close the OMICS Q2 project (done:2026-07-06) #Finance", "desc": "Close the OMICS Q2 project", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Archive the cash plan (done:2026-07-06) #Finance", "desc": "Archive the cash plan", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Finish payroll (catch-up) (done:2026-07-06) #HR", "desc": "Finish payroll (catch-up)", "tags": ["HR"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "CAN journal entry (done:2026-07-06) #Finance", "desc": "CAN journal entry", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Send the Beta invoice (done:2026-07-06) #Finance", "desc": "Send the Beta invoice", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Decide whether to deploy the Life Sciences JD (done:2026-07-06) #HR", "desc": "Decide whether to deploy the Life Sciences JD", "tags": ["HR"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Update bank info in the AR schedule (done:2026-07-06) #Finance", "desc": "Update bank info in the AR schedule", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Reorganize the file system into per-agent folders (done:2026-07-03) #Ops", "desc": "Reorganize the file system into per-agent folders", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Promote Otto to Chief of Staff; create EA + five specialists (done:2026-07-03) #Ops", "desc": "Promote Otto to Chief of Staff; create EA + five specialists", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Build the 10 agent knowledge bases + shared context profile (done:2026-07-03) #Research", "desc": "Build the 10 agent knowledge bases + shared context profile", "tags": ["Research"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Fold the AI Usage Policy into Legal; resolve both compliance flags (done:2026-07-03) #Legal", "desc": "Fold the AI Usage Policy into Legal; resolve both compliance flags", "tags": ["Legal"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Decide which new-agent SOP & calendar recommendations to adopt (done:2026-07-06) #Ops", "desc": "Decide which new-agent SOP & calendar recommendations to adopt", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Mark up the SOP & calendar recommendations (done:2026-07-06) #Ops", "desc": "Mark up the SOP & calendar recommendations", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Revoke the retired Faithful Steward service-account key (done:2026-07-06) #IT", "desc": "Revoke the retired Faithful Steward service-account key", "tags": ["IT"], "due": "", "prio": "", "owners": [], "subs": []}];
+const PALETTE={"Finance": "#0F6B3C", "HR": "#8A5A00", "Sales": "#1F6FB2", "Marketing": "#6A1B9A", "IT": "#B03A2E", "Data": "#0B6E99", "Research": "#2E4D7B", "Legal": "#555F6E", "Brand": "#C2185B", "Ops": "#1F3864", "Client": "#00796B", "Governance": "#4E342E", "Personal": "#546E7A"};
+const PRIO={"high": "#c0392b", "med": "#c98a00", "low": "#3a7d3a"};
+
+const SECT=["Active","Waiting On","Someday","Done"];
+const today=new Date(); today.setHours(0,0,0,0);
+let selTags=new Set(), selPrio=new Set(), sortDue=false, hideDone=false;
+function dueClass(d){if(!d)return"";const dt=new Date(d+"T00:00:00");const diff=(dt-today)/86400000;if(diff<0)return"over";if(diff<=3)return"soon";return"";}
+function tagColor(t){return PALETTE[t]||"#8894a6";}
+function el(h){const d=document.createElement('div');d.innerHTML=h;return d.firstElementChild;}
+// build tag filter chips from palette + present tags
+const present=new Set(); TASKS.forEach(t=>t.tags.forEach(x=>present.add(x)));
+const tagOrder=Object.keys(PALETTE).filter(t=>present.has(t)).concat([...present].filter(t=>!PALETTE[t]));
+const tf=document.getElementById('tagfilters');
+tagOrder.forEach(t=>{const c=el('<span class="chip" data-t="'+t+'">'+t+'</span>');c.style.borderColor=tagColor(t);c.addEventListener('click',()=>{if(selTags.has(t)){selTags.delete(t);c.classList.remove('on');c.style.background='';}else{selTags.add(t);c.classList.add('on');c.style.background=tagColor(t);}render();});tf.appendChild(c);});
+document.querySelectorAll('.chip.prio').forEach(c=>c.addEventListener('click',()=>{const p=c.dataset.p;if(selPrio.has(p)){selPrio.delete(p);c.classList.remove('on');}else{selPrio.add(p);c.classList.add('on');}render();}));
+document.getElementById('sortDue').addEventListener('click',function(){sortDue=!sortDue;this.style.background=sortDue?'#dbe4f0':'#fff';render();});
+document.getElementById('hideDone').addEventListener('click',function(){hideDone=!hideDone;this.style.background=hideDone?'#dbe4f0':'#fff';render();});
+document.getElementById('clear').addEventListener('click',()=>{selTags.clear();selPrio.clear();sortDue=false;hideDone=false;document.getElementById('q').value='';document.querySelectorAll('.chip.on').forEach(c=>{c.classList.remove('on');c.style.background='';});document.getElementById('sortDue').style.background='#fff';document.getElementById('hideDone').style.background='#fff';render();});
+document.getElementById('q').addEventListener('input',render);
+function match(t){
+ const q=document.getElementById('q').value.toLowerCase().trim();
+ if(hideDone&&t.done)return false;
+ if(selTags.size&&!t.tags.some(x=>selTags.has(x)))return false;
+ if(selPrio.size&&!(t.prio&&selPrio.has(t.prio)))return false;
+ if(q){const hay=(t.title+' '+t.desc+' '+t.tags.join(' ')+' '+t.owners.join(' ')+' '+t.subs.join(' ')).toLowerCase();if(hay.indexOf(q)<0)return false;}
+ return true;
+}
+function card(t){
+ const pc=PRIO[t.prio]||'#c4cede';
+ const c=document.createElement('div');c.className='card'+(t.done?' done':'');c.style.borderLeftColor=pc;
+ let h='';
+ h+='<div class="title">'+(t.prio?'<span class="pdot" style="background:'+pc+'" title="'+t.prio+' priority"></span>':'')+escape(t.title)+'</div>';
+ if(t.desc)h+='<div class="desc">'+escape(t.desc)+'</div>';
+ h+='<div class="row">';
+ t.tags.forEach(x=>h+='<span class="tag" style="background:'+tagColor(x)+'">'+escape(x)+'</span>');
+ if(t.due)h+='<span class="due '+dueClass(t.due)+'">due '+t.due+'</span>';
+ t.owners.forEach(o=>h+='<span class="owner">@'+escape(o)+'</span>');
+ h+='</div>';
+ if(t.subs.length){h+='<ul class="subs">';t.subs.forEach(s=>h+='<li>'+escape(s)+'</li>');h+='</ul>';}
+ c.innerHTML=h;return c;
+}
+function escape(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+let view='board';
+document.querySelectorAll('.viewbtn').forEach(b=>b.addEventListener('click',function(){document.querySelectorAll('.viewbtn').forEach(x=>x.classList.remove('on'));this.classList.add('on');view=this.dataset.v;render();}));
+function byDue(a,b){return (a.due||'9999')<(b.due||'9999')?-1:1;}
+function grp(title,arr,host,color){const g=el('<div class="listgrp"></div>');g.appendChild(el('<h3 class="cathdr"'+(color?' style="border-color:'+color+'"':'')+'>'+escape(title)+' <span class="n">('+arr.length+')</span></h3>'));arr.forEach(t=>g.appendChild(card(t)));host.appendChild(g);}
+function render(){
+ const host=document.getElementById('cols');host.innerHTML='';host.className=(view==='board')?'cols':'list';
+ if(view==='board'){
+  SECT.forEach(sec=>{
+   let items=TASKS.filter(t=>t.section===sec&&match(t));
+   if(sortDue)items=items.slice().sort(byDue);
+   const col=document.createElement('div');col.className='col';
+   col.innerHTML='<h2>'+sec+' <span class="n">('+items.length+')</span></h2>';
+   if(!items.length)col.appendChild(el('<div class="empty">Nothing here</div>'));
+   items.forEach(t=>col.appendChild(card(t)));
+   host.appendChild(col);
+  });
+ } else if(view==='due'){
+  const items=TASKS.filter(t=>match(t)&&!t.done&&t.due);
+  const isToday=t=>{const d=new Date(t.due+'T00:00:00');return (d-today)===0;};
+  const mine=items.filter(t=>t.section!=='Waiting On');
+  const wait=items.filter(t=>t.section==='Waiting On');
+  const over=mine.filter(t=>dueClass(t.due)==='over').sort(byDue);
+  const tod=mine.filter(isToday).sort(byDue);
+  const waitDue=wait.filter(t=>dueClass(t.due)==='over'||isToday(t)).sort(byDue);
+  if(over.length)grp('Overdue',over,host);
+  if(tod.length)grp('Due today',tod,host);
+  if(!over.length&&!tod.length)host.appendChild(el('<div class="empty">Nothing overdue or due today.</div>'));
+  if(waitDue.length)grp('Waiting on — to follow up',waitDue,host,'#7a5c00');
+ } else {
+  const items=TASKS.filter(t=>match(t)&&!t.done);
+  const groups={};
+  items.forEach(t=>{(t.tags.length?t.tags:['(untagged)']).forEach(tag=>{(groups[tag]=groups[tag]||[]).push(t);});});
+  const ord=Object.keys(PALETTE).filter(k=>groups[k]).concat(Object.keys(groups).filter(k=>!PALETTE[k]));
+  if(!ord.length)host.appendChild(el('<div class="empty">No tasks.</div>'));
+  ord.forEach(tag=>grp(tag,groups[tag].slice().sort(byDue),host,tagColor(tag)));
+ }
+}
+document.getElementById('legend').textContent='Tags are customizable by function (edit the palette in the generator). Priority: high/med/low. Due dates flag red when overdue, amber within 3 days. Recurring items live in the Company Calendar. Edit tasks in TASKS.md; regenerate this board to refresh.';
+render();
+</script></body></html>

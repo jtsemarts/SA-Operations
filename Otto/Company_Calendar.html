@@ -1,0 +1,790 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semantic Arts — Company Calendar</title>
+<style>
+:root{--navy:#1F3864;--mid:#2E4D7B;--line:#dce3ec;--bg:#f7f9fc;--muted:#667;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#222;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.55;}
+.wrap{max-width:960px;margin:0 auto;padding:28px 26px 60px;}
+h1{color:var(--navy);font-size:28px;margin:0 0 2px;}
+h2{color:var(--navy);font-size:20px;margin:28px 0 8px;border-bottom:2px solid var(--line);padding-bottom:4px;}
+h3{color:var(--mid);font-size:16px;margin:20px 0 6px;}
+.meta{color:var(--muted);font-size:13px;margin-bottom:18px;}
+table{border-collapse:collapse;width:100%;margin:10px 0 18px;font-size:14px;}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top;}
+th{background:var(--navy);color:#fff;font-weight:600;}
+tr:nth-child(even) td{background:#eef2f8;}
+code{background:#eef2f5;padding:1px 5px;border-radius:3px;font-size:13px;}
+ul,ol{margin:8px 0 14px;padding-left:22px;}
+li{margin:3px 0;}
+hr{border:none;border-top:1px solid var(--line);margin:22px 0;}
+a{color:var(--mid);}
+.foot{color:var(--muted);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:10px;}
+</style></head><body><div class="wrap">
+<h1 id="semantic-arts-company-calendar">Semantic Arts — Company Calendar</h1>
+<p><strong>Maintained by:</strong> Otto (for JT Metcalf, COO)
+<strong>Type:</strong> Living document · <strong>Version:</strong> 1.8 · <strong>Last updated:</strong> July 6, 2026</p>
+<p>A recurring calendar of deadlines and standing reminders: tax and compliance dates plus annual operating rituals (review job descriptions, run salary surveys, refresh insurance, etc.). Otto will suggest new entries as they come up in our work; JT confirms before anything is added.</p>
+<h2 id="how-to-use-this">How to use this</h2>
+<ul>
+<li>Entries are grouped two ways: a <strong>recurring-cadence overview</strong> (annual / quarterly / monthly) and a <strong>month-by-month</strong> list of dated deadlines.</li>
+<li>Tags: <code>[TAX]</code> <code>[PAYROLL]</code> <code>[COMPLIANCE]</code> <code>[HR]</code> <code>[OPS]</code> <code>[FINANCE]</code> <code>[CLIENT]</code> <code>[BENEFITS]</code>.</li>
+<li><strong>Dates roll:</strong> when a federal deadline falls on a weekend or holiday, it moves to the next business day. Confirm the exact day each year.</li>
+</ul>
+<h2 id="assumptions-confirm-correct">Assumptions (confirm / correct)</h2>
+<ul>
+<li>Entity: <strong>S-corporation</strong> (Form 1120-S), <strong>calendar tax year</strong>.</li>
+<li>HQ: Fort Collins, Colorado; operations and/or payroll touch <strong>many US states</strong> (state deadlines vary — see the state section).</li>
+<li>Some items (retirement-plan Form 5500, ACA reporting, state annual reports) apply only if relevant to the firm. They are marked <em>(if applicable)</em>.</li>
+<li>These dates are general scheduling reminders, not tax advice. Confirm specifics with the firm's accountant (the COO coordinates with the firm accountant per the governance matrix).</li>
+</ul>
+<hr />
+<h2 id="recurring-cadence-overview">Recurring-Cadence Overview</h2>
+<h3 id="annual-rituals-hr-ops-suggested-timing-set-by-jt">Annual rituals (HR / Ops — suggested timing, set by JT)</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>Suggested timing</th>
+<th>Owner (per governance matrix)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Review and refresh executive &amp; staff job descriptions</td>
+<td>[HR]</td>
+<td>Q1 (Jan–Feb)</td>
+<td>President + COO</td>
+</tr>
+<tr>
+<td>Run salary / compensation surveys</td>
+<td>[HR]</td>
+<td>Before annual comp review</td>
+<td>COO (input), President (sets rates)</td>
+</tr>
+<tr>
+<td>Annual performance review cycle</td>
+<td>[HR]</td>
+<td>Set by JT</td>
+<td>President + COO</td>
+</tr>
+<tr>
+<td>Benefits open enrollment</td>
+<td>[HR]</td>
+<td>Q4 (typical)</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Review &amp; update employee handbook</td>
+<td>[HR]</td>
+<td>Annual</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Review business insurance coverage &amp; seek bids</td>
+<td>[OPS]</td>
+<td>Annual</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Review incentive / bonus program &amp; profit distribution</td>
+<td>[FINANCE]</td>
+<td>Year-end</td>
+<td>Governance Committee + President</td>
+</tr>
+<tr>
+<td>Team Summit</td>
+<td>[OPS]</td>
+<td>Annual</td>
+<td>COO coordinates</td>
+</tr>
+<tr>
+<td>Annual budget setting</td>
+<td>[FINANCE]</td>
+<td>Q4 for next year</td>
+<td>CEO/President/COO</td>
+</tr>
+<tr>
+<td>Review agent charters (Otto, Legal, Brand)</td>
+<td>[OPS]</td>
+<td>Quarterly (also annual)</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Review &amp; update Operations Playbook</td>
+<td>[OPS]</td>
+<td>Quarterly</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>HR end-of-year checklist</td>
+<td>[HR]</td>
+<td>Dec 1</td>
+<td>COO / HR agent</td>
+</tr>
+<tr>
+<td>Vacation / PTO analysis</td>
+<td>[HR]</td>
+<td>End of December</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Review all recurring meeting invites &amp; build next year's calendar</td>
+<td>[OPS]</td>
+<td>Dec 1</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Update HR/payroll in Spark (positions, rates)</td>
+<td>[HR]</td>
+<td>Jan 1</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Insurance audit</td>
+<td>[OPS]</td>
+<td>Jan 6</td>
+<td>COO</td>
+</tr>
+</tbody>
+</table>
+<h3 id="quarterly">Quarterly</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>Due</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Form 941 (employer payroll tax)</td>
+<td>[PAYROLL]</td>
+<td>Apr 30, Jul 31, Oct 31, Jan 31</td>
+</tr>
+<tr>
+<td>Estimated tax payments (shareholders / individual)</td>
+<td>[TAX]</td>
+<td>Apr 15, Jun 15, Sep 15, Jan 15</td>
+</tr>
+<tr>
+<td>Financial &amp; operational reporting to Governance Committee</td>
+<td>[FINANCE]</td>
+<td>End of each quarter (cadence set by JT)</td>
+</tr>
+<tr>
+<td>Operations Playbook + charter review</td>
+<td>[OPS]</td>
+<td>Each quarter</td>
+</tr>
+<tr>
+<td>Trust distributions (3% of gross earned revenue; accrued each payroll, remitted via KeyNavigator)</td>
+<td>[GOVERNANCE]</td>
+<td>Quarterly</td>
+</tr>
+<tr>
+<td>Trustee stipends ($500 each, 3 trustees; Abhishek held)</td>
+<td>[GOVERNANCE]</td>
+<td>Quarterly</td>
+</tr>
+<tr>
+<td>Standing GC–trustee meeting: GC shares a fixed set of financials with the trustees and answers questions</td>
+<td>[GOVERNANCE]</td>
+<td>Quarterly</td>
+</tr>
+<tr>
+<td>Prepare quarterly trustee-meeting financials (Amanda prepares, COO reviews, shared to GC)</td>
+<td>[GOVERNANCE]</td>
+<td>Start of each quarter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="monthly">Monthly</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>Timing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Payroll runs &amp; payroll-tax deposits</td>
+<td>[PAYROLL]</td>
+<td>Per schedule (monthly/semiweekly per IRS deposit rules)</td>
+</tr>
+<tr>
+<td>Bookkeeping close &amp; cash-flow projection</td>
+<td>[FINANCE]</td>
+<td>Month-end</td>
+</tr>
+<tr>
+<td>Spending vs. budget review</td>
+<td>[FINANCE]</td>
+<td>Month-end</td>
+</tr>
+<tr>
+<td>Review clients due for a 1:1 satisfaction check-in call (flag contracts near their midpoint)</td>
+<td>[CLIENT]</td>
+<td>1st of month — Ops Manager (Amanda)</td>
+</tr>
+<tr>
+<td><strong>Reminder to JT:</strong> check which satisfaction calls need coordinating/scheduling</td>
+<td>[CLIENT]</td>
+<td>1st of month</td>
+</tr>
+<tr>
+<td>Prepare trustee financial reports</td>
+<td>[FINANCE]</td>
+<td>1st of month</td>
+</tr>
+<tr>
+<td>Otto reviews the calendar for recurring tasks due this week and adds them to the task board</td>
+<td>[OPS]</td>
+<td>Weekly (Monday, recurring task)</td>
+</tr>
+<tr>
+<td><strong>Manual backup of the Agents workspace to SharePoint</strong> (added redundancy; iCloud is the primary backup)</td>
+<td>[OPS]</td>
+<td>Monthly — 28th — JT / IT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="benefits-health-plan-compliance-if-applicable">Benefits &amp; health-plan compliance (if applicable)</h3>
+<p>These apply to employers offering group health / prescription-drug coverage; several are handled by the insurer or TPA, but confirming the deadlines is the firm's responsibility. Note: employer ACA 1094-C/1095-C filing applies only to Applicable Large Employers (50+ full-time-equivalent employees); at ~30 people Semantic Arts is likely below that threshold, so confirm ALE status before relying on the ACA filing dates.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>Timing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Medicare Part D creditable-coverage disclosure to CMS</td>
+<td>[BENEFITS]</td>
+<td>Within 60 days of plan-year start (Mar 1 for calendar-year plans)</td>
+</tr>
+<tr>
+<td>ACA 1095-C / 1095-B furnished to employees</td>
+<td>[BENEFITS]</td>
+<td>Early March (~Mar 3) — if applicable</td>
+</tr>
+<tr>
+<td>ACA 1094 / 1095 filing to IRS</td>
+<td>[BENEFITS]</td>
+<td>Feb 28 (paper) / Mar 31 (electronic) — if an ALE</td>
+</tr>
+<tr>
+<td>RxDC prescription-drug data collection reporting</td>
+<td>[BENEFITS]</td>
+<td>June 1</td>
+</tr>
+<tr>
+<td>Form 5500 (retirement plan)</td>
+<td>[COMPLIANCE]</td>
+<td>July 31 (calendar-year plans) — if applicable</td>
+</tr>
+</tbody>
+</table>
+<p>Subsidiary-specific: <strong>CAN 2200 forms</strong> (Canada) — March. UK National Insurance is deducted automatically from pay. Confirm regional filings per subsidiary.</p>
+<h3 id="recurring-operational-tasks-migrated-from-faithful-steward-july-2026">Recurring operational tasks (migrated from Faithful Steward, July 2026)</h3>
+<p>Migrated from JT's Faithful Steward list per the July 2026 task migration. Owner is JT unless noted. Otto's weekly Monday review surfaces the ones due that week into the task board.</p>
+<p>Each item has a hard-date anchor so it lands on the board with a real deadline. Weekdays follow the Thursday-to-Friday workweek.</p>
+<p><strong>Weekly</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>When (hard date)</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QuickBooks (QB) export</td>
+<td>[FINANCE]</td>
+<td>Weekly — Thursday</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Email Pride — planned remit</td>
+<td>[FINANCE]</td>
+<td>Weekly — Monday</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Update the evaluation spreadsheet</td>
+<td>[OPS]</td>
+<td>Weekly — Monday</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Archive the cash plan</td>
+<td>[FINANCE]</td>
+<td>Weekly — Monday</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Update the cash &amp; staff plan</td>
+<td>[GOVERNANCE]</td>
+<td>Weekly — Monday</td>
+<td>JT (includes the AR-schedule bank info)</td>
+</tr>
+<tr>
+<td>Update the Financial Evaluation Dashboard</td>
+<td>[FINANCE]</td>
+<td>Weekly — Monday</td>
+<td>JT (Otto prompts for the numbers; see the dashboard SOP)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Daily (weekday)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>When (hard date)</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Check Zoho for tasks</td>
+<td>[SALES]</td>
+<td>Weekday (Mon-Fri)</td>
+<td>JT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Every 4 weeks</strong> (exact dates in the "2026 pay periods" table below)</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>When (hard date)</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Check and approve Expensify expense reports</td>
+<td>[FINANCE]</td>
+<td>Monday of the payroll-run week (Run payroll Fri − 4 days)</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Enter approved expense reports into the spreadsheet</td>
+<td>[FINANCE]</td>
+<td>Wednesday before period end — the "Expense review (Wed)" column</td>
+<td>Amanda</td>
+</tr>
+<tr>
+<td>Move approved expenses into the payroll spreadsheet</td>
+<td>[PAYROLL]</td>
+<td>At payroll run — the "Run payroll (Fri)" column</td>
+<td>Amanda</td>
+</tr>
+<tr>
+<td>Run payroll (President approves)</td>
+<td>[PAYROLL]</td>
+<td>Day after period end — the "Run payroll (Fri)" column</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Payroll finishing tasks</td>
+<td>[PAYROLL]</td>
+<td>Monday after period end — the "Payroll finishing (Mon)" column</td>
+<td>JT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Monthly</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>When (hard date)</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Send Amanda the Key Bank line-of-credit payment amount</td>
+<td>[FINANCE]</td>
+<td>Monthly — 15th</td>
+<td>JT → Amanda</td>
+</tr>
+<tr>
+<td>Send Amanda the Canada bank statement</td>
+<td>[FINANCE]</td>
+<td>Monthly — 24th</td>
+<td>JT → Amanda</td>
+</tr>
+<tr>
+<td>Send Amanda the MS invoices</td>
+<td>[FINANCE]</td>
+<td>Monthly — 24th</td>
+<td>JT → Amanda</td>
+</tr>
+<tr>
+<td>Review upcoming monthly invoices</td>
+<td>[FINANCE]</td>
+<td>Monthly — 25th</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Coaches meeting</td>
+<td>[HR]</td>
+<td>Monthly — 3rd Friday</td>
+<td>JT (chairs)</td>
+</tr>
+<tr>
+<td>Ask a coach to prepare 2 discussion questions</td>
+<td>[HR]</td>
+<td>Monthly — Monday before the 3rd Friday</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Email the coaches agenda</td>
+<td>[HR]</td>
+<td>Monthly — Thursday before the 3rd Friday</td>
+<td>JT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Quarterly</strong> (note: overlaps the existing quarterly lines above — treat as the same obligations, not duplicates)</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>When (hard date)</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Remit trust &amp; trustee payments ($500 ACH per trustee; Dave may fund the trust)</td>
+<td>[FINANCE]</td>
+<td>Quarterly — 6th (next 2026-10-06)</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>GC financial report</td>
+<td>[GOVERNANCE]</td>
+<td>Quarterly — early (next 2026-10-02)</td>
+<td>Amanda</td>
+</tr>
+<tr>
+<td>Quarterly checklist tasks</td>
+<td>[OPS]</td>
+<td>Quarterly (next 2026-10-02)</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Review lost deals for potential nurturing</td>
+<td>[SALES]</td>
+<td>Quarterly — 15th (Feb / May / Aug / Nov; next 2026-08-15)</td>
+<td>JT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2026-pay-periods-payroll-runs-every-4-weeks-13-periods">2026 pay periods (payroll runs every 4 weeks; 13 periods)</h3>
+<p>Payroll is <strong>every 4 weeks, not monthly (13 periods/year)</strong>. The <strong>workweek runs Thursday to Friday</strong> — a week ends Thursday at midnight and starts Friday morning — so each period <strong>starts on a Friday and ends on a Thursday</strong>. Action dates key off the period-end Thursday: <strong>JT approves Expensify expense reports</strong> = the <strong>Monday of the payroll-run week</strong> (Run payroll Fri − 4 days); <strong>Amanda enters the approved reports into the spreadsheet</strong> = the <strong>Wednesday before</strong> the period ends (the Expense review column); <strong>Run payroll</strong> = the <strong>day after</strong> the period ends (the Friday Process date), when <strong>Amanda also moves the approved expenses into the payroll spreadsheet</strong>; <strong>Payroll finishing tasks</strong> = the <strong>Monday after</strong> the period ends. Pay lands ~10-11 days after the period ends. All exact dates are in the table below (use these hard dates, not a generic cadence).</p>
+<table>
+<thead>
+<tr>
+<th>Period</th>
+<th>Start (Fri)</th>
+<th>End (Thu)</th>
+<th>Expense review (Wed)</th>
+<th>Run payroll (Fri)</th>
+<th>Payroll finishing (Mon)</th>
+<th>Paid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2025-12-12</td>
+<td>2026-01-08</td>
+<td>2026-01-07</td>
+<td>2026-01-09</td>
+<td>2026-01-12</td>
+<td>2026-01-19</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2026-01-09</td>
+<td>2026-02-05</td>
+<td>2026-02-04</td>
+<td>2026-02-06</td>
+<td>2026-02-09</td>
+<td>2026-02-16</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2026-02-06</td>
+<td>2026-03-05</td>
+<td>2026-03-04</td>
+<td>2026-03-06</td>
+<td>2026-03-09</td>
+<td>2026-03-16</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2026-03-06</td>
+<td>2026-04-02</td>
+<td>2026-04-01</td>
+<td>2026-04-03</td>
+<td>2026-04-06</td>
+<td>2026-04-13</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2026-04-03</td>
+<td>2026-04-30</td>
+<td>2026-04-29</td>
+<td>2026-05-01</td>
+<td>2026-05-04</td>
+<td>2026-05-11</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2026-05-01</td>
+<td>2026-05-28</td>
+<td>2026-05-27</td>
+<td>2026-05-29</td>
+<td>2026-06-01</td>
+<td>2026-06-08</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2026-05-29</td>
+<td>2026-06-25</td>
+<td>2026-06-24</td>
+<td>2026-06-26</td>
+<td>2026-06-29</td>
+<td>2026-07-06</td>
+</tr>
+<tr>
+<td>8</td>
+<td>2026-06-26</td>
+<td>2026-07-23</td>
+<td>2026-07-22</td>
+<td>2026-07-24</td>
+<td>2026-07-27</td>
+<td>2026-08-03</td>
+</tr>
+<tr>
+<td>9</td>
+<td>2026-07-24</td>
+<td>2026-08-20</td>
+<td>2026-08-19</td>
+<td>2026-08-21</td>
+<td>2026-08-24</td>
+<td>2026-08-31</td>
+</tr>
+<tr>
+<td>10</td>
+<td>2026-08-21</td>
+<td>2026-09-17</td>
+<td>2026-09-16</td>
+<td>2026-09-18</td>
+<td>2026-09-21</td>
+<td>2026-09-28</td>
+</tr>
+<tr>
+<td>11</td>
+<td>2026-09-18</td>
+<td>2026-10-15</td>
+<td>2026-10-14</td>
+<td>2026-10-16</td>
+<td>2026-10-19</td>
+<td>2026-10-26</td>
+</tr>
+<tr>
+<td>12</td>
+<td>2026-10-16</td>
+<td>2026-11-12</td>
+<td>2026-11-11</td>
+<td>2026-11-13</td>
+<td>2026-11-16</td>
+<td>2026-11-23</td>
+</tr>
+<tr>
+<td>13</td>
+<td>2026-11-13</td>
+<td>2026-12-10</td>
+<td>2026-12-09</td>
+<td>2026-12-11</td>
+<td>2026-12-14</td>
+<td>2026-12-21</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="month-by-month-deadlines-calendar-year-s-corp">Month-by-Month Deadlines (calendar-year S-corp)</h2>
+<h3 id="january">January</h3>
+<ul>
+<li><strong>Jan 15</strong> — <code>[TAX]</code> Q4 (prior year) estimated tax payment due (individual shareholders).</li>
+<li><strong>Jan 31</strong> — <code>[PAYROLL]</code> W-2s furnished to employees and filed with the SSA; 1099-NEC furnished to contractors and filed with the IRS.</li>
+<li><strong>Jan 31</strong> — <code>[PAYROLL]</code> Form 940 (FUTA) annual return; Form 941 for Q4 (prior year).</li>
+<li><strong>Jan 1</strong> — <code>[HR]</code> Update HR/payroll in Spark (positions, rates) for the new year.</li>
+<li><strong>Jan 6</strong> — <code>[OPS]</code> Insurance audit.</li>
+<li>ACA employee forms are due in early March, not January (see Benefits &amp; health-plan compliance) — <em>if applicable</em>.</li>
+</ul>
+<h3 id="february">February</h3>
+<ul>
+<li><code>[HR]</code> Suggested window to <strong>review job descriptions</strong> ahead of the comp cycle.</li>
+<li><code>[OPS]</code> Confirm state annual-report / registered-agent renewal dates for the year <em>(see state section)</em>.</li>
+</ul>
+<h3 id="march">March</h3>
+<ul>
+<li><strong>Mar 15</strong> — <code>[TAX]</code> <strong>Form 1120-S</strong> (S-corporation return) due, with <strong>Schedule K-1s</strong> to shareholders. File <strong>Form 7004</strong> for a 6-month extension (to Sep 15) if needed.</li>
+<li><code>[HR]</code> Suggested window to <strong>run salary surveys</strong> before setting rates.</li>
+</ul>
+<h3 id="april">April</h3>
+<ul>
+<li><strong>Apr 15</strong> — <code>[TAX]</code> Individual returns (Form 1040) for shareholders; <strong>Q1 estimated tax</strong> payment.</li>
+<li><strong>Apr 30</strong> — <code>[PAYROLL]</code> Form 941 for Q1.</li>
+</ul>
+<h3 id="may">May</h3>
+<ul>
+<li><code>[OPS]</code> Mid-year insurance / vendor contract check-in (placeholder).</li>
+</ul>
+<h3 id="june">June</h3>
+<ul>
+<li><strong>Jun 15</strong> — <code>[TAX]</code> <strong>Q2 estimated tax</strong> payment.</li>
+</ul>
+<h3 id="july">July</h3>
+<ul>
+<li><strong>Jul 31</strong> — <code>[PAYROLL]</code> Form 941 for Q2.</li>
+<li><strong>Jul 31</strong> — <code>[COMPLIANCE]</code> Form 5500 (retirement plan) for calendar-year plans <em>(if applicable)</em>.</li>
+</ul>
+<h3 id="august">August</h3>
+<ul>
+<li><code>[OPS]</code> Suggested planning window for Q4 benefits open enrollment.</li>
+</ul>
+<h3 id="september">September</h3>
+<ul>
+<li><strong>Sep 15</strong> — <code>[TAX]</code> Extended <strong>Form 1120-S</strong> due (if extension filed); <strong>Q3 estimated tax</strong> payment.</li>
+</ul>
+<h3 id="october">October</h3>
+<ul>
+<li><strong>Oct 31</strong> — <code>[PAYROLL]</code> Form 941 for Q3.</li>
+<li><code>[HR]</code> Benefits open-enrollment window (typical).</li>
+</ul>
+<h3 id="november">November</h3>
+<ul>
+<li><code>[FINANCE]</code> Begin <strong>annual budget</strong> setting for next year.</li>
+<li><code>[FINANCE]</code> Begin <strong>bonus / profit-distribution</strong> review (Governance Committee + President).</li>
+</ul>
+<h3 id="december">December</h3>
+<ul>
+<li><strong>Dec 1</strong> — <code>[HR]</code> HR end-of-year checklist.</li>
+<li><strong>Dec 1</strong> — <code>[OPS]</code> Review all recurring meeting invites and build next year's calendar/events.</li>
+<li><code>[FINANCE]</code> Year-end financial close prep; confirm W-9s on file for all contractors before January 1099 filing.</li>
+<li><code>[HR]</code> Finalize comp decisions and any year-end bonuses.</li>
+<li><code>[HR]</code> Vacation / PTO analysis (end of month).</li>
+</ul>
+<hr />
+<h2 id="state-multi-jurisdiction-placeholders-confirm-per-registration">State &amp; Multi-Jurisdiction (placeholders — confirm per registration)</h2>
+<p>Because Semantic Arts operates across many states, several recurring obligations vary by jurisdiction. Fill these in per the states where the firm is registered, has employees, or has tax nexus. (Legal can help flag which states create obligations; the COO coordinates filings.)</p>
+<ul>
+<li><code>[COMPLIANCE]</code> <strong>Colorado periodic report</strong> (Secretary of State) — due in the anniversary month of formation; confirm exact month.</li>
+<li><code>[COMPLIANCE]</code> <strong>Foreign-qualification annual reports</strong> in each registered state — dates vary.</li>
+<li><code>[COMPLIANCE]</code> <strong>Registered-agent renewals</strong> per state.</li>
+<li><code>[TAX]</code> <strong>State S-corp / pass-through entity returns</strong> (incl. any PTE-tax elections) — dates vary, many mirror the federal Mar 15 / Sep 15.</li>
+<li><code>[PAYROLL]</code> <strong>State payroll withholding &amp; unemployment</strong> filings for each state with employees.</li>
+<li><code>[TAX]</code> <strong>State sales/use tax</strong> filings where economic nexus is triggered <em>(if applicable)</em>.</li>
+</ul>
+<hr />
+<h2 id="change-log">Change Log</h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>2026-06-30</td>
+<td>Initial scaffold: S-corp federal deadlines, recurring HR/Ops rituals, state placeholders.</td>
+</tr>
+<tr>
+<td>1.1</td>
+<td>2026-07-03</td>
+<td>Added monthly (1st) client satisfaction check-in review (Ops Manager) and a monthly reminder to JT to coordinate calls. Added the [CLIENT] tag. Linked to the mid-contract check-in SOP.</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>2026-07-03</td>
+<td>Added: 1st-of-month trustee financial reports; first-Monday task-suggestion review; quarterly trust distributions/stipends/GC-to-trustees; annual items from the internal checklist (HR EOY, vacation analysis, recurring-invite/next-year setup on Dec 1, Spark update Jan 1, insurance audit Jan 6); a Benefits &amp; health-plan compliance section (Medicare Part D/creditable coverage, ACA, RxDC, 5500) with ALE caveat; and subsidiary (CAN 2200) note. Added [BENEFITS] tag.</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>2026-07-06</td>
+<td>Migrated 15 recurring tasks from Faithful Steward into a new "Recurring operational tasks" section (weekly, every-4-weeks, monthly, quarterly). Changed Otto's review from first-Monday-monthly to weekly (surfaces recurring items due that week into the task board).</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td>2026-07-06</td>
+<td>Added a monthly manual SharePoint backup of the Agents workspace (redundancy; iCloud remains the primary backup while SharePoint use is not yet permitted).</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>2026-07-06</td>
+<td>Documented that payroll runs every 4 weeks (13 periods/year, not monthly) and the Thursday-to-Friday workweek; added the dated 2026 pay-period schedule (Start/End/Process/Paid). Payroll actions key off the Process date.</td>
+</tr>
+<tr>
+<td>1.6</td>
+<td>2026-07-06</td>
+<td>Assigned hard dates to the payroll-cycle tasks: Review expense reports = Wednesday before period end; Run payroll = day after period end (Friday); Payroll finishing = Monday after period end. Added these as columns in the pay-period table.</td>
+</tr>
+<tr>
+<td>1.7</td>
+<td>2026-07-06</td>
+<td>Split the expense-reimbursement flow across the pay cycle: JT approves Expensify reports on the Monday of the payroll-run week; Amanda enters approved reports into the spreadsheet the Wednesday before period end; Amanda moves approved expenses into the payroll spreadsheet at the Friday payroll run.</td>
+</tr>
+<tr>
+<td>1.7</td>
+<td>2026-07-06</td>
+<td>Gave every recurring task a hard-date anchor (a "When" column): weekly items pinned to a weekday (Thu/Mon), monthly items to a day-of-month (LOC 15th; Canada statement &amp; MS invoices 24th; SharePoint backup 28th), quarterly items to an anchor date. So each lands on the board with a real deadline.</td>
+</tr>
+<tr>
+<td>1.8</td>
+<td>2026-07-06</td>
+<td>Moved "Update bank info in the AR schedule" to Monday (grouped with the Monday cash &amp; staff work); added a monthly "Review upcoming monthly invoices" on the 25th.</td>
+</tr>
+<tr>
+<td>1.9</td>
+<td>2026-07-13</td>
+<td>Deduped: removed the standalone weekly "Update bank info in the AR schedule" (it duplicates the Monday cash &amp; staff plan work); folded the note into the cash &amp; staff plan row.</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>2026-07-13</td>
+<td>Added weekly Monday "Update the Financial Evaluation Dashboard" (new Finance SOP; Otto prompts the COO for the required numbers).</td>
+</tr>
+<tr>
+<td>2.1</td>
+<td>2026-07-14</td>
+<td>Added quarterly "Review lost deals for potential nurturing" on the 15th (Feb / May / Aug / Nov; next 2026-08-15).</td>
+</tr>
+</tbody>
+</table>
+<div class="foot">Generated from Company_Calendar.md on 2026-07-14. Edit the markdown, then rerun build_docs.py.</div>
+</div></body></html>

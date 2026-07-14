@@ -1,0 +1,17 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+~$*
+*.tmp
+
+# local render artifacts (regenerated on demand)
+page-*.jpg
+pg-*.jpg
+tpg-*.jpg
+*.pdf.tmp
+
+# never commit secrets (defensive; credentials live outside the repo)
+.env
+*.git-credentials
+id_rsa*
+*.pem
