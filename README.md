@@ -33,8 +33,10 @@ The Financial Evaluation Dashboard (`Financial_Evaluation_Dashboard_PROTOTYPE.ht
 
 ## Version control and backup
 
-This folder is the **SA-Operations** private GitHub repository. It is the operating system for the COO's Claude account and is version-controlled so history is preserved and the workspace can be restored. It is separate from the read-only marketing vault.
+This folder is the live working copy of the COO's Claude operating system. It is backed up to the **SA-Operations** private GitHub repo (`jtsemarts/SA-Operations`) so history is preserved and the workspace can be restored. It is separate from the read-only marketing vault.
 
-- **Private and sensitive.** The repo contains personnel-sensitive material (the 1:1 KB), financial figures, compensation notes, and internal policy. Keep it private, limit collaborators, and never commit credentials or tokens.
-- **Nightly backup.** A launchd job on the COO's Mac commits and pushes changes once a day; ad hoc commits can be made any time with `git add -A && git commit -m "..." && git push`.
-- **One-way discipline for the marketing vault stays unchanged.** That vault is a separate read-only clone; this repo is the read-write operations workspace.
+- **How the backup works.** This folder lives in iCloud, and a git repo must not live inside iCloud (iCloud's sync corrupts git internals). So a nightly launchd job on the COO's Mac mirrors this folder (via `rsync`, excluding junk) into a git repo kept outside iCloud at `~/git/SA-Operations`, then commits and pushes to GitHub. The backup is therefore one way: working copy to GitHub.
+- **Schedule and logs.** Runs nightly at 8:30pm via `~/Library/LaunchAgents/com.semanticarts.sa-ops-backup.plist` (script: `~/bin/sa-ops-nightly-backup.sh`, log: `~/Library/Logs/sa-ops-backup.log`). To force a run: `launchctl start com.semanticarts.sa-ops-backup`.
+- **Private and sensitive.** The repo contains personnel-sensitive material (the 1:1 KB), financial figures, compensation notes, and internal policy. Keep it private, limit collaborators, and never commit credentials or tokens (the push token lives in `~/.config/sa-ops/git-credentials`, outside the repo).
+- **Weekly verification.** Every Friday, confirm the backup is running: `tail -n 5 ~/Library/Logs/sa-ops-backup.log` should show recent dated runs (each line ends in `no changes` or `backup pushed`). This is a Company Calendar item; Otto surfaces it and helps interpret the log.
+- **Marketing vault unchanged.** That vault is a separate read-only clone; this is the operations backup.

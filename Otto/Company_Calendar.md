@@ -99,6 +99,7 @@ Each item has a hard-date anchor so it lands on the board with a real deadline. 
 | Archive the cash plan | [FINANCE] | Weekly — Monday | JT |
 | Update the cash & staff plan | [GOVERNANCE] | Weekly — Monday | JT (includes the AR-schedule bank info) |
 | Update the Financial Evaluation Dashboard | [FINANCE] | Weekly — Monday | JT (Otto prompts for the numbers; see the dashboard SOP) |
+| Verify the SA-Operations nightly backup ran | [IT] | Weekly — Friday | JT (glance at `~/Library/Logs/sa-ops-backup.log`; Otto helps interpret) |
 
 **Daily (weekday)**
 
@@ -256,3 +257,4 @@ Because Semantic Arts operates across many states, several recurring obligations
 | 1.9 | 2026-07-13 | Deduped: removed the standalone weekly "Update bank info in the AR schedule" (it duplicates the Monday cash & staff plan work); folded the note into the cash & staff plan row. |
 | 2.0 | 2026-07-13 | Added weekly Monday "Update the Financial Evaluation Dashboard" (new Finance SOP; Otto prompts the COO for the required numbers). |
 | 2.1 | 2026-07-14 | Added quarterly "Review lost deals for potential nurturing" on the 15th (Feb / May / Aug / Nov; next 2026-08-15). |
+| 2.2 | 2026-07-14 | Added weekly Friday "Verify the SA-Operations nightly backup ran" (glance at the backup log; Otto interprets). |

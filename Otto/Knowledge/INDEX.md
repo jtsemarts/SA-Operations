@@ -1,6 +1,6 @@
 # Knowledge Hub — Index
 
-**Maintained by:** Otto (for the COO) · **Last updated:** 2026-07-07
+**Maintained by:** Otto (for the COO) · **Last updated:** 2026-07-14
 
 Operational and company knowledge bases that Otto maintains and surfaces for the COO. These are living documents; Otto updates them as work surfaces new detail, and can pull from them for reporting, task-board additions, or calendar entries (always confirming before creating anything).
 
@@ -11,6 +11,7 @@ Operational and company knowledge bases that Otto maintains and surfaces for the
 | `Partners_KB.md` | Partners: AIM (The Connected Customer + pharma offering) and RGI (government contracting). | Internal |
 | `Marketing_KB.md` | Marketing operations; Lucas driving day to day. | Internal |
 | `Meeting_Intelligence_KB.md` | Decisions and open items from standing meetings (Exec, Tuesday Staff, Sales, Friday Staff). | Internal |
+| `AI_Cyber_Taskforce_KB.md` | AI & Cyber Task Force: agendas, update log, action-item tracker (JT chairs). | Internal (security-sensitive) |
 | `Direct_Report_1on1_KB.md` | 1:1s with direct reports (Lucas, Amanda): decisions and open items. | **Restricted** (personnel; COO-scoped) |
 | `Coaches_Meeting_Agendas.docx` | Archive of past coaches-meeting agendas. | Internal |
 

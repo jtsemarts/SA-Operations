@@ -12,22 +12,23 @@
 - [ ] **Make pay changes in Spark** - HR/payroll system. #HR !high due:2026-07-24
 - [ ] **Talk to Dave about Brian Schulte** - SA HR. #HR !med due:2026-07-17 @Dave
 - [ ] **Colton baby gift** - team/HR gesture (confirmed SA). #HR !med due:2026-07-20
-- [ ] **Figure out the CAN accounting in QB and write out a plan** - Canada entity bookkeeping in QuickBooks. #Finance !high due:2026-07-14
+- [ ] **Figure out the CAN accounting in QB and write out a plan** - Canada entity bookkeeping in QuickBooks. #Finance !high due:2026-07-15
 - [ ] **Box quantity of each book** - inventory. #Ops !med due:2026-08-01
 - [ ] **Talk with Bill about Databricks with FedScale** - SA Sales. #Sales !med
 - [ ] **Set up the sales to-do list for the nurturing pipeline** - build out the nurturing-pipeline sales task list/process. #Sales !med
 - [ ] **Add projects to the nurturing pipeline** - accounts to move into nurturing. #Sales !med
   - Factset; Eurofins; Broadridge; J&J; Bayer; Craxel (Mythos); ISG at MS; Threatconnect
-- [ ] **Put Dylan at BNY on the nurturing list** - add to the nurturing pipeline. #Sales !med due:2026-07-14
-- [ ] **Review lost deals from the last 12 months to resurrect** - identify closed-lost deals worth reviving. #Sales !med due:2026-07-14
-- [ ] **Review AIM Services draft webpage content** - from AIM. Doc: Documents/AIM_Services_draft_webpage_content.docx #Sales !med due:2026-07-14
+- [ ] **Put Dylan at BNY on the nurturing list** - add to the nurturing pipeline. #Sales !med due:2026-07-15
+- [ ] **Review lost deals from the last 12 months to resurrect** - identify closed-lost deals worth reviving. #Sales !med due:2026-07-15
+- [ ] **Review AIM Services draft webpage content** - from AIM. Doc: Documents/AIM_Services_draft_webpage_content.docx #Sales !med due:2026-07-15
 - [ ] **Check and approve Expensify expense reports** - recurring (every pay cycle, Monday before payroll), from the calendar. #Finance !high due:2026-07-20
-- [ ] **Close Beta** - close the Beta project. #Finance !med due:2026-07-14
-- [ ] **Reimburse SA $822.66** - reimbursement to Semantic Arts. #Finance !med due:2026-07-14
-- [ ] **PDF the Expensify reports** - export/save the expense reports as PDFs. #Finance !med due:2026-07-14
-- [ ] **Ask a coach to prepare 2 discussion questions** - for the 3rd-Friday coaches meeting; recurring, from the calendar. #HR !med due:2026-07-14
+- [ ] **Close Beta** - close the Beta project. #Finance !med due:2026-07-15
+- [ ] **Reimburse SA $822.66** - reimbursement to Semantic Arts. #Finance !med due:2026-07-15
+- [ ] **PDF the Expensify reports** - export/save the expense reports as PDFs. #Finance !med due:2026-07-15
+- [ ] **Ask a coach to prepare 2 discussion questions** - for the 3rd-Friday coaches meeting; recurring, from the calendar. #HR !med due:2026-07-15
 - [ ] **Email the coaches agenda** - for the 3rd-Friday coaches meeting; recurring, from the calendar. #HR !med due:2026-07-16
 - [ ] **Back up the Agents workspace to SharePoint** - monthly redundancy backup (iCloud is the primary backup). #IT !med due:2026-07-31
+- [ ] **Verify the SA-Operations nightly backup ran** - weekly check of the backup log; recurring, from the calendar. #IT !low due:2026-07-17
 - [ ] **Rebecca check-in (Thursday)** - run the scheduled Thursday 1:1; consolidated agenda. #Governance !med due:2026-07-16 @Rebecca
   - Confirm commission assignment
   - Lawyer information from Rebecca
@@ -41,7 +42,7 @@
   - Promo letter to hand to Amanda
 - [ ] **QuickBooks export** - recurring (weekly, Thursday), from the calendar. #Finance !med due:2026-07-16
 - [ ] **Send Amanda the Key Bank line-of-credit payment amount** - recurring (monthly, 15th), from the calendar. #Finance !med due:2026-07-15
-- [ ] **Check Zoho for tasks** - daily weekday check of Zoho CRM tasks/activities; recurring, from the calendar. #Sales !med due:2026-07-14
+- [ ] **Check Zoho for tasks** - daily weekday check of Zoho CRM tasks/activities; recurring, from the calendar. #Sales !med due:2026-07-15
 
 ## Waiting On
 - [ ] **Ratify the executive decision-rights model** - final sign-off. @CEO @President #Governance !high
