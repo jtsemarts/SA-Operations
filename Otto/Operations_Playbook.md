@@ -1,7 +1,7 @@
 # Semantic Arts Operations Playbook
 
 **Maintained by:** Otto (for JT Metcalf, COO)
-**Type:** Living document · **Version:** 2.1 · **Last updated:** July 14, 2026
+**Type:** Living document · **Version:** 2.3 · **Last updated:** July 15, 2026
 
 The single source of truth for how Semantic Arts runs internally: standard operating procedures (SOPs) across Sales, Client/Delivery, Marketing, HR, Administration, IT, Finance, Legal & Compliance, Knowledge Management, and Governance & Risk. This document holds the SOPs that are written and in use. Each section also carries a **Backlog (to write)** list — the SOPs we intend to document but haven't yet — so the scaffold stays lean while the roadmap is preserved. Otto proposes new SOPs as work surfaces them; JT confirms and Otto writes them.
 
@@ -274,6 +274,11 @@ The single source of truth for how Semantic Arts runs internally: standard opera
 
 *Scope: accounts, devices, tools, data, and security. Authority note: COO oversees; some items may be delegated or outsourced.*
 
+**Physical IT resources (reference).**
+- QuickBooks server: named "Plotter"; its login password is stored in LastPass (not recorded here).
+- VPN and network switch: Meraki, administered through its web interface.
+- All other office servers are managed internally by Jamie and are out of scope for this document.
+
 **Backlog (to write):** Account provisioning & deprovisioning (joiner/mover/leaver; tie to HR onboarding/offboarding) · SaaS & tool inventory · Equipment & device management (incl. device-purchase-assistance) · Data backup & retention · IT security & incident response (incl. staff security advisories; a phishing staff-warning template exists from recent work, to be folded in — deferred per COO) · Acceptable use & access policy.
 
 ---
@@ -330,6 +335,22 @@ The single source of truth for how Semantic Arts runs internally: standard opera
 - Tools / templates: operator card with the exact prompt and variable map (`Agents/Otto/Work/Financial_Dashboard_Update_Checklist.md`).
 - Related: Cash & Staff Plan SOP (same Monday cadence); Company Calendar (weekly Monday dashboard update).
 - Last updated: 2026-07-13
+
+### SOP: Project setup (operational onboarding)
+- Status: [ACTIVE]
+- Owner: COO (operational and financial setup); Operations Manager (Amanda) supports; President owns delivery
+- Trigger / frequency: When a new project or engagement is won, before work starts
+- Purpose: Stand up a new project cleanly across systems, billing, risk, and staffing so it starts on solid footing.
+- Steps:
+  1. Set up the project in Spark (project record and code, budget, and assignments).
+  2. Set up the project in QuickBooks for billing and accounting.
+  3. Confirm the invoice procedure for this client (how and when to invoice; any client portal or format).
+  4. Use a purchase order where the client requires one; capture the PO before billing against it.
+  5. Add the project to the AR Schedule.
+  6. Verify insurance requirements are met; add the client as an additional insured where required.
+  7. Update the staff plan (assignments and capacity).
+- Related: Project closing (financial close); Cash & Staff Plan; Expense reimbursement; Client/Delivery engagement kickoff (backlog).
+- Last updated: 2026-07-15
 
 ### SOP: Project closing (financial close)
 - Status: [ACTIVE]
@@ -429,7 +450,7 @@ Written and in use:
 
 - **Client / Delivery:** Mid-contract client satisfaction check-in (keep/stop/start)
 - **HR:** Candidate sourcing & talent-pool channels · Job offer & offer letter · Onboarding new hires · Compensation review & salary surveys · Coaching program · Personnel file & records retention · Offboarding
-- **Finance:** Expense reimbursement · Payroll processing (needs review) · Financial Evaluation Dashboard weekly update · Project closing (financial close)
+- **Finance:** Expense reimbursement · Payroll processing (needs review) · Financial Evaluation Dashboard weekly update · Project setup (operational onboarding) · Project closing (financial close)
 - **Governance & Risk:** Trust interaction & trustee relations · Cash & Staff Plan
 
 Everything else is captured in the per-section **Backlog (to write)** lists above.
@@ -449,4 +470,6 @@ Everything else is captured in the per-section **Backlog (to write)** lists abov
 | 1.8 | 2026-07-10 | Trimmed the empty [DRAFT] SOP placeholders into compact per-section "Backlog (to write)" lists, keeping all [ACTIVE] SOPs verbatim. Reduces document size while preserving the roadmap. Added an "Index of active SOPs". |
 | 1.9 | 2026-07-13 | Added Finance SOP "Financial Evaluation Dashboard weekly update" ([ACTIVE]): the metric list required to fully update the dashboard each Monday and the operating rule that Otto prompts the COO for those numbers, edits the inputs, verifies, and presents. Points to the operator card checklist. |
 | 2.0 | 2026-07-14 | Expanded the Expense reimbursement SOP with the full flow: approval against the Confluence Travel & Expense Policy, direct rectification of violations with staff, saving approved reports as PDFs to the SharePoint Expenses folder, and the Operations Manager reconciling PDFs into the Expense Master Spreadsheet (Wednesday before payroll) which feeds the payroll spreadsheet. |
+| 2.3 | 2026-07-15 | Added Finance SOP "Project setup (operational onboarding)" ([ACTIVE]): Spark and QuickBooks setup, invoice procedure, PO where the client requires it, add to the AR Schedule, verify insurance and add the client as additional insured, and update the staff plan. Pairs with Project closing. |
+| 2.2 | 2026-07-15 | Added a "Physical IT resources" reference note under IT & Access Management: QuickBooks server ("Plotter", password in LastPass), Meraki VPN/switch via web interface, other office servers managed by Jamie (out of scope). |
 | 2.1 | 2026-07-14 | Added Finance SOP "Project closing (financial close)" ([ACTIVE]): confirm finish with the project leader, set the Spark end date, handle any over-budget overage via an RCE (evenly across project staff, President coordinates exceptions), then close in QuickBooks (project ER entered, Unbilled Contracts billed, Unearned Revenue zeroed via the memorized transaction; T&M caveat noted). |

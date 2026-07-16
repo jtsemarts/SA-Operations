@@ -61,7 +61,7 @@ Newest first. Copy the block below for each meeting.
 
 ## 2026-07-16 (Kickoff)
 - Attendees: JT (chair), Rebecca, Lucas, Neil, Brett, Steven, Jamie
-- Agenda: Kickoff. (1) Welcome (Rebecca); (2) how we'll operate (JT); (3) cyber topics: password manager (select + policy update), VPN (adopt; pick vendor + draft policy), Microsoft protections beyond MFA, zero-trust (understand offering, vendors, timing); (4) AI topics: use of MCP connectors and integrations; (5) action items and owners; (6) next meeting and close. Doc: `AI_Cyber_Taskforce_Agenda_2026-07-16.docx`.
+- Agenda: Kickoff. (1) Welcome (Rebecca); (2) how we'll operate (JT); (3) cyber topics: Microsoft protections beyond MFA, zero-trust (understand offering, vendors, timing); (4) AI topics: MCP connectors and integrations; (5) action items, including: all members review the AI policy before the next meeting and bring notes; (6) next meeting and close. Doc: `AI_Cyber_Taskforce_Agenda_2026-07-16.docx`. Note: password manager and VPN are already underway and are being handled directly by the COO (on the COO task board), so they are out of task-force scope, not deferred.
 - Updates: (to log after the meeting)
 - Recommendations: (to log after the meeting; note who each is routed to)
 - New action items: (to add to the tracker after the meeting)

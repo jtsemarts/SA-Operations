@@ -23,7 +23,7 @@ a{color:var(--mid);}
 </style></head><body><div class="wrap">
 <h1 id="semantic-arts-operations-playbook">Semantic Arts Operations Playbook</h1>
 <p><strong>Maintained by:</strong> Otto (for JT Metcalf, COO)
-<strong>Type:</strong> Living document · <strong>Version:</strong> 2.1 · <strong>Last updated:</strong> July 14, 2026</p>
+<strong>Type:</strong> Living document · <strong>Version:</strong> 2.3 · <strong>Last updated:</strong> July 15, 2026</p>
 <p>The single source of truth for how Semantic Arts runs internally: standard operating procedures (SOPs) across Sales, Client/Delivery, Marketing, HR, Administration, IT, Finance, Legal &amp; Compliance, Knowledge Management, and Governance &amp; Risk. This document holds the SOPs that are written and in use. Each section also carries a <strong>Backlog (to write)</strong> list — the SOPs we intend to document but haven't yet — so the scaffold stays lean while the roadmap is preserved. Otto proposes new SOPs as work surfaces them; JT confirms and Otto writes them.</p>
 <h2 id="how-to-use-this">How to use this</h2>
 <ul>
@@ -276,6 +276,10 @@ a{color:var(--mid);}
 <hr />
 <h2 id="6-it-access-management">6. IT &amp; Access Management</h2>
 <p><em>Scope: accounts, devices, tools, data, and security. Authority note: COO oversees; some items may be delegated or outsourced.</em></p>
+<p><strong>Physical IT resources (reference).</strong>
+- QuickBooks server: named "Plotter"; its login password is stored in LastPass (not recorded here).
+- VPN and network switch: Meraki, administered through its web interface.
+- All other office servers are managed internally by Jamie and are out of scope for this document.</p>
 <p><strong>Backlog (to write):</strong> Account provisioning &amp; deprovisioning (joiner/mover/leaver; tie to HR onboarding/offboarding) · SaaS &amp; tool inventory · Equipment &amp; device management (incl. device-purchase-assistance) · Data backup &amp; retention · IT security &amp; incident response (incl. staff security advisories; a phishing staff-warning template exists from recent work, to be folded in — deferred per COO) · Acceptable use &amp; access policy.</p>
 <hr />
 <h2 id="7-finance">7. Finance</h2>
@@ -331,6 +335,23 @@ a{color:var(--mid);}
 <li>Tools / templates: operator card with the exact prompt and variable map (<code>Agents/Otto/Work/Financial_Dashboard_Update_Checklist.md</code>).</li>
 <li>Related: Cash &amp; Staff Plan SOP (same Monday cadence); Company Calendar (weekly Monday dashboard update).</li>
 <li>Last updated: 2026-07-13</li>
+</ul>
+<h3 id="sop-project-setup-operational-onboarding">SOP: Project setup (operational onboarding)</h3>
+<ul>
+<li>Status: [ACTIVE]</li>
+<li>Owner: COO (operational and financial setup); Operations Manager (Amanda) supports; President owns delivery</li>
+<li>Trigger / frequency: When a new project or engagement is won, before work starts</li>
+<li>Purpose: Stand up a new project cleanly across systems, billing, risk, and staffing so it starts on solid footing.</li>
+<li>Steps:
+  1. Set up the project in Spark (project record and code, budget, and assignments).
+  2. Set up the project in QuickBooks for billing and accounting.
+  3. Confirm the invoice procedure for this client (how and when to invoice; any client portal or format).
+  4. Use a purchase order where the client requires one; capture the PO before billing against it.
+  5. Add the project to the AR Schedule.
+  6. Verify insurance requirements are met; add the client as an additional insured where required.
+  7. Update the staff plan (assignments and capacity).</li>
+<li>Related: Project closing (financial close); Cash &amp; Staff Plan; Expense reimbursement; Client/Delivery engagement kickoff (backlog).</li>
+<li>Last updated: 2026-07-15</li>
 </ul>
 <h3 id="sop-project-closing-financial-close">SOP: Project closing (financial close)</h3>
 <ul>
@@ -422,7 +443,7 @@ a{color:var(--mid);}
 <ul>
 <li><strong>Client / Delivery:</strong> Mid-contract client satisfaction check-in (keep/stop/start)</li>
 <li><strong>HR:</strong> Candidate sourcing &amp; talent-pool channels · Job offer &amp; offer letter · Onboarding new hires · Compensation review &amp; salary surveys · Coaching program · Personnel file &amp; records retention · Offboarding</li>
-<li><strong>Finance:</strong> Expense reimbursement · Payroll processing (needs review) · Financial Evaluation Dashboard weekly update · Project closing (financial close)</li>
+<li><strong>Finance:</strong> Expense reimbursement · Payroll processing (needs review) · Financial Evaluation Dashboard weekly update · Project setup (operational onboarding) · Project closing (financial close)</li>
 <li><strong>Governance &amp; Risk:</strong> Trust interaction &amp; trustee relations · Cash &amp; Staff Plan</li>
 </ul>
 <p>Everything else is captured in the per-section <strong>Backlog (to write)</strong> lists above.</p>
@@ -492,11 +513,21 @@ a{color:var(--mid);}
 <td>Expanded the Expense reimbursement SOP with the full flow: approval against the Confluence Travel &amp; Expense Policy, direct rectification of violations with staff, saving approved reports as PDFs to the SharePoint Expenses folder, and the Operations Manager reconciling PDFs into the Expense Master Spreadsheet (Wednesday before payroll) which feeds the payroll spreadsheet.</td>
 </tr>
 <tr>
+<td>2.3</td>
+<td>2026-07-15</td>
+<td>Added Finance SOP "Project setup (operational onboarding)" ([ACTIVE]): Spark and QuickBooks setup, invoice procedure, PO where the client requires it, add to the AR Schedule, verify insurance and add the client as additional insured, and update the staff plan. Pairs with Project closing.</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>2026-07-15</td>
+<td>Added a "Physical IT resources" reference note under IT &amp; Access Management: QuickBooks server ("Plotter", password in LastPass), Meraki VPN/switch via web interface, other office servers managed by Jamie (out of scope).</td>
+</tr>
+<tr>
 <td>2.1</td>
 <td>2026-07-14</td>
 <td>Added Finance SOP "Project closing (financial close)" ([ACTIVE]): confirm finish with the project leader, set the Spark end date, handle any over-budget overage via an RCE (evenly across project staff, President coordinates exceptions), then close in QuickBooks (project ER entered, Unbilled Contracts billed, Unearned Revenue zeroed via the memorized transaction; T&amp;M caveat noted).</td>
 </tr>
 </tbody>
 </table>
-<div class="foot">Generated from Operations_Playbook.md on 2026-07-14. Edit the markdown, then rerun build_docs.py.</div>
+<div class="foot">Generated from Operations_Playbook.md on 2026-07-15. Edit the markdown, then rerun build_docs.py.</div>
 </div></body></html>

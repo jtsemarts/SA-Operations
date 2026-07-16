@@ -8,51 +8,48 @@
 ## Active
 - [ ] **Run the 2-week Productivity + HR plugin trial** - connector-free; complete the go/no-go review. #Ops !high due:2026-07-17
   - Compare against our SOP-driven workflows; capture time saved.
-- [ ] **Review revised Exec Roles / RACI with CEO & President** - set the threshold figures. #Governance !high due:2026-07-15
 - [ ] **Make pay changes in Spark** - HR/payroll system. #HR !high due:2026-07-24
 - [ ] **Talk to Dave about Brian Schulte** - SA HR. #HR !med due:2026-07-17 @Dave
 - [ ] **Colton baby gift** - team/HR gesture (confirmed SA). #HR !med due:2026-07-20
-- [ ] **Figure out the CAN accounting in QB and write out a plan** - Canada entity bookkeeping in QuickBooks. #Finance !high due:2026-07-15
+- [ ] **Figure out the CAN accounting in QB and write out a plan** - Canada entity bookkeeping in QuickBooks. #Finance !high due:2026-07-16
 - [ ] **Box quantity of each book** - inventory. #Ops !med due:2026-08-01
 - [ ] **Talk with Bill about Databricks with FedScale** - SA Sales. #Sales !med
 - [ ] **Set up the sales to-do list for the nurturing pipeline** - build out the nurturing-pipeline sales task list/process. #Sales !med
 - [ ] **Add projects to the nurturing pipeline** - accounts to move into nurturing. #Sales !med
   - Factset; Eurofins; Broadridge; J&J; Bayer; Craxel (Mythos); ISG at MS; Threatconnect
-- [ ] **Put Dylan at BNY on the nurturing list** - add to the nurturing pipeline. #Sales !med due:2026-07-15
-- [ ] **Review lost deals from the last 12 months to resurrect** - identify closed-lost deals worth reviving. #Sales !med due:2026-07-15
-- [ ] **Review AIM Services draft webpage content** - from AIM. Doc: Documents/AIM_Services_draft_webpage_content.docx #Sales !med due:2026-07-15
+- [ ] **Put Dylan at BNY on the nurturing list** - add to the nurturing pipeline. #Sales !med due:2026-07-16
+- [ ] **Review lost deals from the last 12 months to resurrect** - identify closed-lost deals worth reviving. #Sales !med due:2026-07-16
+- [ ] **Review AIM Services draft webpage content** - from AIM. Doc: Documents/AIM_Services_draft_webpage_content.docx #Sales !med due:2026-07-16
 - [ ] **Check and approve Expensify expense reports** - recurring (every pay cycle, Monday before payroll), from the calendar. #Finance !high due:2026-07-20
-- [ ] **Close Beta** - close the Beta project. #Finance !med due:2026-07-15
-- [ ] **Reimburse SA $822.66** - reimbursement to Semantic Arts. #Finance !med due:2026-07-15
-- [ ] **PDF the Expensify reports** - export/save the expense reports as PDFs. #Finance !med due:2026-07-15
-- [ ] **Ask a coach to prepare 2 discussion questions** - for the 3rd-Friday coaches meeting; recurring, from the calendar. #HR !med due:2026-07-15
+- [ ] **Close Beta** - close the Beta project. #Finance !med due:2026-07-16
 - [ ] **Email the coaches agenda** - for the 3rd-Friday coaches meeting; recurring, from the calendar. #HR !med due:2026-07-16
 - [ ] **Back up the Agents workspace to SharePoint** - monthly redundancy backup (iCloud is the primary backup). #IT !med due:2026-07-31
+- [ ] **Roll out a company-wide password manager** - select vendor, enact the policy, deploy. Research doc in progress. #IT !med
+- [ ] **Roll out a business VPN** - select vendor, enact the remote-access / public-wifi policy, deploy. Research doc in progress. #IT !med
+- [ ] **Schedule time to work on IT posture** - block time to work through security settings and the IT reference materials. #IT !med due:2026-07-16
+- [ ] **Create an SOP for accessing QuickBooks and doing the export** - document login/permissions (COO-only) and the export steps. #Finance !med due:2026-07-16
+- [ ] **Contact Jason (external IT) re: Microsoft & Box backup procedures** - document backup procedures for M365 and Box with our external IT help. #IT !med due:2026-07-29
 - [ ] **Verify the SA-Operations nightly backup ran** - weekly check of the backup log; recurring, from the calendar. #IT !low due:2026-07-17
-- [ ] **Rebecca check-in (Thursday)** - run the scheduled Thursday 1:1; consolidated agenda. #Governance !med due:2026-07-16 @Rebecca
-  - Confirm commission assignment
-  - Lawyer information from Rebecca
-  - Sign the T-Mobile NDA
-  - Records retention policy review (route legal questions to Legal)
-  - Client-satisfaction email to CIS (review and share)
-  - Microsoft integration decision (read-only M365 email/calendar/Teams)
-  - Setting up OMICS
-  - Paylocity (payroll provider)
-  - Baker relocation stipend
-  - Promo letter to hand to Amanda
 - [ ] **QuickBooks export** - recurring (weekly, Thursday), from the calendar. #Finance !med due:2026-07-16
-- [ ] **Send Amanda the Key Bank line-of-credit payment amount** - recurring (monthly, 15th), from the calendar. #Finance !med due:2026-07-15
-- [ ] **Check Zoho for tasks** - daily weekday check of Zoho CRM tasks/activities; recurring, from the calendar. #Sales !med due:2026-07-15
+- [ ] **Check Zoho for tasks** - daily weekday check of Zoho CRM tasks/activities; recurring, from the calendar. #Sales !med due:2026-07-16
 
 ## Waiting On
 - [ ] **Ratify the executive decision-rights model** - final sign-off. @CEO @President #Governance !high
 - [ ] **Remind Dave to contact Abhi re: MS Map turnover after the rate increase** - SA Sales. @Dave #Sales !med due:2026-08-05
 - [ ] **Margin queries from Dave** - awaiting Dave's margin questions/answers; follow up next Tuesday. @Dave #Finance !med due:2026-07-21
+- [ ] **Commission assignment from Rebecca** - confirm commission assignment. @Rebecca #Sales !med due:2026-07-17
+- [ ] **Microsoft integration decision (Rebecca)** - read-only M365 email/calendar/Teams connection decision. @Rebecca #IT !med due:2026-07-17
 
 ## Someday
 - [ ] **Populate remaining [DRAFT] SOP placeholders** in the Operations Playbook. #Ops !low
 
 ## Done
+- [x] ~~Rebecca check-in (agenda cleared; commission & MS integration moved to Fri 7/17)~~ (done:2026-07-15) #Governance
+- [x] ~~Review revised Exec Roles / RACI with CEO & President~~ (done:2026-07-15) #Governance
+- [x] ~~Send Amanda the Key Bank line-of-credit payment amount~~ (done:2026-07-15) #Finance
+- [x] ~~PDF the Expensify reports~~ (done:2026-07-15) #Finance
+- [x] ~~Ask a coach to prepare 2 discussion questions~~ (done:2026-07-15) #HR
+- [x] ~~Reimburse SA $822.66~~ (done:2026-07-15) #Finance
 - [x] ~~Hover domain transfer~~ (done:2026-07-14) #IT
 - [x] ~~Set up an SOP for PDFing the Expensify reports~~ (done:2026-07-14) #Ops
 - [x] ~~Work with Lucas on the lead-nurturing plan~~ (done:2026-07-14) #Marketing

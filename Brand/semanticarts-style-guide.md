@@ -2,7 +2,7 @@
 
 **Maintained by:** Brand · **Status:** aligned to the SA22 Brand Kit v3.1 (July 2026)
 
-The visual and voice source of truth is `Semantic_Arts_Brand_Kit.md` in this folder (and the companion `Semantic_Arts_Visual_Style_Guide.pdf`). This guide is the working checklist Brand applies; the brand kit holds the full detail. **Conformance is vital on anything external; internal documents follow the same principles.**
+Sources of truth: the local SA22 Brand Kit (`Semantic_Arts_Brand_Kit.md` and `Semantic_Arts_Visual_Style_Guide.pdf`) governs **visual identity**; the marketing vault's canonical, living guides govern **voice, messaging, terminology, and copyediting**, chiefly `50-Resources/Brand-and-Messaging/SA-Voice-and-Messaging-Guide.md` and `50-Resources/Content-Standards/Copyediting-and-Number-Style-Conventions.md` in the read-only vault at `~/git/sa-marketing-os`. This guide is the working checklist Brand applies; those sources hold the full detail, and Brand consults the vault heavily for any brand or voice question. **Conformance is vital on anything external; internal documents follow the same principles.**
 
 ## The three writing rules
 
@@ -18,6 +18,8 @@ The visual and voice source of truth is `Semantic_Arts_Brand_Kit.md` in this fol
 - **Frame clients as heroes** ("Data Masters"); name the culprit ("application-centric thinking"); avoid buzzwords, hedging, vendor bragging, and lock-in language.
 
 ## QC checklist (run on every draft before it reaches the COO)
+
+**Check the canonical sources first.** For external or voice-heavy content, review the marketing vault's `SA-Voice-and-Messaging-Guide.md` and `Copyediting-and-Number-Style-Conventions.md` (read-only at `~/git/sa-marketing-os/50-Resources`) and align terminology, banned/filler words, and number style to them before running the checks below.
 
 **Writing**
 1. **Em dashes:** none, unless genuinely required; no en dash as a substitute.
