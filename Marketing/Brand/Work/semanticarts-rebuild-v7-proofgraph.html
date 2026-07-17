@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semantic Arts — Rebuild Prototype (SA22 v3.1)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+:root{
+--blue:#005A7D;--blue-dark:#00465F;--gray:#808080;--orange:#C84A2B;--olive:#8C9E38;
+--link:#1E70B0;--gold:#D4A83A;--teal:#E0EEF2;--near:#2B2B2B;--char:#4A4A4A;--lgray:#CCCCCC;
+--cream:#F1EFE8;--alt:#FAFAFA;--crumb:#F6F6F4;
+--f:'Open Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);color:var(--char);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:var(--blue);color:#fff;box-shadow:0 1px 0 rgba(0,0,0,.15)}
+.nav .wrap{display:flex;align-items:center;height:62px;gap:8px}
+.wm{font-weight:800;font-size:18px;letter-spacing:.2px;color:#fff;cursor:pointer;white-space:nowrap}
+.nlinks{display:flex;align-items:center;gap:4px;margin-left:auto}
+.nitem{position:relative}
+.nlink{display:inline-flex;align-items:center;gap:5px;color:rgba(255,255,255,.62);font-size:13px;font-weight:600;padding:10px 12px;cursor:pointer;background:none;border:none;font-family:var(--f)}
+.nlink:hover,.nlink.on{color:var(--olive)}
+.nlink .caret{font-size:9px;opacity:.8}
+.dd{position:absolute;top:100%;left:0;min-width:248px;background:#fff;border:1px solid #e3e3e3;border-radius:4px;box-shadow:0 12px 30px rgba(0,0,0,.16);padding:6px;display:none}
+.nitem:hover .dd,.dd.open{display:block}
+.dd a{display:block;color:var(--near);font-size:12.5px;font-weight:600;padding:9px 12px;border-radius:3px}
+.dd a:hover{background:var(--teal);color:var(--blue)}
+.dd a span{display:block;font-weight:400;color:var(--gray);font-size:11px;margin-top:1px}
+.btn{display:inline-block;font-family:var(--f);font-weight:700;font-size:11px;letter-spacing:.6px;text-transform:uppercase;padding:11px 18px;border-radius:4px;border:none;cursor:pointer;transition:transform .08s,background .15s,box-shadow .15s;text-align:center}
+.btn:active{transform:scale(.98)}
+.btn-cta{background:var(--orange);color:#fff}
+.btn-cta:hover{background:#b23f24;box-shadow:0 4px 14px rgba(200,74,43,.35)}
+.btn-o{background:transparent;border:1.5px solid var(--blue);color:var(--blue)}
+.btn-o:hover{background:var(--teal)}
+.btn-ow{background:transparent;border:1.5px solid rgba(255,255,255,.85);color:#fff}
+.btn-ow:hover{background:rgba(255,255,255,.12)}
+.nav .btn-cta{margin-left:8px}
+.burger{display:none;margin-left:auto;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:6px}
+
+/* PAGES */
+.page{display:none;animation:fade .35s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.crumb{background:var(--crumb);border-bottom:1px solid #ececec;font-size:11.5px;color:var(--gray)}
+.crumb .wrap{padding:9px 32px}
+.crumb b{color:var(--blue);font-weight:600}
+.crumb a{color:var(--gray)}.crumb a:hover{color:var(--blue)}
+
+/* SECTIONS */
+.sec{padding:56px 0}
+.sec-alt{background:var(--alt);border-top:1px solid #eee;border-bottom:1px solid #eee}
+.sec-teal{background:var(--teal)}
+.sec-tight{padding:34px 0}
+.kick{color:var(--olive);font-weight:700;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;display:block}
+.h2{color:var(--near);font-weight:700;font-size:28px;line-height:1.22;margin:10px 0 4px;letter-spacing:-.01em}
+.rule{height:3px;width:48px;background:var(--lgray);margin:12px 0 22px}
+.lead{font-size:17px;font-weight:300;color:var(--char);max-width:62ch}
+p.body{font-size:15.5px;color:var(--char);margin-bottom:14px;max-width:66ch}
+.center{text-align:center}.center .rule{margin-left:auto;margin-right:auto}.center .lead{margin:0 auto}
+
+/* HERO */
+.hero{padding:70px 0 60px;background:linear-gradient(180deg,#fff, #fbfdfe)}
+.hero.dark{background:var(--blue);color:#fff}
+.hero .eh{max-width:78%}
+.hero h1{font-weight:800;font-size:44px;line-height:1.12;color:var(--near);margin:12px 0 14px;letter-spacing:-.02em}
+.hero.dark h1{color:#fff}
+.hero .sub{font-size:19px;font-weight:300;color:var(--char);max-width:56ch;margin-bottom:26px}
+.hero.dark .sub{color:rgba(255,255,255,.85)}
+.hrow{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+@media(max-width:760px){.hero h1{font-size:32px}.hero .eh{max-width:100%}}
+
+/* ANSWER */
+.ans{background:var(--teal);border-left:5px solid var(--blue);border-radius:0 6px 6px 0;padding:22px 26px;font-size:16px;color:var(--near);line-height:1.6;max-width:70ch}
+.dark .ans{background:rgba(255,255,255,.09);border-left-color:var(--gold);color:#fff}
+.ans .al{display:block;color:var(--blue);font-weight:700;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:8px}
+.dark .ans .al{color:var(--gold)}
+
+/* TRUST */
+.trust{background:var(--blue);color:#fff}
+.trust .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;padding:26px 32px}
+.tstat{text-align:center;flex:1;min-width:150px}
+.tnum{font-weight:800;font-size:24px;color:var(--gold)}
+.tlbl{font-size:12px;color:rgba(255,255,255,.82);margin-top:3px}
+
+/* GRIDS + CARDS */
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:860px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid #e6e6e6;border-radius:6px;overflow:hidden;transition:box-shadow .15s,transform .15s;cursor:pointer;display:flex;flex-direction:column}
+.card:hover{box-shadow:0 10px 26px rgba(0,0,0,.09);transform:translateY(-2px)}
+.card .top{height:4px;background:var(--blue)}
+.card .cb{padding:18px 20px;flex:1;display:flex;flex-direction:column}
+.card h3{color:var(--near);font-weight:700;font-size:16px;margin:4px 0 6px}
+.card p{color:var(--char);font-size:13px;line-height:1.55;flex:1}
+.rm{color:var(--link);font-size:12px;font-weight:600;margin-top:12px;display:inline-block}
+.card .pk{color:var(--olive);font-weight:700;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+
+/* MINI BLOCKS */
+.minis{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:760px){.minis{grid-template-columns:1fr}}
+.mini h4{color:var(--blue);font-size:15px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.mini .n{width:26px;height:26px;border-radius:50%;background:var(--teal);color:var(--blue);font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.mini p{font-size:13px;color:var(--char)}
+
+/* PILLS + PROOF */
+.pills{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:760px){.pills{grid-template-columns:repeat(2,1fr)}}
+.pill{background:var(--teal);border-radius:6px;padding:18px 12px;text-align:center;color:var(--blue);font-weight:700;font-size:13px;cursor:pointer;transition:background .15s}
+.pill:hover{background:#cfe6ee}
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.proof{grid-template-columns:1fr}}
+.pc{background:#fff;border:1px solid #e6e6e6;border-radius:6px;padding:16px 18px}
+.pc h4{color:var(--near);font-size:14px;font-weight:700;margin:5px 0}
+.pc p{color:var(--char);font-size:12px;line-height:1.5}
+.tag{display:inline-block;background:rgba(140,158,56,.16);color:#5f6d1f;font-weight:700;font-size:10px;letter-spacing:.8px;text-transform:uppercase;padding:4px 9px;border-radius:3px}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.stats{grid-template-columns:1fr}}
+.stat{background:rgba(212,168,58,.12);border:1px solid rgba(212,168,58,.5);border-radius:6px;padding:20px 14px;text-align:center}
+.stat .big{color:var(--near);font-weight:800;font-size:26px}
+.stat .lbl{color:var(--char);font-size:12px;margin-top:5px}
+
+/* FACTS (gist) */
+.facts .wrap{display:flex;justify-content:space-around;flex-wrap:wrap;gap:14px;padding:24px 32px}
+.facts{background:var(--blue)}
+.fact{text-align:center;color:#fff;min-width:130px}
+.fnum{font-weight:800;font-size:22px;color:var(--gold)}
+.flbl{font-size:11px;color:rgba(255,255,255,.82);margin-top:3px}
+
+/* FAQ */
+.faq details{border-bottom:1px solid #e6e6e6;padding:4px 0}
+.faq summary{list-style:none;cursor:pointer;padding:15px 2px;font-weight:700;font-size:15px;color:var(--near);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';color:var(--blue);font-weight:800;font-size:20px}
+.faq details[open] summary::after{content:'–'}
+.faq details p{font-size:14px;color:var(--char);padding:0 2px 16px;max-width:74ch}
+
+/* CTA CLOSE */
+.close{background:var(--blue);color:#fff;text-align:center}
+.close .wrap{padding:48px 32px}
+.close.soft{background:var(--teal);color:var(--near)}
+.close h2{font-size:26px;font-weight:800;margin-bottom:8px}
+.close.soft h2{color:var(--near)}
+.close p{font-size:15px;font-weight:300;color:rgba(255,255,255,.85);margin-bottom:22px}
+.close.soft p{color:var(--char)}
+.close .hrow{justify-content:center}
+
+/* ARTICLE */
+.article{max-width:760px;margin:0 auto;padding:44px 32px}
+.article h1{font-size:34px;font-weight:800;color:var(--near);line-height:1.18;letter-spacing:-.02em;margin:10px 0 14px}
+.byline{display:flex;align-items:center;gap:12px;border-top:1px solid #eee;border-bottom:1px solid #eee;padding:12px 0;margin-bottom:24px}
+.av{width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.byline .mt{font-size:12.5px;color:var(--char)}.byline .mt b{color:var(--near)}
+.article h2{font-size:22px;font-weight:700;color:var(--near);margin:30px 0 10px;letter-spacing:-.01em}
+.article h3{font-size:16px;font-weight:700;color:var(--blue);margin:22px 0 6px}
+.article p{font-size:16px;color:#3a3a3a;line-height:1.8;margin-bottom:16px}
+.pq{border-left:4px solid var(--olive);padding:6px 0 6px 20px;margin:22px 0;font-size:19px;font-weight:300;font-style:italic;color:var(--near);line-height:1.5}
+.bio{display:flex;gap:16px;background:var(--cream);border-radius:8px;padding:20px 22px;margin:28px 0}
+.bio .bav{width:52px;height:52px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bio .bn{font-weight:700;color:var(--near);font-size:14px}
+.bio .br{color:var(--olive);font-weight:700;font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;margin:2px 0 6px}
+.bio .bd{font-size:12.5px;color:var(--char);line-height:1.55}
+.rel{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0}
+@media(max-width:640px){.rel{grid-template-columns:1fr}}
+.rc{background:#fff;border:1px solid #e6e6e6;border-radius:5px;padding:12px 14px;cursor:pointer;transition:box-shadow .15s}
+.rc:hover{box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.rc .rk{color:var(--olive);font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.rc .rt{color:var(--link);font-size:12.5px;font-weight:600;margin-top:4px;line-height:1.35}
+.rc.up{border:1px solid var(--blue);background:var(--teal)}
+
+/* CASE HEADER */
+.chead{background:var(--blue);color:#fff}
+.chead .wrap{padding:40px 32px}
+.chead h1{font-size:30px;font-weight:800;line-height:1.18;margin:12px 0 8px}
+.chead .out{color:var(--gold);font-weight:600;font-size:16px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:640px){.metrics{grid-template-columns:1fr}}
+.mc{background:rgba(212,168,58,.12);border:1px solid rgba(212,168,58,.5);border-radius:6px;padding:18px 12px;text-align:center}
+.mc .big{color:var(--near);font-weight:800;font-size:24px}
+.mc .lbl{color:var(--char);font-size:11.5px;margin-top:5px;line-height:1.4}
+
+/* RESOURCE / FEATURE */
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.feat{grid-template-columns:1fr}}
+.newsletter{background:var(--cream);border-radius:8px;padding:26px 28px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.newsletter .nt{flex:1;min-width:240px}
+.field{display:flex;gap:8px;flex-wrap:wrap}
+.field input{flex:1;min-width:180px;border:1px solid var(--lgray);border-radius:4px;padding:11px 12px;font-family:var(--f);font-size:13px}
+.field input:focus{outline:none;border-color:var(--blue)}
+
+/* FOOTER */
+.foot{background:var(--blue-dark);color:rgba(255,255,255,.72)}
+.foot .wrap{padding:44px 32px 22px}
+.fcols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:28px}
+@media(max-width:860px){.fcols{grid-template-columns:1fr 1fr;row-gap:26px}}
+.fcol h5{color:#fff;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;font-weight:700}
+.fcol a{display:block;color:rgba(255,255,255,.7);font-size:12.5px;padding:4px 0;cursor:pointer}
+.fcol a:hover{color:var(--olive)}
+.fbrand .wm{font-size:16px}
+.fbrand p{font-size:12px;color:rgba(255,255,255,.6);margin-top:10px;line-height:1.6;max-width:30ch}
+.fbot{border-top:1px solid rgba(255,255,255,.14);margin-top:28px;padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;color:rgba(255,255,255,.55)}
+.proto{display:inline-block;background:rgba(212,168,58,.2);color:var(--gold);font-weight:700;font-size:10px;letter-spacing:.6px;text-transform:uppercase;padding:4px 10px;border-radius:3px}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(15,30,38,.55);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;animation:fade .2s ease}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:10px;max-width:480px;width:100%;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.modal .mh{background:var(--blue);color:#fff;padding:22px 26px;position:relative}
+.modal .mh .kick{color:var(--olive)}
+.modal .mh h3{font-size:20px;font-weight:800;margin-top:6px}
+.modal .x{position:absolute;top:16px;right:18px;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1}
+.modal .mb{padding:24px 26px}
+.modal label{display:block;font-size:12px;font-weight:600;color:var(--near);margin:12px 0 5px}
+.modal input,.modal textarea{width:100%;border:1px solid var(--lgray);border-radius:4px;padding:10px 12px;font-family:var(--f);font-size:13px}
+.modal input:focus,.modal textarea:focus{outline:none;border-color:var(--blue)}
+.promises{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+.promises span{background:var(--teal);color:var(--blue);font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px}
+.mnote{font-size:11px;color:var(--gray);margin-top:14px;font-style:italic}
+
+/* MOBILE NAV */
+@media(max-width:900px){
+.burger{display:block}
+.nlinks{position:fixed;top:62px;right:0;left:0;background:var(--blue);flex-direction:column;align-items:stretch;gap:0;padding:8px 16px 18px;display:none;box-shadow:0 12px 24px rgba(0,0,0,.25)}
+.nlinks.open{display:flex}
+.nitem{width:100%}
+.nlink{width:100%;justify-content:space-between;padding:13px 6px}
+.dd{position:static;box-shadow:none;border:none;background:rgba(255,255,255,.06);display:none;padding:2px 0 6px}
+.dd a{color:rgba(255,255,255,.85)}.dd a:hover{background:rgba(255,255,255,.1);color:#fff}
+.dd a span{color:rgba(255,255,255,.55)}
+.nitem.exp .dd{display:block}
+.nav .btn-cta{margin:12px 6px 0;display:block}
+}
+</style>
+<style id="sa-carto">
+/* ===== SA cartographic edition (SA22 palette, Open Sans) ===== */
+body{background:#fff}
+.wrap{max-width:1180px}
+.sec{padding:88px 0}
+
+/* eyebrow as a map marker */
+.kick{font-weight:700;letter-spacing:2.2px;display:inline-flex;align-items:center;gap:10px}
+.kick::before{content:"\25CE";font-size:12px;color:var(--olive)}
+.h2{font-size:clamp(28px,3.2vw,36px);letter-spacing:-.02em}
+.rule{height:2px;width:60px;background:var(--olive);opacity:.9;margin:14px 0 24px}
+
+/* HERO: dark topographic map surface */
+.hero,.hero.dark{position:relative;overflow:hidden;color:#fff;padding:118px 0 104px;
+ background:radial-gradient(140% 120% at 82% -20%,#0a6e93,transparent 55%),linear-gradient(160deg,#00374C 0%,#005A7D 78%)}
+.hero .wrap{position:relative;z-index:2;max-width:1180px}
+.hero .eh{max-width:60ch}
+.hero h1,.hero.dark h1{color:#fff;font-size:clamp(40px,6vw,68px);line-height:1.01;letter-spacing:-.03em;font-weight:800;margin:16px 0 18px}
+.hero .sub,.hero.dark .sub{color:rgba(255,255,255,.86);font-size:clamp(18px,2vw,22px);max-width:52ch}
+.hero .kick{color:var(--olive)}
+.carto-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.carto-bg .grat{stroke:rgba(255,255,255,.07);stroke-width:1}
+.carto-bg .ct{fill:none;stroke:rgba(224,238,242,.2);stroke-width:1.1}
+.carto-bg .ct.olv{stroke:rgba(140,158,56,.55)}
+.carto-bg .ct.gld{stroke:rgba(212,168,58,.5)}
+.carto-bg .route{fill:none;stroke:#8C9E38;stroke-width:1.8;stroke-dasharray:1 7;stroke-linecap:round}
+.carto-bg .peak{fill:#D4A83A}
+.carto-bg .peakring{fill:none;stroke:#D4A83A;stroke-width:1.3;opacity:.65}
+.carto-bg .tick{stroke:rgba(255,255,255,.4);stroke-width:1.4}
+
+/* coordinate framing bars injected into hero */
+.coordbar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+ font-size:10.5px;font-weight:700;letter-spacing:2.4px;text-transform:uppercase;color:rgba(255,255,255,.62);
+ border-bottom:1px solid rgba(255,255,255,.18);padding-bottom:10px;margin-bottom:26px}
+.coordbar .r{color:var(--gold)}
+.maplegend{display:flex;gap:22px;flex-wrap:wrap;margin-top:30px;font-size:11px;font-weight:600;letter-spacing:.4px;color:rgba(255,255,255,.72)}
+.maplegend span{display:inline-flex;align-items:center;gap:7px}
+.maplegend .k{width:16px;height:2px;background:#8C9E38;display:inline-block}
+.maplegend .d{width:9px;height:9px;border-radius:50%;background:#D4A83A;display:inline-block}
+.maplegend .c{width:11px;height:11px;border:1.6px solid #CFE6EE;border-radius:50%;display:inline-block}
+.hero .hrow{margin-top:6px}
+
+/* buttons on dark hero */
+.hero .btn-o{border-color:rgba(255,255,255,.7);color:#fff}
+.hero .btn-o:hover{background:rgba(255,255,255,.12)}
+
+/* answer/assertion */
+.ans{background:var(--teal);border-left:4px solid var(--blue);border-radius:0 6px 6px 0}
+
+/* map-tile cards: corner registration ticks */
+.card{border-radius:5px;position:relative}
+.card::after{content:"";position:absolute;top:8px;right:8px;width:9px;height:9px;
+ border-top:1.5px solid var(--lgray);border-right:1.5px solid var(--lgray)}
+.card:hover{box-shadow:0 14px 32px rgba(0,90,125,.14)}
+.card:hover::after{border-color:var(--olive)}
+
+/* alt sections read as faint paper-map */
+.sec-alt{background:#F5F9FA;position:relative}
+.foot{background:#00374C}
+</style>
+<style id="sa-relational">
+/* ===== relational / graph-native body treatment (SA22) ===== */
+.sec{position:relative;overflow:hidden}
+.sec>.wrap{position:relative;z-index:1}
+
+/* faint node-field behind each section */
+.rel-field{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.rf-edge{stroke:#005A7D;stroke-width:1;opacity:.13;fill:none}
+.rf-node{fill:#005A7D;opacity:.15}
+.rf-node.a{fill:#8C9E38;opacity:.42}
+.close{position:relative;overflow:hidden}
+.close>.wrap{position:relative;z-index:1}
+.close .rf-edge{stroke:#CFE6EE;opacity:.22}
+.close .rf-node{fill:#CFE6EE;opacity:.32}
+.close .rf-node.a{fill:#D4A83A;opacity:.85}
+
+/* generative graph clusters as section "images" */
+.rel-art{position:absolute;z-index:0;width:220px;height:200px;pointer-events:none;opacity:.6}
+.ra-edge{stroke:#005A7D;stroke-width:1.5;fill:none;opacity:.45}
+.ra-node{fill:#fff;stroke:#005A7D;stroke-width:1.7}
+.ra-node.olv{fill:#8C9E38;stroke:#6f7d24}
+.ra-node.gld{fill:#D4A83A;stroke:#a97f1e}
+.ra-node.blu{fill:#005A7D;stroke:#00374C}
+.ra-halo{fill:none;stroke:#8C9E38;stroke-width:1.2;opacity:.4}
+@media (prefers-reduced-motion:no-preference){.rel-art{animation:raFloat 10s ease-in-out infinite}}
+@keyframes raFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* cards break the grid + hang off connector nodes */
+@media(min-width:861px){
+ .grid.g3 .card:nth-child(3n-1){margin-top:32px}
+ .grid.g3 .card:nth-child(3n){margin-top:14px}
+ .grid.g4 .card:nth-child(4n-2){margin-top:24px}
+ .grid.g4 .card:nth-child(4n){margin-top:44px}
+ .grid.g2 .card:nth-child(2n){margin-top:32px}
+}
+.grid .card{position:relative}
+.grid .card::before{content:"";position:absolute;left:-7px;top:24px;width:12px;height:12px;border-radius:50%;
+ background:var(--olive);border:2px solid #fff;box-shadow:0 0 0 4px rgba(140,158,56,.18),-22px 6px 0 -5px var(--blue);z-index:3}
+
+/* process steps wired as a path graph */
+.minis{position:relative}
+.minis::before{content:"";position:absolute;top:15px;left:9%;right:9%;border-top:2px dashed rgba(0,90,125,.32);z-index:0}
+.minis .mini{position:relative;z-index:1}
+.mini .n{background:#fff!important;border:2px solid var(--olive);color:var(--olive)!important;
+ box-shadow:0 0 0 5px #fff,0 0 0 7px rgba(140,158,56,.22)}
+@media(max-width:760px){.minis::before{display:none}}
+
+/* pills + proof as nodes */
+.pill{position:relative}
+.pill::before{content:"";position:absolute;left:12px;top:12px;width:7px;height:7px;border-radius:50%;background:var(--olive);opacity:.8}
+.pc{position:relative}
+.pc::before{content:"";position:absolute;right:14px;top:14px;width:8px;height:8px;border-radius:50%;border:2px solid var(--gold)}
+
+/* stat callouts get a connective orbit */
+.stat{position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-24px;bottom:-24px;width:70px;height:70px;border-radius:50%;border:1.5px dashed rgba(212,168,58,.5)}
+</style>
+<style id="sa-proofgraph">
+/* proof/clients as an obvious interactive graph */
+.proofgraph{margin-top:16px;border:1px solid var(--lgray);border-radius:14px;background:linear-gradient(180deg,#ffffff,#F2F8FA);padding:16px 16px 10px;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(0,90,125,.07)}
+.proofgraph text{font-family:var(--f)}
+.pg-head{display:flex;align-items:center;gap:9px;font-size:10.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--blue);margin:2px 4px 6px}
+.pg-head::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--olive);box-shadow:0 0 0 4px rgba(140,158,56,.2)}
+.proofgraph svg{width:100%;height:auto;display:block;overflow:visible}
+.pg-edge{stroke:#005A7D;stroke-width:3;opacity:.3}
+.pg-flow{stroke:#005A7D;stroke-width:3;stroke-dasharray:2 13;stroke-linecap:round;opacity:.95}
+@media(prefers-reduced-motion:no-preference){.pg-flow{animation:pgflow 1.5s linear infinite}}
+@keyframes pgflow{to{stroke-dashoffset:-30}}
+.pg-hub{fill:#005A7D}
+.pg-hubring{fill:none;stroke:#005A7D;stroke-width:2;opacity:.4;transform-box:fill-box;transform-origin:center}
+@media(prefers-reduced-motion:no-preference){.pg-hubring{animation:pgpulse 2.8s ease-in-out infinite}}
+@keyframes pgpulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.08;transform:scale(1.22)}}
+.pg-hublabel{fill:#fff;font-weight:800;font-size:18px}
+.pg-hubsub{fill:#CFE6EE;font-weight:700;font-size:8.5px;letter-spacing:1.4px;text-transform:uppercase}
+.pg-node{cursor:pointer}
+.pg-ncirc{fill:#E0EEF2;stroke:#005A7D;stroke-width:2.5;transition:fill .15s,stroke .15s}
+.pg-node:hover .pg-ncirc,.pg-node:focus-visible .pg-ncirc{fill:#fff;stroke:#C84A2B;stroke-width:3.5}
+.pg-mono{fill:#005A7D;font-weight:800;font-size:18px}
+.pg-cat{fill:#63711d;font-weight:700;font-size:8.5px;letter-spacing:.6px;text-transform:uppercase}
+.pg-name{fill:#2B2B2B;font-weight:700;font-size:12.5px}
+.pg-hint{fill:#C84A2B;font-weight:800;font-size:9px;letter-spacing:.5px;text-transform:uppercase;opacity:0;transition:opacity .15s}
+.pg-node:hover .pg-hint,.pg-node:focus-visible .pg-hint{opacity:1}
+.pg-cap{text-align:center;font-size:10.5px;color:var(--gray);margin:10px 0 4px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="sa">
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="wrap">
+    <div class="wm" onclick="go('home')">semantic arts.</div>
+    <button class="burger" aria-label="Menu" onclick="document.querySelector('.nlinks').classList.toggle('open')">☰</button>
+    <div class="nlinks">
+      <div class="nitem"><button class="nlink" data-nav="solutions">Solutions <span class="caret">▾</span></button>
+        <div class="dd">
+          <a onclick="go('pillar-dca')">Data-Centric Architecture<span>Put data at the center</span></a>
+          <a onclick="go('pillar-ai')">AI-Ready Data<span>Why AI pilots stall</span></a>
+          <a onclick="go('pillar-kg')">Knowledge Graphs &amp; Ontologies<span>The semantic layer</span></a>
+          <a onclick="go('pillar-graph')">Graph Database Alternative<span>RDF vs LPG</span></a>
+          <a onclick="go('pillar-roi')">Business Case &amp; ROI<span>Cost of bad data</span></a>
+        </div>
+      </div>
+      <div class="nitem"><button class="nlink" data-nav="industries">Industries <span class="caret">▾</span></button>
+        <div class="dd">
+          <a onclick="go('ind-pharma')">Pharma &amp; Life Sciences</a>
+          <a onclick="go('ind-sc')">Supply Chain</a>
+          <a onclick="go('ind-cyber')">Cybersecurity</a>
+          <a onclick="go('ind-fs')">Financial Services</a>
+        </div>
+      </div>
+      <div class="nitem"><button class="nlink" data-nav="gist" onclick="go('gist')">gist</button></div>
+      <div class="nitem"><button class="nlink" data-nav="resources" onclick="go('resources')">Resources</button></div>
+      <div class="nitem"><button class="nlink" data-nav="about" onclick="go('about')">About</button></div>
+      <button class="btn btn-cta" onclick="openQuote()">Get a Quote</button>
+    </div>
+  </div>
+</nav>
+
+<style id="v2-additions">
+/* Semantic-substrate module additions (SA22-consistent) */
+.cmp{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+.cmp th,.cmp td{border:1px solid #e6e6e6;padding:10px 12px;text-align:left;vertical-align:top;line-height:1.45}
+.cmp thead th{background:var(--blue);color:#fff;font-weight:700;font-size:10.5px;letter-spacing:.4px;text-transform:uppercase}
+.cmp tbody th{background:var(--alt);color:var(--near);font-weight:700;width:19%}
+.cmp td.hi{background:rgba(140,158,56,.10);color:var(--near);font-weight:600}
+@media(max-width:760px){.cmp{font-size:11.5px}.cmp th,.cmp td{padding:7px 8px}}
+.ssvg{margin:8px 0 2px;border:1px solid #e6e6e6;border-radius:6px;background:#fff;padding:16px}
+.scap{font-size:12px;color:var(--gray);font-style:italic;margin-top:8px}
+</style>
+<!-- ===================== HOME ===================== -->
+<section class="page" id="home">
+  <div class="hero">
+    <div class="wrap">
+      <div class="eh">
+        <span class="kick">Enterprise data, made AI-ready</span>
+        <h1>Your hardest problems have always been data problems. Now they're your AI problems too.</h1>
+        <p class="sub">Semantic Arts fixes the data — so all of them go away.</p>
+        <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-o" onclick="go('services')">See how it works →</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="sec-tight"><div class="wrap"><div class="ans">We build the ontologies and knowledge graphs that turn fragmented enterprise data into one shared, AI-ready model — so every system, and every AI initiative, speaks the same language.</div></div></div>
+  <div class="trust"><div class="wrap">
+    <div class="tstat"><div class="tnum">25+ yrs</div><div class="tlbl">Data-centric practice</div></div>
+    <div class="tstat"><div class="tnum">~90</div><div class="tlbl">Enterprise clients</div></div>
+    <div class="tstat"><div class="tnum">FIBO</div><div class="tlbl">Standard authorship</div></div>
+    <div class="tstat"><div class="tnum">gist</div><div class="tlbl">Upper-ontology steward</div></div>
+  </div></div>
+  <div class="sec"><div class="wrap">
+    <span class="kick">Start here</span><h2 class="h2">Which problem are you solving?</h2><div class="rule"></div>
+    <div class="grid g4">
+      <div class="card" onclick="go('pillar-dca')"><div class="top"></div><div class="cb"><h3>Data-Centric Architecture</h3><p>Put data — not applications — at the center of your enterprise.</p><span class="rm">Explore →</span></div></div>
+      <div class="card" onclick="go('pillar-ai')"><div class="top"></div><div class="cb"><h3>AI-Ready Data</h3><p>Why AI pilots stall, and the data foundation that makes them land.</p><span class="rm">Explore →</span></div></div>
+      <div class="card" onclick="go('pillar-kg')"><div class="top"></div><div class="cb"><h3>Knowledge Graphs &amp; Ontologies</h3><p>One shared model of meaning underneath every system, analysis, and AI.</p><span class="rm">Explore →</span></div></div>
+      <div class="card" onclick="go('pillar-graph')"><div class="top"></div><div class="cb"><h3>Graph Database Alternative</h3><p>RDF vs. LPG — and why the standard wins for the enterprise.</p><span class="rm">Explore →</span></div></div>
+    </div>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap">
+    <span class="kick">By industry</span><h2 class="h2">Built for regulated, high-stakes data</h2><div class="rule"></div>
+    <div class="pills">
+      <div class="pill" onclick="go('ind-pharma')">Pharma &amp; Life Sciences</div>
+      <div class="pill" onclick="go('ind-sc')">Supply Chain</div>
+      <div class="pill" onclick="go('ind-cyber')">Cybersecurity</div>
+      <div class="pill" onclick="go('ind-fs')">Financial Services</div>
+    </div>
+  </div></div>
+  <div class="sec"><div class="wrap">
+    <span class="kick">Proof</span><h2 class="h2">Who we've helped</h2><div class="rule"></div>
+    <div class="proof">
+      <div class="pc" onclick="go('ind-fs')"><span class="pk">Financial Services</span><h4>Global investment bank</h4><p>One shared model across trading, risk, and compliance.</p></div>
+      <div class="pc" onclick="go('ind-cyber')"><span class="pk">Cybersecurity</span><h4>Center for Internet Security</h4><p>Semantic backbone for security controls at national scale.</p></div>
+      <div class="pc" onclick="go('case-student-loan')"><span class="pk">Financial Services</span><h4>Sallie Mae</h4><p>50,000+ tables distilled to ~1,000 shared concepts.</p></div>
+    </div>
+    <div style="margin-top:20px"><button class="btn btn-o" onclick="go('case-studies')">See all case studies →</button></div>
+  </div></div>
+  <div class="sec sec-teal"><div class="wrap" style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+    <div style="flex:1;min-width:280px"><span class="kick">Open source</span><h2 class="h2" style="margin-top:8px">gist — the free enterprise upper ontology</h2><p class="body" style="margin-top:8px">~100 classes, CC BY 4.0. The minimalist model thousands build on.</p></div>
+    <button class="btn btn-o" onclick="go('gist')">Explore gist →</button>
+  </div></div>
+  <div class="close"><div class="wrap">
+    <span class="kick" style="color:var(--olive)">Ready when you are</span>
+    <h2>Turn your data problem into an advantage</h2>
+    <p>Fixed scope. No lock-in. A model that outlives every application.</p>
+    <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('resources')">Join the EDTC community</button></div>
+  </div></div>
+</section>
+
+<!-- ===================== PILLAR: DATA-CENTRIC ARCH ===================== -->
+<section class="page" id="pillar-dca">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › Solutions › <b>Data-Centric Architecture</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">Data-Centric Architecture</span>
+    <h1>Make your data the foundation that outlives every application.</h1>
+    <p class="sub">One shared, meaning-rich model — so integration stops being a permanent cost and your AI has something solid to stand on.</p>
+    <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button></div>
+  </div></div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans"><span class="al">What is data-centric architecture?</span>Data-centric architecture makes data — not applications — the center of the enterprise. Instead of every system owning its own copy and interpretation of core concepts, all systems share one meaning-rich model (an ontology and knowledge graph) that outlives any application. It's the foundation that turns integration from a permanent cost into a solved problem — and makes enterprise AI reliable.</div></div></div>
+  <div class="sec"><div class="wrap">
+    <span class="kick">Why it matters</span><h2 class="h2">The application-centric tax</h2><div class="rule"></div>
+    <div class="minis">
+      <div class="mini"><h4><span class="n">1</span>Silos by default</h4><p>Every application owns and defines its own data, so the same concept means ten different things across the estate.</p></div>
+      <div class="mini"><h4><span class="n">2</span>Integration debt</h4><p>Ten systems don't mean ten models — they mean a tangle of brittle, point-to-point mappings tied to legacy code.</p></div>
+      <div class="mini"><h4><span class="n">3</span>AI on sand</h4><p>Fragmented, contradictory data is exactly what stalls enterprise AI in pilot purgatory.</p></div>
+    </div>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap">
+    <span class="kick">How SA does it</span><h2 class="h2">One model, built from your business</h2><div class="rule"></div>
+    <p class="body">We model your organization's actual concepts — not its tables — into a compact enterprise ontology. Data-centric is the approach; a <strong>semantic substrate</strong> is what it produces — the ontology-grounded foundation every application, analysis, and AI draws from directly. New systems conform to the shared model automatically; existing ones integrate through its lens rather than point-to-point. It's a fixed-scope, gist-based engagement with no lock-in.</p>
+    <button class="btn btn-o" onclick="go('services')">How our engagements work →</button>
+  </div></div>
+  <div class="sec"><div class="wrap">
+    <span class="kick">Go deeper</span><h2 class="h2">In this cluster</h2><div class="rule"></div>
+    <div class="grid g3">
+      <div class="card" onclick="go('article-dcdd')"><div class="top"></div><div class="cb"><span class="pk">Article</span><h3>Data-centric vs. data-driven</h3><p>The difference that decides whether your AI works.</p><span class="rm">Read →</span></div></div>
+      <div class="card" onclick="go('article-dcdd')"><div class="top"></div><div class="cb"><span class="pk">Article</span><h3>The core model at the heart of your architecture</h3><p>What a shared enterprise model actually looks like.</p><span class="rm">Read →</span></div></div>
+      <div class="card" onclick="go('case-student-loan')"><div class="top"></div><div class="cb"><span class="pk">Case study</span><h3>50,000+ tables → ~1,000 concepts</h3><p>An enterprise ontology for Sallie Mae.</p><span class="rm">Read →</span></div></div>
+    </div>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap">
+    <span class="kick">Questions</span><h2 class="h2">FAQ</h2><div class="rule"></div>
+    <div class="faq">
+      <details open><summary>Is data-centric the same as a data lake or data fabric?</summary><p>No. A lake centralizes storage; data-centric centralizes <em>meaning</em>. The model — not the repository — is the shared asset, and it's what makes a fabric or lake actually coherent.</p></details>
+      <details><summary>How long before we see value?</summary><p>Engagements are fixed-scope and designed to be self-funding — the first model delivers a usable, integrating asset rather than a multi-year rewrite.</p></details>
+      <details><summary>Do we have to replace our applications?</summary><p>No. Applications keep running; they conform to or integrate through the shared model incrementally. It's a bridge, not a rip-and-replace.</p></details>
+    </div>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">Your data, one model</span><h2>Ready to put data at the center?</h2><p>Fixed scope. No change orders. No lock-in.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('resources')">Join the EDTC community</button></div></div></div>
+</section>
+
+<!-- ===================== PILLAR: AI-READY DATA (AI-DOMINANT) ===================== -->
+<section class="page" id="pillar-ai">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › Solutions › <b>AI-Ready Data</b></div></div>
+  <div class="hero dark"><div class="wrap"><div class="eh">
+    <span class="kick">AI-Ready Data</span>
+    <h1>Make your enterprise data AI-ready.</h1>
+    <p class="sub">Most AI pilots don't fail on the model. They fail on the data. Here's the foundation that makes AI reliable in production.</p>
+    <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('article-airc')">Why pilots fail →</button></div>
+  </div></div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans"><span class="al">What is AI-ready data?</span>AI-ready data is enterprise data that an AI system can use reliably — unified, unambiguous, and grounded in a shared model of what the business means. Most AI pilots stall not on the model but on the data: fragmented, contradictory, and context-free. Semantic Arts makes data AI-ready by building the ontology and knowledge graph that give AI a trustworthy foundation — a semantic substrate underneath grounding, GraphRAG, and agentic systems, not a metrics layer bolted on top.</div></div></div>
+  <div class="sec"><div class="wrap">
+    <span class="kick">The real bottleneck</span><h2 class="h2">Why AI pilots fail</h2><div class="rule"></div>
+    <div class="minis">
+      <div class="mini"><h4><span class="n">1</span>The data, not the model</h4><p>Foundation models are strong. The data underneath them is fragmented, ambiguous, and missing business context.</p></div>
+      <div class="mini"><h4><span class="n">2</span>RAG inherits the mess</h4><p>Retrieval-augmented and agentic systems inherit every inconsistency in the underlying data.</p></div>
+      <div class="mini"><h4><span class="n">3</span>No shared meaning</h4><p>Without a model of what the business means, AI can't reason across systems — only within one.</p></div>
+    </div>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap">
+    <span class="kick">The approach</span><h2 class="h2">Ground AI on a knowledge graph</h2><div class="rule"></div>
+    <div class="minis">
+      <div class="mini"><h4><span class="n">1</span>Assess</h4><p>Find where fragmented, ungoverned data is capping model reliability today.</p></div>
+      <div class="mini"><h4><span class="n">2</span>Model</h4><p>Build the ontology and knowledge graph that give your data shared, machine-usable meaning.</p></div>
+      <div class="mini"><h4><span class="n">3</span>Ground</h4><p>Wire grounding, GraphRAG, and guardrails to a foundation AI can trust in production.</p></div>
+    </div>
+    <p class="body" style="margin-top:26px">A semantic layer gives your tools a consistent set of metrics. A <strong>semantic substrate</strong> gives your whole enterprise a consistent set of meanings — which is what AI actually needs to stop guessing. AI doesn't resolve ambiguity; it industrializes it. The substrate is how you remove the ambiguity before the machine acts on it.</p>
+    <div class="ssvg"><svg viewBox="0 0 720 210" xmlns="http://www.w3.org/2000/svg" width="100%" role="img" aria-label="On a metrics layer an agent guesses between two lookalike fields; on a semantic substrate it reads one formal definition unambiguously."><style>.t7{font-family:'Open Sans',sans-serif}.h7{font-weight:700;fill:#2B2B2B}.s7{fill:#808080}.l7{fill:#4A4A4A}</style><text class="t7 h7" x="175" y="20" text-anchor="middle" font-size="13">On a metrics layer</text><circle cx="78" cy="112" r="26" fill="#E0EEF2" stroke="#005A7D"/><text class="t7 l7" x="78" y="116" text-anchor="middle" font-size="10">agent</text><rect x="150" y="62" width="180" height="32" rx="4" fill="#fff" stroke="#CCCCCC"/><text x="240" y="82" text-anchor="middle" font-size="12" font-family="monospace" fill="#4A4A4A">cust_rev</text><rect x="150" y="130" width="180" height="32" rx="4" fill="#fff" stroke="#CCCCCC"/><text x="240" y="150" text-anchor="middle" font-size="12" font-family="monospace" fill="#4A4A4A">customer_revenue</text><path d="M106 102 L150 84" stroke="#C84A2B" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M106 122 L150 142" stroke="#C84A2B" stroke-width="1.5" stroke-dasharray="4 3"/><text class="t7" x="130" y="118" text-anchor="middle" font-size="18" font-weight="800" fill="#C84A2B">?</text><text class="t7 s7" x="185" y="190" text-anchor="middle" font-size="10.5" font-style="italic">guesses between lookalike fields</text><line x1="365" y1="40" x2="365" y2="182" stroke="#e6e6e6"/><text class="t7 h7" x="545" y="20" text-anchor="middle" font-size="13">On a semantic substrate</text><circle cx="448" cy="112" r="26" fill="#E0EEF2" stroke="#005A7D"/><text class="t7 l7" x="448" y="116" text-anchor="middle" font-size="10">agent</text><rect x="520" y="88" width="170" height="48" rx="6" fill="#005A7D"/><text x="605" y="109" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">CustomerRevenue</text><text x="605" y="125" text-anchor="middle" font-size="9" fill="#E0EEF2">formally defined · reasoned</text><path d="M476 112 L520 112" stroke="#8C9E38" stroke-width="2" marker-end="url(#chk7)"/><text class="t7" x="500" y="104" text-anchor="middle" font-size="15" font-weight="800" fill="#8C9E38">✓</text><text class="t7 s7" x="545" y="172" text-anchor="middle" font-size="10.5" font-style="italic">reads one unambiguous definition</text><defs><marker id="chk7" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#8C9E38"/></marker></defs></svg></div>
+    <p class="scap">What the AI sees: two lookalike fields it must guess between (left) versus one formal definition it reads unambiguously (right).</p>
+  </div></div>
+  <div class="sec"><div class="wrap">
+    <span class="kick">Credentials</span><h2 class="h2">Semantics is what we do</h2><div class="rule"></div>
+    <div class="proof">
+      <div class="pc"><span class="pk">Standard authorship</span><h4>FIBO</h4><p>We helped author the industry's financial ontology standard.</p></div>
+      <div class="pc" onclick="go('gist')"><span class="pk">Open source</span><h4>gist steward</h4><p>We maintain the free enterprise upper ontology thousands build on.</p></div>
+      <div class="pc" onclick="go('article-airc')"><span class="pk">Cornerstone</span><h4>Why AI pilots fail</h4><p>The deep read on grounding AI on enterprise data.</p></div>
+    </div>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap">
+    <span class="kick">Questions</span><h2 class="h2">FAQ</h2><div class="rule"></div>
+    <div class="faq">
+      <details open><summary>How do we ground generative AI on our own data?</summary><p>By connecting that data through a shared ontology into a knowledge graph, then retrieving against it — so the model reasons over governed meaning, not scattered documents.</p></details>
+      <details><summary>What is GraphRAG, and do we need it?</summary><p>GraphRAG grounds retrieval in a knowledge graph rather than loose text chunks. It matters most when answers depend on relationships across systems — which, in the enterprise, they usually do.</p></details>
+      <details><summary>RDF or a property graph for AI grounding?</summary><p>For enterprise-wide, durable, vendor-neutral meaning, RDF/OWL wins. See the Graph Database Alternative for the full comparison.</p></details>
+      <details><summary>What do AI agents actually need underneath?</summary><p>Formal, machine-readable meaning they can reason over — not just a consistent set of metric names. Reasoning (OWL) and constraints (SHACL) on one shared model let an agent draw the same inference a person would, instead of guessing between lookalike fields. That shared foundation is a semantic substrate.</p></details>
+    </div>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">AI on a foundation you can trust</span><h2>Make your data AI-ready</h2><p>Start with an assessment. Fixed scope, no lock-in.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('resources')">Join the EDTC community</button></div></div></div>
+</section>
+
+<!-- ===================== PILLAR: KNOWLEDGE GRAPHS ===================== -->
+<section class="page" id="pillar-kg">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › Solutions › <b>Knowledge Graphs &amp; Ontologies</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">Knowledge Graphs &amp; Ontologies</span>
+    <h1>One coherent picture of your enterprise — queryable by people, systems, and AI.</h1>
+    <p class="sub">One shared model of what your business means — the foundation every system, analysis, and AI draws from, not a layer bolted on top.</p>
+    <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button></div>
+  </div></div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans"><span class="al">What is an enterprise knowledge graph?</span>An enterprise knowledge graph is your organization's data connected according to a shared ontology — a model of what your business means, not just where its data sits. It's the shared foundation — a semantic substrate — that lets systems, analytics, and AI query one coherent picture instead of stitching together dozens of incompatible ones. Ontologies supply the meaning; the knowledge graph is where that meaning becomes queryable at enterprise scale.</div></div></div>
+  <div class="sec"><div class="wrap">
+    <span class="kick">Clear the vocabulary</span><h2 class="h2">Ontology, knowledge graph, semantic layer, semantic substrate</h2><div class="rule"></div>
+    <div class="grid g4" style="gap:20px">
+      <div class="mini"><h4>Ontology</h4><p>The shared model of concepts and relationships — the meaning.</p></div>
+      <div class="mini"><h4>Knowledge graph</h4><p>Your actual data, connected according to that model, at scale.</p></div>
+      <div class="mini"><h4>Semantic layer</h4><p>A query-time band on top that translates business metrics for BI and AI, per tool — useful, but it depends on the systems beneath it.</p></div>
+      <div class="mini"><h4>Semantic substrate</h4><p>The foundation underneath — one formally-defined model of meaning every application, analysis, and AI draws from directly.</p></div>
+    </div>
+    <div class="ans" style="max-width:74ch;margin-top:28px"><span class="al">What is a semantic substrate?</span>A semantic substrate is the formally-defined foundation an enterprise's data is expressed in — one ontology-grounded model of meaning (RDF/OWL/SHACL) that every application, analysis, and AI system draws from directly. Where a semantic layer sits on top and translates business metrics at query time, per tool, a substrate sits underneath and defines meaning once, for everything — and is independent of the legacy systems, so it can absorb them over time instead of depending on them.</div>
+    <div class="ssvg" style="margin-top:18px"><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" width="100%" role="img" aria-label="A semantic layer sits on top of the systems and translates; a semantic substrate sits underneath as the shared foundation every consumer draws from."><style>.t1{font-family:'Open Sans',sans-serif}.h1x{font-weight:700;fill:#2B2B2B}.s1{fill:#808080}.w1{fill:#fff;font-weight:700}.l1{fill:#4A4A4A}</style><text class="t1 h1x" x="175" y="22" text-anchor="middle" font-size="14">Semantic layer</text><text class="t1 s1" x="175" y="40" text-anchor="middle" font-size="11">on top · translates · per tool</text><rect x="40" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t1 l1" x="80" y="75" text-anchor="middle" font-size="11">BI</text><rect x="135" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t1 l1" x="175" y="75" text-anchor="middle" font-size="11">App</text><rect x="230" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t1 l1" x="270" y="75" text-anchor="middle" font-size="11">AI</text><rect x="40" y="100" width="270" height="26" rx="4" fill="#8C9E38"/><text class="t1 w1" x="175" y="117" text-anchor="middle" font-size="11">semantic layer</text><rect x="40" y="140" width="82" height="104" rx="4" fill="#fff" stroke="#CCCCCC"/><text class="t1 s1" x="81" y="196" text-anchor="middle" font-size="10">silo</text><rect x="134" y="140" width="82" height="104" rx="4" fill="#fff" stroke="#CCCCCC"/><text class="t1 s1" x="175" y="196" text-anchor="middle" font-size="10">silo</text><rect x="228" y="140" width="82" height="104" rx="4" fill="#fff" stroke="#CCCCCC"/><text class="t1 s1" x="269" y="196" text-anchor="middle" font-size="10">silo</text><text class="t1 s1" x="175" y="266" text-anchor="middle" font-size="10.5" font-style="italic">complexity preserved underneath</text><line x1="360" y1="46" x2="360" y2="266" stroke="#e6e6e6"/><text class="t1 h1x" x="545" y="22" text-anchor="middle" font-size="14">Semantic substrate</text><text class="t1 s1" x="545" y="40" text-anchor="middle" font-size="11">underneath · defines · for everything</text><rect x="410" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t1 l1" x="450" y="75" text-anchor="middle" font-size="11">BI</text><rect x="505" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t1 l1" x="545" y="75" text-anchor="middle" font-size="11">Apps</text><rect x="600" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t1 l1" x="640" y="75" text-anchor="middle" font-size="11">AI</text><path d="M450 88 L450 152" stroke="#005A7D" stroke-width="1.5" marker-end="url(#ar1)"/><path d="M545 88 L545 152" stroke="#005A7D" stroke-width="1.5" marker-end="url(#ar1)"/><path d="M640 88 L640 152" stroke="#005A7D" stroke-width="1.5" marker-end="url(#ar1)"/><rect x="410" y="158" width="270" height="72" rx="6" fill="#005A7D"/><text class="t1 w1" x="545" y="192" text-anchor="middle" font-size="13">semantic substrate</text><text x="545" y="210" text-anchor="middle" font-size="9.5" fill="#E0EEF2">one formal model of meaning · RDF/OWL/SHACL</text><text class="t1 s1" x="545" y="254" text-anchor="middle" font-size="10.5" font-style="italic">complexity reduced · independent of legacy</text><defs><marker id="ar1" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#005A7D"/></marker></defs></svg></div>
+    <p class="scap">A semantic layer is a band on top; a semantic substrate is the ground underneath.</p>
+    <p class="lead" style="margin-top:18px;color:var(--near)">"A semantic layer translates meaning at the surface, one tool at a time. A semantic substrate builds meaning into the foundation — once, for everything."</p>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap">
+    <span class="kick">Built on gist</span><h2 class="h2">A running start, not a blank page</h2><div class="rule"></div>
+    <p class="body">We build enterprise knowledge graphs on gist — our free, minimalist upper ontology — so you extend a proven foundation instead of reinventing core concepts like organization, event, and agreement.</p>
+    <button class="btn btn-o" onclick="go('gist')">Explore gist →</button>
+  </div></div>
+  <div class="sec"><div class="wrap"><span class="kick">Questions</span><h2 class="h2">FAQ</h2><div class="rule"></div>
+    <div class="faq">
+      <details open><summary>What's the difference between an ontology and a taxonomy?</summary><p>A taxonomy classifies things into a hierarchy. An ontology also captures the relationships and rules between them — which is what makes it machine-reasonable and AI-usable.</p></details>
+      <details><summary>Semantic layer vs. semantic substrate — what's the difference?</summary><p>A layer sits on top and translates business metrics for BI/AI at query time, per tool, and depends on the systems beneath it. A substrate sits underneath as one formally-defined model of meaning that every consumer draws from directly, and is independent of those systems.</p></details>
+      <details><summary>Is a semantic layer enough for enterprise AI?</summary><p>It helps with metric consistency, which improves natural-language-to-SQL accuracy. It does not resolve the thousands of conflicting meanings underneath, which is what determines whether AI is trustworthy. For that you need meaning at the foundation — a semantic substrate.</p></details>
+    </div>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">One model, many systems</span><h2>Unify your data into one queryable model</h2><p>Fixed scope. No lock-in.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('resources')">Join the EDTC community</button></div></div></div>
+</section>
+
+<!-- ===================== PILLAR: GRAPH DB ALTERNATIVE ===================== -->
+<section class="page" id="pillar-graph">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › Solutions › <b>Graph Database Alternative</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">Graph Database Alternative</span>
+    <h1>RDF vs. property graph: which one survives contact with the enterprise?</h1>
+    <p class="sub">Both store graphs. Only one is built for shared, portable, AI-ready meaning across your whole organization.</p>
+    <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button></div>
+  </div></div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans"><span class="al">RDF/OWL or labeled property graph?</span>For an enterprise knowledge graph, the choice is between the open RDF/OWL standard and a vendor's labeled-property-graph database. RDF wins for the enterprise because it's a W3C standard with formal semantics, portable meaning, and no vendor lock-in — the properties that matter when data must outlive tools and feed AI. Labeled property graphs optimize for single-application convenience; RDF optimizes for enterprise-wide, durable, AI-ready meaning.</div></div></div>
+  <div class="sec"><div class="wrap">
+    <span class="kick">The real question</span><h2 class="h2">It isn't traversal speed</h2><div class="rule"></div>
+    <div class="minis">
+      <div class="mini"><h4>Portability</h4><p>RDF meaning moves between tools and vendors. LPG meaning is tied to one product.</p></div>
+      <div class="mini"><h4>Standards &amp; validation</h4><p>OWL and SHACL give you formal semantics and validation an application-scoped model can't.</p></div>
+      <div class="mini"><h4>No lock-in</h4><p>The enterprise choice optimizes for durable meaning, not a single application's convenience.</p></div>
+    </div>
+  </div></div>
+  <div class="sec"><div class="wrap">
+    <span class="kick">You don't need another platform</span><h2 class="h2">Don't add a layer. Build the foundation.</h2><div class="rule"></div>
+    <p class="body">The market keeps adding strata — a semantic layer, then a context layer, then a governance layer — each one a patch over the fact that meaning was never in the data. Put meaning at the foundation, and the layers you were about to buy become things the substrate already does. A context graph is a knowledge graph that still needs a formal ontology; a <strong>semantic substrate</strong> is that ontology-grounded foundation — the thing the whole tower is missing.</p>
+    <div class="ssvg"><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" width="100%" role="img" aria-label="A semantic layer sits on top of the systems and translates; a semantic substrate sits underneath as the shared foundation every consumer draws from."><style>.t2{font-family:'Open Sans',sans-serif}.h2x{font-weight:700;fill:#2B2B2B}.s2{fill:#808080}.w2{fill:#fff;font-weight:700}.l2{fill:#4A4A4A}</style><text class="t2 h2x" x="175" y="22" text-anchor="middle" font-size="14">Semantic layer</text><text class="t2 s2" x="175" y="40" text-anchor="middle" font-size="11">on top · translates · per tool</text><rect x="40" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t2 l2" x="80" y="75" text-anchor="middle" font-size="11">BI</text><rect x="135" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t2 l2" x="175" y="75" text-anchor="middle" font-size="11">App</text><rect x="230" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t2 l2" x="270" y="75" text-anchor="middle" font-size="11">AI</text><rect x="40" y="100" width="270" height="26" rx="4" fill="#8C9E38"/><text class="t2 w2" x="175" y="117" text-anchor="middle" font-size="11">semantic layer</text><rect x="40" y="140" width="82" height="104" rx="4" fill="#fff" stroke="#CCCCCC"/><text class="t2 s2" x="81" y="196" text-anchor="middle" font-size="10">silo</text><rect x="134" y="140" width="82" height="104" rx="4" fill="#fff" stroke="#CCCCCC"/><text class="t2 s2" x="175" y="196" text-anchor="middle" font-size="10">silo</text><rect x="228" y="140" width="82" height="104" rx="4" fill="#fff" stroke="#CCCCCC"/><text class="t2 s2" x="269" y="196" text-anchor="middle" font-size="10">silo</text><text class="t2 s2" x="175" y="266" text-anchor="middle" font-size="10.5" font-style="italic">complexity preserved underneath</text><line x1="360" y1="46" x2="360" y2="266" stroke="#e6e6e6"/><text class="t2 h2x" x="545" y="22" text-anchor="middle" font-size="14">Semantic substrate</text><text class="t2 s2" x="545" y="40" text-anchor="middle" font-size="11">underneath · defines · for everything</text><rect x="410" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t2 l2" x="450" y="75" text-anchor="middle" font-size="11">BI</text><rect x="505" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t2 l2" x="545" y="75" text-anchor="middle" font-size="11">Apps</text><rect x="600" y="56" width="80" height="30" rx="4" fill="#E0EEF2" stroke="#005A7D"/><text class="t2 l2" x="640" y="75" text-anchor="middle" font-size="11">AI</text><path d="M450 88 L450 152" stroke="#005A7D" stroke-width="1.5" marker-end="url(#ar2)"/><path d="M545 88 L545 152" stroke="#005A7D" stroke-width="1.5" marker-end="url(#ar2)"/><path d="M640 88 L640 152" stroke="#005A7D" stroke-width="1.5" marker-end="url(#ar2)"/><rect x="410" y="158" width="270" height="72" rx="6" fill="#005A7D"/><text class="t2 w2" x="545" y="192" text-anchor="middle" font-size="13">semantic substrate</text><text x="545" y="210" text-anchor="middle" font-size="9.5" fill="#E0EEF2">one formal model of meaning · RDF/OWL/SHACL</text><text class="t2 s2" x="545" y="254" text-anchor="middle" font-size="10.5" font-style="italic">complexity reduced · independent of legacy</text><defs><marker id="ar2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#005A7D"/></marker></defs></svg></div>
+    <p class="scap">A layer sits on top and translates; a substrate sits underneath as the shared foundation.</p>
+    <h3 style="color:var(--near);font-size:18px;font-weight:700;margin:28px 0 6px">Three things sold under one word</h3>
+    <p class="body" style="margin-bottom:12px">"Semantic layer," "context graph," and "knowledge graph" now cover three different altitudes — and only one carries meaning a machine can reason over.</p>
+    <table class="cmp">
+      <thead><tr><th>&nbsp;</th><th>Metrics semantic layer</th><th>Context / property graph</th><th>Formal ontology + KG (substrate)</th></tr></thead>
+      <tbody>
+        <tr><th>What it models</th><td>Business metrics &amp; dimensions</td><td>Metadata, lineage, relationships</td><td class="hi">The business itself — concepts, relationships, constraints</td></tr>
+        <tr><th>Can it reason?</th><td>No — it looks up</td><td>Traverses; no formal inference</td><td class="hi">Yes — OWL inference</td></tr>
+        <tr><th>Enforces constraints?</th><td>No</td><td>No</td><td class="hi">Yes — SHACL validation</td></tr>
+        <tr><th>Relationship to legacy</th><td>Depends on the silos</td><td>Describes the silos</td><td class="hi">Independent; coexists, then absorbs</td></tr>
+        <tr><th>Effect on complexity</th><td>Preserves it (a nicer window)</td><td>Preserves it</td><td class="hi">Reduces it to enduring concepts</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:24px;padding:16px 18px;background:rgba(0,90,125,.06);border-left:4px solid var(--blue);border-radius:0 6px 6px 0">
+      <span class="kick" style="color:var(--blue)">Deep read</span>
+      <p class="body" style="margin:6px 0 0;max-width:none">Semantic Layer vs. Semantic Substrate — the definitive comparison, and what your AI actually needs underneath.</p>
+      <button class="btn btn-o" style="margin-top:12px" onclick="alert('Prototype: the Semantic Layer vs. Semantic Substrate cornerstone (CP-H-F-02-01).')">Read the cornerstone →</button>
+    </div>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap">
+    <span class="kick">Fair is fair</span><h2 class="h2">Where property graphs are genuinely fine</h2><div class="rule"></div>
+    <p class="body">For a single application that needs fast local traversal and won't share its model, a property-graph database is a reasonable pick. The moment that model has to be shared, governed, and fed to AI across the enterprise, RDF's standards-based portability is what lasts. Morgan Stanley runs an RDF graph at enterprise scale for exactly this reason.</p>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">Build on the standard</span><h2>Choosing your graph foundation?</h2><p>We'll help you pick the model that outlives the tool.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('resources')">Join the EDTC community</button></div></div></div>
+</section>
+
+<!-- ===================== PILLAR: ROI ===================== -->
+<section class="page" id="pillar-roi">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › Solutions › <b>Business Case &amp; ROI</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">Business Case &amp; ROI</span>
+    <h1>Your data problems have always had a price. Now they cap your AI ROI too.</h1>
+    <p class="sub">The cost of fragmentation is hiding in every integration project, every reconciliation, every stalled pilot.</p>
+    <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button></div>
+  </div></div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans"><span class="al">Where the money goes</span>Most enterprise IT spend is consumed by moving and reconciling data between applications that each define it differently. A shared, data-centric model removes that recurring cost at the root — and unblocks the AI investments the same fragmentation was quietly capping.</div></div></div>
+  <div class="sec"><div class="wrap"><span class="kick">The number</span><h2 class="h2">What fragmentation costs</h2><div class="rule"></div>
+    <div class="stats">
+      <div class="stat"><div class="big">40–60%</div><div class="lbl">of IT spend recoverable by fixing the data foundation</div></div>
+      <div class="stat"><div class="big">1 model</div><div class="lbl">replaces endless point-to-point integration</div></div>
+      <div class="stat"><div class="big">Self-funding</div><div class="lbl">engagements designed to pay for themselves</div></div>
+    </div>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">Make the case</span><h2>See the ROI for your enterprise</h2><p>Fixed scope, no lock-in.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('services')">How engagements work</button></div></div></div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="page" id="services">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › <b>Services</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">How we work</span>
+    <h1>Fixed scope. No change orders. No lock-in.</h1>
+    <p class="sub">Engagements designed to deliver a usable, integrating asset — and to pay for themselves as they roll out.</p>
+    <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button></div>
+  </div></div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans"><span class="al">How our engagements work</span>We start with a fixed-scope Discovery that turns your problem into a defined build — no open-ended contracts. From there we build the shared model incrementally, so each phase delivers value and the rollout funds itself. You keep the model; there's no proprietary platform to stay locked into.</div></div></div>
+  <div class="sec"><div class="wrap"><span class="kick">The model</span><h2 class="h2">Discovery → build → self-funding rollout</h2><div class="rule"></div>
+    <div class="minis">
+      <div class="mini"><h4><span class="n">1</span>Discovery</h4><p>A fixed-scope engagement that defines the problem, the model, and the plan.</p></div>
+      <div class="mini"><h4><span class="n">2</span>Fixed-scope build</h4><p>We build the shared ontology and knowledge graph to a defined scope — no change-order creep.</p></div>
+      <div class="mini"><h4><span class="n">3</span>Self-funding rollout</h4><p>Each phase delivers usable value, so the rollout pays for itself.</p></div>
+    </div>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap"><span class="kick">Our promises</span><h2 class="h2">Not fine print — brand identity</h2><div class="rule"></div>
+    <div class="grid g3">
+      <div class="card"><div class="top"></div><div class="cb"><h3>No Contract Bloat</h3><p>Fixed scope, defined outcomes. You know what you're buying.</p></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3>No Change Orders</h3><p>We scope it right, then build it. The number doesn't drift.</p></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3>No Lock-in</h3><p>Open standards, your model. No proprietary platform to depend on.</p></div></div>
+    </div>
+  </div></div>
+  <div class="sec"><div class="wrap"><span class="kick">Outcomes</span><h2 class="h2">What good looks like</h2><div class="rule"></div>
+    <div class="stats">
+      <div class="stat"><div class="big">40–60%</div><div class="lbl">IT spend recoverable</div></div>
+      <div class="stat"><div class="big">Phase 1</div><div class="lbl">delivers a usable, integrating asset</div></div>
+      <div class="stat"><div class="big">100+</div><div class="lbl">enterprise implementation projects</div></div>
+    </div>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap"><span class="kick">Procurement</span><h2 class="h2">FAQ</h2><div class="rule"></div>
+    <div class="faq">
+      <details open><summary>How do you scope a fixed-price engagement?</summary><p>Discovery is itself a small fixed-scope engagement. It produces the defined model and plan the build is priced against — so there are no surprises later.</p></details>
+      <details><summary>What do we actually own at the end?</summary><p>The ontology and knowledge graph, built on open standards. There's no proprietary runtime you have to keep licensing.</p></details>
+    </div>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">Let's scope it</span><h2>Get a quote for your data problem</h2><p>Tell us the problem; we'll tell you the shape of the fix.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button></div></div></div>
+</section>
+
+<!-- ===================== INDUSTRY: PHARMA ===================== -->
+<section class="page" id="ind-pharma">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › Industries › <b>Pharma &amp; Life Sciences</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">Pharma &amp; Life Sciences</span>
+    <h1>Connect research, clinical, regulatory, and manufacturing — so AI can reason across the whole pipeline.</h1>
+    <p class="sub">A shared life-sciences model that turns siloed data into an asset your teams and your AI can trust.</p>
+    <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button></div>
+  </div></div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans"><span class="al">The core problem</span>Life-sciences data is scattered across research, clinical, regulatory, and manufacturing silos that don't share meaning — which is exactly what stalls both integration and AI. A shared ontology connects them into one model, so systems interoperate and AI can reason across the full pipeline.</div></div></div>
+  <div class="sec"><div class="wrap"><span class="kick">Pain points</span><h2 class="h2">Where it hurts</h2><div class="rule"></div>
+    <div class="grid g2">
+      <div class="card"><div class="top"></div><div class="cb"><h3>Siloed R&amp;D → clinical → regulatory</h3><p>Each stage speaks its own dialect; nothing connects end-to-end.</p></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3>Regulatory traceability</h3><p>Assembling consistent, provable data for submissions is slow and manual.</p></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3>Stalled AI pilots</h3><p>Models can't reason over data that doesn't share meaning.</p></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3>Acquisition sprawl</h3><p>Merged estates carry incompatible definitions of the same science.</p></div></div>
+    </div>
+  </div></div>
+  <div class="sec sec-teal"><div class="wrap"><span class="kick">Why SA</span><h2 class="h2">Deep pharma expertise — accelerated by gistPharma</h2><div class="rule"></div>
+    <p class="body">The differentiator is our expertise: 25 years modeling regulated, high-stakes enterprise data. We build your pharma ontology on open standards and accelerate it with gistPharma — a business-ready model of what life-sciences organizations already share — so we start from a proven foundation, not a blank page. That we author and maintain gistPharma is also proof we've done this work for a long time.</p>
+    <button class="btn btn-o" onclick="go('gist')">See the gist family →</button>
+  </div></div>
+  <div class="sec"><div class="wrap"><span class="kick">Proof</span><h2 class="h2">Trusted in life sciences</h2><div class="rule"></div>
+    <div class="proof">
+      <div class="pc"><span class="pk">Life Sciences</span><h4>Amgen</h4><p>Named enterprise life-sciences client.</p></div>
+      <div class="pc"><span class="pk">Life Sciences</span><h4>AstraZeneca · Bayer · Lilly · J&amp;J · Novartis</h4><p>Named life-sciences engagements.</p></div>
+      <div class="pc" onclick="go('case-studies')"><span class="pk">More</span><h4>Case studies →</h4><p>See cleared client stories by industry.</p></div>
+    </div>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">Molecules move faster on connected data</span><h2>Make your life-sciences data AI-ready</h2><p>Fixed scope, no lock-in.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('resources')">Join the EDTC community</button></div></div></div>
+</section>
+
+<!-- ===================== INDUSTRY: SUPPLY CHAIN ===================== -->
+<section class="page" id="ind-sc">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › Industries › <b>Supply Chain</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">Supply Chain</span>
+    <h1>Reason over the whole network — suppliers, products, sites, and shipments — not one node at a time.</h1>
+    <p class="sub">A shared model that makes supply-chain data coherent enough for AI to act on.</p>
+    <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button></div>
+  </div></div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans"><span class="al">The core problem</span>Supply-chain data lives in disconnected ERPs, catalogs, and partner systems that describe the same things differently. Unifying it in a shared model lets AI reason over the whole network, not one node — and lets planning, sourcing, and risk run on one picture.</div></div></div>
+  <div class="sec"><div class="wrap"><span class="kick">Pain points</span><h2 class="h2">Where it hurts</h2><div class="rule"></div>
+    <div class="grid g2">
+      <div class="card"><div class="top"></div><div class="cb"><h3>Catalog &amp; product chaos</h3><p>The same product, described a dozen ways across systems and partners.</p></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3>Partner data mismatch</h3><p>Every supplier's data model is a little different — integration never ends.</p></div></div>
+    </div>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap"><span class="kick">Proof</span><h2 class="h2">Adjacent, deep experience</h2><div class="rule"></div>
+    <div class="proof">
+      <div class="pc"><span class="pk">Industrial</span><h4>Schneider Electric</h4><p>Product-catalog ontology.</p></div>
+      <div class="pc"><span class="pk">Knowledge graph</span><h4>Industry Building Blocks</h4><p>A 24,000-industry knowledge graph.</p></div>
+      <div class="pc"><span class="pk">Materials</span><h4>Koch · Chevron · DuPont</h4><p>Industrial and materials engagements.</p></div>
+    </div>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">One picture of the network</span><h2>Make your supply-chain data AI-ready</h2><p>Fixed scope, no lock-in.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('resources')">Join the EDTC community</button></div></div></div>
+</section>
+
+<!-- ===================== INDUSTRY: CYBER ===================== -->
+<section class="page" id="ind-cyber">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › Industries › <b>Cybersecurity</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">Cybersecurity</span>
+    <h1>Correlate across every tool — because attackers don't respect your data silos.</h1>
+    <p class="sub">A shared security ontology so AI can reason over threats, controls, and assets as one picture.</p>
+    <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button></div>
+  </div></div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans"><span class="al">The core problem</span>Security teams run tools that each model threats, controls, and assets their own way — the fragmentation that breaks AI-driven detection and response. A shared ontology unifies them so AI can correlate across the whole picture. Semantic Arts designed the semantic backbone for the Center for Internet Security's controls and benchmarks.</div></div></div>
+  <div class="sec"><div class="wrap"><span class="kick">Proof</span><h2 class="h2">Direct, national-scale experience</h2><div class="rule"></div>
+    <div class="proof">
+      <div class="pc"><span class="pk">Named reference</span><h4>Center for Internet Security</h4><p>Designed the cyber ontology behind controls, benchmarks, and safeguards.</p></div>
+      <div class="pc"><span class="pk">Publication</span><h4>STIDS — three realms of security</h4><p>Published cyber-semantics research.</p></div>
+      <div class="pc"><span class="pk">Named reference</span><h4>Equifax</h4><p>Post-breach advisory.</p></div>
+    </div>
+  </div></div>
+  <div class="sec sec-teal"><div class="wrap"><span class="kick">Why SA</span><h2 class="h2">A shared security ontology — built by SA, accelerated by gistCyber</h2><div class="rule"></div>
+    <p class="body">We build you a custom cybersecurity ontology on open standards that links the standards your tools already speak — ATT&amp;CK, CVE, STIX, NIST 800-53, CIS — so meaning is shared and correlation can be automated. We accelerate it with gistCyber, a business-ready model of what security programs share, so we get straight to what's unique to you. Our Center for Internet Security work is proof we can implement it.</p>
+    <button class="btn btn-o" onclick="go('gist')">See the gist family →</button>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">One picture of your security data</span><h2>Make your security data AI-ready</h2><p>Fixed scope, no lock-in.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('resources')">Join the EDTC community</button></div></div></div>
+</section>
+
+<!-- ===================== INDUSTRY: FINANCIAL SERVICES ===================== -->
+<section class="page" id="ind-fs">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › Industries › <b>Financial Services</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">Financial Services</span>
+    <h1>Risk, regulation, and AI — on the same trusted meaning.</h1>
+    <p class="sub">A sound, shared data foundation for finance, from the firm that helped write FIBO.</p>
+    <div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button></div>
+  </div></div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans"><span class="al">The core problem</span>Financial services runs on decades of siloed risk, trading, and compliance data that each system defines differently — the gap that stalls reporting, model reliability, and regulatory defensibility. Grounding it in a shared financial ontology lets the enterprise reason consistently. Semantic Arts helped author FIBO and builds the foundation leading institutions run on.</div></div></div>
+  <div class="sec"><div class="wrap"><span class="kick">Pain points</span><h2 class="h2">Where it hurts</h2><div class="rule"></div>
+    <div class="grid g2">
+      <div class="card"><div class="top"></div><div class="cb"><h3>Risk-data aggregation (BCBS 239)</h3><p>A single, reconciled view of risk across the enterprise.</p></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3>Regulatory reporting &amp; lineage</h3><p>Consistent, traceable numbers for every new requirement.</p></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3>Entity resolution / KYC</h3><p>The same party, represented consistently everywhere.</p></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3>Legacy &amp; acquisition sprawl</h3><p>Incompatible definitions across merged estates.</p></div></div>
+    </div>
+  </div></div>
+  <div class="sec sec-teal"><div class="wrap"><span class="kick">Why SA</span><h2 class="h2">FIBO authorship and deep FS expertise — accelerated by gistFinance</h2><div class="rule"></div>
+    <p class="body">The differentiator is expertise: we led the design of the loans-and-mortgages portion of FIBO for the EDM Council. We build your financial-services ontology on open standards and accelerate it with gistFinance — a business-ready model of what financial institutions share. Authoring and maintaining it is proof of depth, not a product you buy.</p>
+    <button class="btn btn-o" onclick="go('gist')">See the gist family →</button>
+  </div></div>
+  <div class="sec"><div class="wrap"><span class="kick">Proof — the deepest we have</span><h2 class="h2">Trusted across finance</h2><div class="rule"></div>
+    <div class="proof">
+      <div class="pc"><span class="pk">Named reference</span><h4>Goldman Sachs</h4><p>Financial-inventory taxonomy, risk ontology, resolution planning.</p></div>
+      <div class="pc" onclick="go('pillar-graph')"><span class="pk">Named reference</span><h4>Morgan Stanley</h4><p>RDF graph + semantic knowledge base at enterprise scale.</p></div>
+      <div class="pc"><span class="pk">Named reference</span><h4>Broadridge</h4><p>Data-fabric on semantic foundations.</p></div>
+    </div>
+    <div class="proof" style="margin-top:14px">
+      <div class="pc"><span class="pk">Named logos</span><h4>Citi · JPMorgan · Wells Fargo</h4><p>Enterprise data and ontology engagements.</p></div>
+      <div class="pc" onclick="go('case-student-loan')"><span class="pk">Case study</span><h4>50,000+ tables → ~1,000 concepts</h4><p>Sallie Mae's enterprise ontology.</p></div>
+      <div class="pc"><span class="pk">Standard authorship</span><h4>FIBO</h4><p>We helped write the industry's financial ontology.</p></div>
+    </div>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">One meaning for money</span><h2>Put risk, regulation, and AI on one foundation</h2><p>Fixed scope, no lock-in.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('resources')">Join the EDTC community</button></div></div></div>
+</section>
+
+<!-- ===================== GIST ===================== -->
+<section class="page" id="gist">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › <b>gist</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">Open source · Upper ontology</span>
+    <h1>gist — the free enterprise upper ontology.</h1>
+    <p class="sub">A deliberately minimal core of about 100 concepts that organizations build their enterprise models on — free, open, and CC BY 4.0.</p>
+    <div class="hrow"><button class="btn btn-o" onclick="alert('Prototype: links to the gist GitHub repository.')">Explore on GitHub →</button><button class="btn btn-o" onclick="alert('Prototype: downloads the current gist release (RDF/OWL).')">Download (RDF/OWL)</button></div>
+  </div></div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans"><span class="al">What is gist?</span>gist is a small, carefully designed upper ontology — roughly 100 classes and properties — that gives an enterprise a shared semantic starting point. Rather than every project reinventing core ideas like organization, event, agreement, or place, teams extend gist. It's maintained by Semantic Arts and licensed CC BY 4.0, so you can use it anywhere, including commercially.</div></div></div>
+  <div class="facts"><div class="wrap">
+    <div class="fact"><div class="fnum">14.1.0</div><div class="flbl">Current version</div></div>
+    <div class="fact"><div class="fnum">~100</div><div class="flbl">Classes &amp; properties</div></div>
+    <div class="fact"><div class="fnum">CC BY 4.0</div><div class="flbl">Open license</div></div>
+    <div class="fact"><div class="fnum">gistBFO</div><div class="flbl">Only public extension</div></div>
+  </div></div>
+  <div class="sec"><div class="wrap"><span class="kick">Why so small</span><h2 class="h2">Minimalism is the whole point</h2><div class="rule"></div>
+    <p class="body">Most upper ontologies fail by trying to model everything — the more they add, the harder they are to agree on, govern, and use. gist takes the opposite bet: cover the handful of concepts nearly every business genuinely shares, define them precisely, and stop there. That restraint is what makes gist adoptable in weeks, extensible with confidence, and maintainable for decades.</p>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap"><span class="kick">The gist family</span><h2 class="h2">Extensions</h2><div class="rule"></div>
+    <div class="grid g4">
+      <div class="card" style="border-color:var(--blue)"><div class="top"></div><div class="cb"><h3 style="font-family:monospace;font-size:14px">gistBFO</h3><p>Alignment of gist to Basic Formal Ontology.</p><span class="tag" style="margin-top:8px">Public · downloadable</span></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3 style="font-family:monospace;font-size:14px">gistPharma</h3><p>Life-sciences extension of gist.</p><span class="tag" style="margin-top:8px;background:var(--cream);color:#8a7a2e">Applied with SA</span></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3 style="font-family:monospace;font-size:14px">gistCyber</h3><p>Cybersecurity extension of gist.</p><span class="tag" style="margin-top:8px;background:var(--cream);color:#8a7a2e">Applied with SA</span></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><h3 style="font-family:monospace;font-size:14px">gistFinance</h3><p>Financial-services extension of gist.</p><span class="tag" style="margin-top:8px;background:var(--cream);color:#8a7a2e">Applied with SA</span></div></div>
+    </div>
+    <p class="body" style="margin-top:16px">gist also has extensions for computing, human resources, and professional services.</p>
+    <p style="font-size:12px;color:var(--gray);font-style:italic;margin-top:10px">gistBFO is the one extension we publish and you can download. The domain extensions are business-ready models SA applies inside an engagement — the accelerator that gets your custom ontology to value faster. The expertise to extend and apply them is the offering; the models are how we get there sooner.</p>
+  </div></div>
+  <div class="sec sec-teal"><div class="wrap" style="text-align:center"><span class="kick">Community</span><h2 class="h2" style="margin-top:8px">Learn and shape gist with us</h2><p class="body" style="margin:6px auto 16px">Join the Enterprise Data-Centric Community and the working groups that steward gist in the open.</p><button class="btn btn-o" onclick="go('resources')">Join the EDTC community</button></div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">Put gist to work</span><h2>Want help applying gist to your enterprise?</h2><p>We'll extend it into a model that fits your business — fixed scope, no lock-in.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('services')">How engagements work</button></div></div></div>
+</section>
+
+<!-- ===================== RESOURCES ===================== -->
+<section class="page" id="resources">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › <b>Resources</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">Resources</span>
+    <h1>Ideas, guides, and the community around data-centric practice.</h1>
+    <p class="sub">Articles, diagnostics, and the Enterprise Data-Centric Community — everything to go deeper before you talk to us.</p>
+  </div></div></div>
+  <div class="sec"><div class="wrap"><span class="kick">Featured</span><h2 class="h2">Start reading</h2><div class="rule"></div>
+    <div class="feat">
+      <div class="card" onclick="go('article-airc')"><div class="top"></div><div class="cb"><span class="pk">Cornerstone · AI</span><h3>Why AI pilots fail</h3><p>The model is fine — the data isn't. How to ground AI on a knowledge graph.</p><span class="rm">Read →</span></div></div>
+      <div class="card" onclick="go('article-dcdd')"><div class="top"></div><div class="cb"><span class="pk">Article</span><h3>Data-centric vs. data-driven</h3><p>The difference that decides whether your AI actually works.</p><span class="rm">Read →</span></div></div>
+      <div class="card" onclick="go('gist')"><div class="top"></div><div class="cb"><span class="pk">Open source</span><h3>gist — the free upper ontology</h3><p>~100 classes, CC BY 4.0. The model thousands build on.</p><span class="rm">Explore →</span></div></div>
+    </div>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap"><span class="kick">Browse</span><h2 class="h2">By type</h2><div class="rule"></div>
+    <div class="grid g4">
+      <div class="pill" onclick="alert('Prototype: the full blog / article archive.')">Blog &amp; articles</div>
+      <div class="pill" onclick="alert('Prototype: diagnostics and white-paper lead magnets.')">Diagnostics &amp; ebooks</div>
+      <div class="pill" onclick="go('case-studies')">Case studies</div>
+      <div class="pill" onclick="alert('Prototype: talks, working groups, and events.')">Community events</div>
+    </div>
+  </div></div>
+  <div class="sec"><div class="wrap"><div class="newsletter">
+    <div class="nt"><span class="kick">Stay in the loop</span><h2 class="h2" style="font-size:22px;margin-top:6px">The data-centric newsletter</h2><p style="font-size:13px;color:var(--char);margin-top:4px">Occasional, substantive. No noise.</p></div>
+    <div class="field"><input type="email" placeholder="name@company.com" aria-label="Email"><button class="btn btn-cta" onclick="alert('Prototype: subscribes to the newsletter.')">Subscribe</button></div>
+  </div></div></div>
+  <div class="close soft"><div class="wrap"><span class="kick">Community</span><h2>Join the Enterprise Data-Centric Community</h2><p>Talks, working groups, and peers solving the same problems.</p><div class="hrow"><button class="btn btn-cta" onclick="alert('Prototype: joins the EDTC community (datatransform.co).')">Join the EDTC community</button><button class="btn btn-o" onclick="openQuote()">Get a Quote</button></div></div></div>
+</section>
+
+<!-- ===================== CASE STUDIES INDEX ===================== -->
+<section class="page" id="case-studies">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › About › <b>Case Studies</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">Case Studies</span>
+    <h1>Who we've helped — and what changed.</h1>
+    <p class="sub">Cleared client stories across financial services, life sciences, cyber, and supply chain.</p>
+  </div></div></div>
+  <div class="sec"><div class="wrap">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px">
+      <span class="promises" style="margin:0"><span>All</span></span>
+      <span class="promises" style="margin:0"><span style="background:#eee;color:var(--char)">Financial Services</span></span>
+      <span class="promises" style="margin:0"><span style="background:#eee;color:var(--char)">Life Sciences</span></span>
+      <span class="promises" style="margin:0"><span style="background:#eee;color:var(--char)">Cybersecurity</span></span>
+      <span class="promises" style="margin:0"><span style="background:#eee;color:var(--char)">Supply Chain</span></span>
+    </div>
+    <div class="grid g3">
+      <div class="card" onclick="go('case-student-loan')"><div class="top"></div><div class="cb"><span class="pk">Financial Services</span><h3>50,000+ tables → ~1,000 concepts</h3><p>An enterprise ontology for Sallie Mae.</p><span class="rm">Read →</span></div></div>
+      <div class="card" onclick="go('ind-fs')"><div class="top"></div><div class="cb"><span class="pk">Financial Services</span><h3>Global investment bank</h3><p>One shared model across trading, risk, and compliance.</p><span class="rm">Read →</span></div></div>
+      <div class="card" onclick="go('ind-cyber')"><div class="top"></div><div class="cb"><span class="pk">Cybersecurity</span><h3>Center for Internet Security</h3><p>Semantic backbone for controls at national scale.</p><span class="rm">Read →</span></div></div>
+      <div class="card" onclick="go('ind-pharma')"><div class="top"></div><div class="cb"><span class="pk">Life Sciences</span><h3>Enterprise pharma ontology</h3><p>Connecting research, clinical, and regulatory data.</p><span class="rm">Read →</span></div></div>
+      <div class="card" onclick="go('ind-sc')"><div class="top"></div><div class="cb"><span class="pk">Supply Chain</span><h3>Product-catalog ontology</h3><p>One coherent model across a sprawling catalog.</p><span class="rm">Read →</span></div></div>
+      <div class="card"><div class="top"></div><div class="cb"><span class="pk">Published</span><h3>From the books</h3><p>S&amp;P Market Intelligence, Montefiore, and more.</p><span class="rm">Read →</span></div></div>
+    </div>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">Your story next</span><h2>See what a shared model could do for you</h2><p>Fixed scope, no lock-in.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button></div></div></div>
+</section>
+
+<!-- ===================== CASE STUDY: SALLIE MAE ===================== -->
+<section class="page" id="case-student-loan">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › <a onclick="go('case-studies')">Case Studies</a> › <b>Sallie Mae</b></div></div>
+  <div class="chead"><div class="wrap">
+    <span class="tag">Financial Services</span>
+    <h1>An enterprise ontology for Sallie Mae</h1>
+    <div class="out">50,000+ tables and attributes distilled into ~1,000 shared concepts</div>
+  </div></div>
+  <div class="sec-tight"><div class="wrap"><div class="ans">Sallie Mae's business was spread across systems with more than 50,000 tables and attributes. Semantic Arts built an enterprise ontology that represented the whole business in just over 1,000 concepts — a shared model that new systems conform to automatically and existing systems integrate through.</div></div></div>
+  <div class="sec"><div class="wrap"><span class="kick">The challenge</span><h2 class="h2">Complexity with no shared model</h2><div class="rule"></div>
+    <p class="body">Decades of application-by-application growth had left the enterprise with tens of thousands of tables and attributes, each system carrying its own arbitrary interpretation of the same core concepts. Integrating anything meant hand-mapping between models tied to legacy code — expensive, brittle, and endless.</p>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap"><span class="kick">The approach</span><h2 class="h2">One model, built from the business</h2><div class="rule"></div>
+    <p class="body">Across a series of workshops and interviews, Semantic Arts modeled the organization's actual concepts — not its tables — into a compact enterprise ontology of just over 1,000 classes and properties. New systems conform to the shared model automatically; existing ones integrate through its lens rather than point-to-point.</p>
+  </div></div>
+  <div class="sec"><div class="wrap"><span class="kick">The outcome</span><h2 class="h2">A strategic, reusable asset</h2><div class="rule"></div>
+    <div class="metrics">
+      <div class="mc"><div class="big">50,000+</div><div class="lbl">tables &amp; attributes in the legacy landscape</div></div>
+      <div class="mc"><div class="big">~1,000</div><div class="lbl">concepts in the shared enterprise ontology</div></div>
+      <div class="mc"><div class="big">1 model</div><div class="lbl">new and existing systems now share</div></div>
+    </div>
+  </div></div>
+  <div class="sec sec-alt"><div class="wrap"><span class="kick">Related</span><h2 class="h2">More proof</h2><div class="rule"></div>
+    <div class="rel">
+      <div class="rc" onclick="go('ind-fs')"><div class="rk">Hub</div><div class="rt">Financial Services →</div></div>
+      <div class="rc" onclick="go('pillar-dca')"><div class="rk">Pillar</div><div class="rt">Data-Centric Architecture →</div></div>
+      <div class="rc" onclick="go('case-studies')"><div class="rk">Index</div><div class="rt">All case studies →</div></div>
+    </div>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">Your data, one model</span><h2>Could your enterprise run on ~1,000 concepts?</h2><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('resources')">Join the EDTC community</button></div></div></div>
+</section>
+
+<!-- ===================== ARTICLE: DATA-CENTRIC VS DATA-DRIVEN ===================== -->
+<section class="page" id="article-dcdd">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › <a onclick="go('resources')">Resources</a> › <b>Data-Centric vs Data-Driven</b></div></div>
+  <div class="article">
+    <span class="kick">Data-Centric · Article</span>
+    <h1>Data-centric vs. data-driven: what's the difference?</h1>
+    <div class="byline"><div class="av">DM</div><div class="mt"><b>Dave McComb</b> · Founder &amp; President · 7 min read</div></div>
+    <div class="ans"><span class="al">TL;DR</span>Data-driven means using data to inform decisions. Data-centric means treating data as a durable asset that outlives every application — one shared model that all systems conform to. Most enterprises run data-driven analytics on top of an application-centric mess. Going data-centric is what makes both the data and the AI on top of it actually work.</div>
+    <h2>Data-driven is about decisions. Data-centric is about architecture.</h2>
+    <p>The two terms get used interchangeably, but they answer different questions. "Data-driven" is a decision-making posture: let the numbers, not opinions, guide what you do. "Data-centric" is an architectural stance: the data model is the center of gravity, and applications are replaceable things that plug into it — not the other way around.</p>
+    <p>You can be data-driven and still application-centric. In fact, most organizations are. Every dashboard and model is stitched together from data trapped inside dozens of applications, each with its own private, incompatible view of the same core concepts.</p>
+    <h3>The application-centric default</h3>
+    <p>When applications own the data, every new system multiplies the integration problem. Ten systems don't mean ten models — they mean a tangle of point-to-point mappings, each tied to legacy code. Data-centric architecture inverts that: one shared model, and systems conform to it.</p>
+    <h2>Why the distinction matters for AI</h2>
+    <p>AI is the forcing function. A model is only as good as the data it's grounded in, and fragmented, application-locked data is exactly what stalls enterprise AI in pilot purgatory. The organizations whose AI initiatives land are the ones that already treat data as a shared, meaning-rich asset.</p>
+    <div class="pq">AI is the door; data-centric is the house. Your hardest problems have always been data problems — now they're your AI problems too.</div>
+    <p>Being data-driven tells you to trust the data. Being data-centric is the work that makes the data trustworthy in the first place — and makes every AI project after it cheaper, faster, and more reliable.</p>
+    <div class="bio"><div class="bav">DM</div><div><div class="bn">Dave McComb</div><div class="br">Founder &amp; President, Semantic Arts</div><div class="bd">Author of <em>Software Wasteland</em> and <em>The Data-Centric Revolution</em>. Dave has led enterprise data-centric transformations for 25+ years and helped define the practice this article describes.</div></div></div>
+    <span class="kick">Continue in this cluster</span>
+    <div class="rel" style="margin-top:10px">
+      <div class="rc up" onclick="go('pillar-dca')"><div class="rk">Pillar</div><div class="rt">Data-Centric Architecture — the full picture →</div></div>
+      <div class="rc" onclick="go('pillar-kg')"><div class="rk">Article</div><div class="rt">What is an ontology, really?</div></div>
+      <div class="rc" onclick="go('article-airc')"><div class="rk">Article</div><div class="rt">Why AI pilots fail</div></div>
+    </div>
+  </div>
+  <div class="close soft"><div class="wrap"><span class="kick">Go deeper</span><h2>Join the conversation on data-centric practice</h2><p>The Enterprise Data-Centric Community — talks, working groups, and peers solving the same problems.</p><div class="hrow"><button class="btn btn-cta" onclick="alert('Prototype: joins the EDTC community.')">Join the EDTC community</button><button class="btn btn-o" onclick="openQuote()">Get a Quote</button></div></div></div>
+</section>
+
+<!-- ===================== ARTICLE: AI-READY CORNERSTONE ===================== -->
+<section class="page" id="article-airc">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › <a onclick="go('resources')">Resources</a> › <b>Why AI Pilots Fail</b></div></div>
+  <div class="article">
+    <span class="kick">AI-Ready Data · Cornerstone</span>
+    <h1>Why AI pilots fail — and what actually fixes it</h1>
+    <div class="byline"><div class="av">SA</div><div class="mt"><b>Semantic Arts</b> · 9 min read</div></div>
+    <div class="ans"><span class="al">TL;DR</span>Most enterprise AI pilots fail for the same reason: the model is fine, but the data underneath is fragmented, ambiguous, and missing the business context an AI needs to reason. Retrieval-augmented and agentic systems inherit every inconsistency in the underlying data. Grounding AI on a knowledge graph — data connected by a shared ontology — is what turns a promising demo into a system you can trust in production.</div>
+    <h2>The pilot that demos well and dies in production</h2>
+    <p>The pattern is familiar: a proof-of-concept dazzles, then stalls the moment it meets real enterprise data. The instinct is to blame the model or the prompt. Usually the real cause is underneath — the data the system has to reason over doesn't share meaning.</p>
+    <h2>What "AI-ready" actually means</h2>
+    <p>AI-ready data is unified, unambiguous, and grounded: the same concept means the same thing everywhere, and the relationships between concepts are explicit enough for a machine to follow. That's not a data-cleaning task. It's a modeling task — the work of building an ontology and a knowledge graph.</p>
+    <h3>Grounding, GraphRAG, and guardrails</h3>
+    <p>When retrieval is grounded in a knowledge graph rather than loose text chunks, an AI can answer questions that depend on relationships across systems — and you can trace why it answered the way it did. That traceability is what makes AI defensible in a regulated enterprise.</p>
+    <div class="pq">The organizations whose AI lands are the ones that already treat data as a shared, meaning-rich asset.</div>
+    <div class="bio"><div class="bav">SA</div><div><div class="bn">Semantic Arts</div><div class="br">Data-centric since 2000</div><div class="bd">We build the ontologies and knowledge graphs that make enterprise data AI-ready — and we helped author FIBO and steward gist, the free enterprise upper ontology.</div></div></div>
+    <span class="kick">Continue in this cluster</span>
+    <div class="rel" style="margin-top:10px">
+      <div class="rc up" onclick="go('pillar-ai')"><div class="rk">Pillar</div><div class="rt">AI-Ready Data — the full picture →</div></div>
+      <div class="rc" onclick="go('pillar-graph')"><div class="rk">Guide</div><div class="rt">RDF vs. property graph</div></div>
+      <div class="rc" onclick="go('article-dcdd')"><div class="rk">Article</div><div class="rt">Data-centric vs. data-driven</div></div>
+    </div>
+  </div>
+  <div class="close soft"><div class="wrap"><span class="kick">Go deeper</span><h2>Join the conversation on AI-ready data</h2><p>The Enterprise Data-Centric Community — where this gets worked out in the open.</p><div class="hrow"><button class="btn btn-cta" onclick="alert('Prototype: joins the EDTC community.')">Join the EDTC community</button><button class="btn btn-o" onclick="openQuote()">Get a Quote</button></div></div></div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="page" id="about">
+  <div class="crumb"><div class="wrap"><a onclick="go('home')">Home</a> › <b>About</b></div></div>
+  <div class="hero"><div class="wrap"><div class="eh">
+    <span class="kick">About</span>
+    <h1>The data-centric firm — since long before the market caught up.</h1>
+    <p class="sub">Founded in 2000 in Fort Collins, Colorado. We've spent 25 years proving that one elegant data model can change everything.</p>
+  </div></div></div>
+  <div class="trust"><div class="wrap">
+    <div class="tstat"><div class="tnum">~90</div><div class="tlbl">Enterprise clients</div></div>
+    <div class="tstat"><div class="tnum">~16</div><div class="tlbl">Industries</div></div>
+    <div class="tstat"><div class="tnum">100+</div><div class="tlbl">Implementation projects</div></div>
+    <div class="tstat"><div class="tnum">50+</div><div class="tlbl">Enterprise ontologies</div></div>
+  </div></div>
+  <div class="sec"><div class="wrap"><span class="kick">Who we are</span><h2 class="h2">Authors of the standards, stewards of the tools</h2><div class="rule"></div>
+    <p class="body">Semantic Arts helped author FIBO — the financial industry's ontology standard — and stewards gist, the free enterprise upper ontology thousands of organizations build on. Led by founder Dave McComb, author of <em>Software Wasteland</em> and <em>The Data-Centric Revolution</em>, we've spent a quarter-century turning fragmented enterprise data into shared, durable, AI-ready models.</p>
+    <button class="btn btn-o" onclick="go('case-studies')">See the proof →</button>
+  </div></div>
+  <div class="close"><div class="wrap"><span class="kick" style="color:var(--olive)">Let's talk</span><h2>Bring us your hardest data problem</h2><p>Fixed scope, no lock-in.</p><div class="hrow"><button class="btn btn-cta" onclick="openQuote()">Get a Quote</button><button class="btn btn-ow" onclick="go('resources')">Join the EDTC community</button></div></div></div>
+</section>
+
+<!-- ===================== FOOTER (shared) ===================== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="fcols">
+      <div class="fcol fbrand"><div class="wm">semantic arts.</div><p>One elegant data model can change everything. Data-centric since 2000.</p></div>
+      <div class="fcol"><h5>Solutions</h5><a onclick="go('pillar-dca')">Data-Centric Architecture</a><a onclick="go('pillar-ai')">AI-Ready Data</a><a onclick="go('pillar-kg')">Knowledge Graphs</a><a onclick="go('pillar-graph')">Graph DB Alternative</a><a onclick="go('pillar-roi')">Business Case &amp; ROI</a></div>
+      <div class="fcol"><h5>Industries</h5><a onclick="go('ind-pharma')">Pharma &amp; Life Sciences</a><a onclick="go('ind-sc')">Supply Chain</a><a onclick="go('ind-cyber')">Cybersecurity</a><a onclick="go('ind-fs')">Financial Services</a></div>
+      <div class="fcol"><h5>Resources</h5><a onclick="go('gist')">gist</a><a onclick="go('resources')">Blog &amp; articles</a><a onclick="go('case-studies')">Case studies</a><a onclick="go('services')">Services</a></div>
+      <div class="fcol"><h5>Company</h5><a onclick="go('about')">About</a><a onclick="go('case-studies')">Case studies</a><a onclick="openQuote()">Get a Quote</a></div>
+    </div>
+    <div class="fbot">
+      <span>© Semantic Arts, Inc. · Fort Collins, CO · gist licensed CC BY 4.0</span>
+      <span class="proto">Prototype · SA22 v3.1</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== QUOTE MODAL ===================== -->
+<div class="overlay" id="quoteOverlay" onclick="if(event.target===this)closeQuote()">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Get a quote">
+    <div class="mh"><span class="kick">Get a Quote</span><h3>Tell us the problem.</h3><button class="x" aria-label="Close" onclick="closeQuote()">×</button></div>
+    <div class="mb">
+      <div class="promises"><span>No Contract Bloat</span><span>No Change Orders</span><span>No Lock-in</span></div>
+      <label>Name</label><input type="text" placeholder="Your name">
+      <label>Work email</label><input type="email" placeholder="name@company.com">
+      <label>Company</label><input type="text" placeholder="Company">
+      <label>What data problem are you trying to solve?</label><textarea rows="3" placeholder="A sentence or two is plenty."></textarea>
+      <div style="margin-top:16px"><button class="btn btn-cta" style="width:100%" onclick="closeQuote();alert('Prototype: submits to the Get-a-Quote form. This is the site\'s primary lead path.')">Request a Quote</button></div>
+      <p class="mnote">Prototype — in the live site this submits to the Get-a-Quote form (the primary lead path).</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /.sa -->
+<script>
+var PAGES=['home','pillar-dca','pillar-ai','pillar-kg','pillar-graph','pillar-roi','services','ind-pharma','ind-sc','ind-cyber','ind-fs','gist','resources','case-studies','case-student-loan','article-dcdd','article-airc','about'];
+var NAVMAP={ 'pillar-dca':'solutions','pillar-ai':'solutions','pillar-kg':'solutions','pillar-graph':'solutions','pillar-roi':'solutions','ind-pharma':'industries','ind-sc':'industries','ind-cyber':'industries','ind-fs':'industries','gist':'gist','resources':'resources','case-studies':'about','about':'about' };
+function go(id){ if(PAGES.indexOf(id)<0)id='home'; location.hash=id; }
+function render(){
+  var id=(location.hash||'#home').replace('#',''); if(PAGES.indexOf(id)<0)id='home';
+  PAGES.forEach(function(p){ var el=document.getElementById(p); if(el)el.classList.toggle('active',p===id); });
+  document.querySelectorAll('.nlink').forEach(function(l){ l.classList.remove('on'); });
+  var nav=NAVMAP[id]; if(nav){ var a=document.querySelector('.nlink[data-nav="'+nav+'"]'); if(a)a.classList.add('on'); }
+  var mob=document.querySelector('.nlinks'); if(mob)mob.classList.remove('open');
+  document.querySelectorAll('.nitem.exp').forEach(function(n){ n.classList.remove('exp'); });
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',render);
+// mobile: tap a dropdown label to expand it
+document.querySelectorAll('.nlink[data-nav="solutions"],.nlink[data-nav="industries"]').forEach(function(btn){
+  btn.addEventListener('click',function(e){ if(window.innerWidth<=900){ e.preventDefault(); this.closest('.nitem').classList.toggle('exp'); } });
+});
+function openQuote(){ document.getElementById('quoteOverlay').classList.add('open'); }
+function closeQuote(){ document.getElementById('quoteOverlay').classList.remove('open'); }
+document.addEventListener('keydown',function(e){ if(e.key==='Escape')closeQuote(); });
+render();
+</script>
+<script>
+(function(){
+ var NS='http://www.w3.org/2000/svg';
+ function contour(cx,cy,rings,step,amp,freq,phase,cls){
+   var g='';
+   for(var i=1;i<=rings;i++){
+     var r=step*i,d='';
+     for(var a=0;a<=360;a+=10){
+       var th=a*Math.PI/180;
+       var rr=r+Math.sin(th*freq+phase+i*0.5)*amp*(0.55+i*0.13);
+       var x=cx+Math.cos(th)*rr, y=cy+Math.sin(th)*rr*0.74;
+       d+=(a===0?'M':'L')+x.toFixed(1)+' '+y.toFixed(1)+' ';
+     }
+     var c='ct'+((cls&&i===Math.round(rings*0.6))?' '+cls:'');
+     g+='<path class="'+c+'" d="'+d+'Z"/>';
+   }
+   return g;
+ }
+ function bg(){
+   var W=1200,H=620,s='<svg class="carto-bg" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid slice" aria-hidden="true">';
+   var grat='';for(var x=0;x<=W;x+=120)grat+='<line class="grat" x1="'+x+'" y1="0" x2="'+x+'" y2="'+H+'"/>';
+   for(var y=0;y<=H;y+=120)grat+='<line class="grat" x1="0" y1="'+y+'" x2="'+W+'" y2="'+y+'"/>';
+   s+=grat;
+   s+=contour(330,360,8,32,26,3,0.4,'olv');
+   s+=contour(940,250,7,30,22,4,1.2,'gld');
+   s+='<path class="route" d="M170 540 L330 360 L620 430 L940 250 L1130 130"/>';
+   // peaks
+   [[330,360],[940,250]].forEach(function(p){
+     s+='<circle class="peakring" cx="'+p[0]+'" cy="'+p[1]+'" r="11"/><circle class="peakring" cx="'+p[0]+'" cy="'+p[1]+'" r="20"/><circle class="peak" cx="'+p[0]+'" cy="'+p[1]+'" r="4.5"/>';
+   });
+   // corner registration ticks
+   [[24,24,1,1],[1176,24,-1,1],[24,596,1,-1],[1176,596,-1,-1]].forEach(function(t){
+     s+='<line class="tick" x1="'+t[0]+'" y1="'+t[1]+'" x2="'+(t[0]+16*t[2])+'" y2="'+t[1]+'"/>';
+     s+='<line class="tick" x1="'+t[0]+'" y1="'+t[1]+'" x2="'+t[0]+'" y2="'+(t[1]+16*t[3])+'"/>';
+   });
+   s+='</svg>';return s;
+ }
+ var COORD='<div class="coordbar"><span>40.5853&deg; N &nbsp; 105.0844&deg; W &nbsp;&middot;&nbsp; Fort Collins, CO</span><span class="r">Fig.01 &middot; the model</span></div>';
+ var LEGEND='<div class="maplegend"><span><span class="c"></span>concept</span><span><span class="k"></span>relationship</span><span><span class="d"></span>where your data lands</span></div>';
+ function run(){
+   document.querySelectorAll('.hero').forEach(function(h){
+     if(h.querySelector('.carto-bg'))return;
+     var d=document.createElement('div');d.innerHTML=bg();h.insertBefore(d.firstChild,h.firstChild);
+     var w=h.querySelector('.wrap'), eh=w&&w.querySelector('.eh');
+     if(w&&eh){var cb=document.createElement('div');cb.innerHTML=COORD;w.insertBefore(cb.firstChild,eh);
+       var lg=document.createElement('div');lg.innerHTML=LEGEND;eh.appendChild(lg.firstChild);}
+   });
+ }
+ if(document.readyState!=='loading')run();else document.addEventListener('DOMContentLoaded',run);
+})();
+</script>
+<script>
+(function(){
+ var NS='http://www.w3.org/2000/svg';
+ function net(W,H,count,maxd,dark){
+   var N=[],s='';
+   for(var i=0;i<count;i++)N.push({x:Math.random()*W,y:Math.random()*H});
+   for(var i=0;i<N.length;i++)for(var j=i+1;j<N.length;j++){
+     var dx=N[i].x-N[j].x,dy=N[i].y-N[j].y;
+     if(Math.sqrt(dx*dx+dy*dy)<maxd)s+='<line class="rf-edge" x1="'+N[i].x.toFixed(0)+'" y1="'+N[i].y.toFixed(0)+'" x2="'+N[j].x.toFixed(0)+'" y2="'+N[j].y.toFixed(0)+'"/>';
+   }
+   N.forEach(function(n,k){s+='<circle class="rf-node'+(k%5===0?' a':'')+'" cx="'+n.x.toFixed(0)+'" cy="'+n.y.toFixed(0)+'" r="'+(k%5===0?4:2.6)+'"/>';});
+   return s;
+ }
+ function field(sec){
+   var svg=document.createElementNS(NS,'svg');
+   svg.setAttribute('class','rel-field');svg.setAttribute('viewBox','0 0 1200 460');
+   svg.setAttribute('preserveAspectRatio','xMidYMid slice');svg.setAttribute('aria-hidden','true');
+   svg.innerHTML=net(1200,460,13,300);
+   sec.insertBefore(svg,sec.firstChild);
+ }
+ // deterministic-ish cluster "cool image"
+ function cluster(seed){
+   var pts=[[110,40],[40,95],[175,90],[70,150],[150,150],[110,100],[190,150]];
+   var edges=[[5,0],[5,1],[5,2],[5,3],[5,4],[2,6],[4,6],[1,3]];
+   var s='<svg class="rel-art" viewBox="0 0 220 200" aria-hidden="true">';
+   edges.forEach(function(e){s+='<line class="ra-edge" x1="'+pts[e[0]][0]+'" y1="'+pts[e[0]][1]+'" x2="'+pts[e[1]][0]+'" y2="'+pts[e[1]][1]+'"/>';});
+   s+='<circle class="ra-halo" cx="'+pts[5][0]+'" cy="'+pts[5][1]+'" r="16"/>';
+   pts.forEach(function(p,k){
+     var cls=k===5?'blu':(k%3===0?'olv':(k%3===1?'':'gld'));
+     var r=k===5?7:(cls==='gld'?5:4.5);
+     s+='<circle class="ra-node '+cls+'" cx="'+p[0]+'" cy="'+p[1]+'" r="'+r+'"/>';
+   });
+   s+='</svg>';return s;
+ }
+ function run(){
+   var secs=document.querySelectorAll('.sec');
+   secs.forEach(function(sec,i){
+     if(!sec.querySelector('.rel-field'))field(sec);
+     if(i%2===1){ // add a cool cluster to every other section, alternating corner
+       var d=document.createElement('div');d.innerHTML=cluster(i);var art=d.firstChild;
+       var corner=[['-24px','auto','auto','-30px'],['auto','-28px','-30px','auto'],['-20px','auto','auto','auto'],['auto','-24px','auto','-24px']][i%4];
+       art.style.top=corner[0];art.style.right=corner[1];art.style.bottom=corner[2];art.style.left=corner[3];
+       sec.appendChild(art);
+     }
+   });
+   document.querySelectorAll('.close').forEach(function(c){
+     if(c.querySelector('.rel-field'))return;
+     var svg=document.createElementNS(NS,'svg');svg.setAttribute('class','rel-field');
+     svg.setAttribute('viewBox','0 0 1200 360');svg.setAttribute('preserveAspectRatio','xMidYMid slice');svg.setAttribute('aria-hidden','true');
+     svg.innerHTML=net(1200,360,12,320,true);c.insertBefore(svg,c.firstChild);
+   });
+ }
+ if(document.readyState!=='loading')run();else document.addEventListener('DOMContentLoaded',run);
+})();
+</script>
+<script>
+(function(){
+ function targetOf(el){var o=el.getAttribute('onclick')||'';var m=o.match(/go\(['"]([^'"]+)['"]\)/);return m?m[1]:null;}
+ function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+ function mono(s){var m=(s||'').replace(/[^A-Za-z0-9]/g,'');return (m[0]||'?').toUpperCase();}
+ function build(proof){
+   var cards=[].slice.call(proof.querySelectorAll('.pc')); if(cards.length<2)return;
+   var wrap=proof.closest('.wrap'), h2=wrap&&wrap.querySelector('.h2'), kick=wrap&&wrap.querySelector('.kick');
+   var htext=h2?h2.textContent:'', hub=/client|help|helped/i.test(htext)?'Clients':((kick&&kick.textContent.trim())||'Proof');
+   var items=cards.map(function(c){var h=c.querySelector('h4'),k=c.querySelector('.pk');return{name:h?h.textContent.trim():'',cat:k?k.textContent.trim():'',t:targetOf(c)};});
+   var W=1020,H=580,cx=510,cy=278,R=208,hubR=56,nR=34,n=items.length;
+   var svg='<svg viewBox="0 0 '+W+' '+H+'" role="group" aria-label="'+esc(hub)+' graph">';
+   svg+='<defs><marker id="pgAr" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#005A7D"/></marker></defs>';
+   var pos=items.map(function(_,i){var a=(-90+i*(360/n))*Math.PI/180;return{x:cx+Math.cos(a)*R,y:cy+Math.sin(a)*(R*0.8)};});
+   // edges (hub perimeter -> node perimeter)
+   pos.forEach(function(p){var dx=p.x-cx,dy=p.y-cy,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+     var x1=(cx+ux*hubR).toFixed(1),y1=(cy+uy*hubR).toFixed(1),x2=(p.x-ux*(nR+8)).toFixed(1),y2=(p.y-uy*(nR+8)).toFixed(1);
+     svg+='<line class="pg-edge" x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" marker-end="url(#pgAr)"/>';
+     svg+='<line class="pg-flow" x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'"/>';
+   });
+   // hub
+   svg+='<circle class="pg-hubring" cx="'+cx+'" cy="'+cy+'" r="'+(hubR+12)+'"/>';
+   svg+='<circle class="pg-hub" cx="'+cx+'" cy="'+cy+'" r="'+hubR+'"/>';
+   svg+='<text class="pg-hublabel" x="'+cx+'" y="'+(cy+1)+'" text-anchor="middle">'+esc(hub)+'</text>';
+   svg+='<text class="pg-hubsub" x="'+cx+'" y="'+(cy+18)+'" text-anchor="middle">Semantic Arts</text>';
+   // nodes
+   pos.forEach(function(p,i){var it=items[i];
+     svg+='<g class="pg-node" role="button" tabindex="0" data-t="'+esc(it.t||'')+'" data-i="'+i+'" aria-label="'+esc(it.name)+', case study">';
+     svg+='<circle class="pg-ncirc" cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+nR+'"/>';
+     svg+='<text class="pg-mono" x="'+p.x.toFixed(1)+'" y="'+(p.y+6).toFixed(1)+'" text-anchor="middle">'+esc(mono(it.name))+'</text>';
+     if(it.cat)svg+='<text class="pg-cat" x="'+p.x.toFixed(1)+'" y="'+(p.y+nR+16).toFixed(1)+'" text-anchor="middle">'+esc(it.cat)+'</text>';
+     svg+='<text class="pg-name" x="'+p.x.toFixed(1)+'" y="'+(p.y+nR+30).toFixed(1)+'" text-anchor="middle">'+esc(it.name)+'</text>';
+     svg+='<text class="pg-hint" x="'+p.x.toFixed(1)+'" y="'+(p.y+nR+44).toFixed(1)+'" text-anchor="middle">case study &#8594;</text>';
+     svg+='</g>';
+   });
+   svg+='</svg>';
+   var box=document.createElement('div');box.className='proofgraph';
+   box.innerHTML='<div class="pg-head">'+esc(hub)+' &middot; graph</div>'+svg+'<div class="pg-cap">Click a node to open its case study</div>';
+   proof.parentNode.replaceChild(box,proof);
+   box.querySelectorAll('.pg-node').forEach(function(g){var t=g.getAttribute('data-t');
+     function goT(){if(t&&window.go)window.go(t);}
+     g.addEventListener('click',goT);
+     g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();goT();}});
+   });
+ }
+ function run(){document.querySelectorAll('.proof').forEach(build);}
+ if(document.readyState!=='loading')run();else document.addEventListener('DOMContentLoaded',run);
+})();
+</script>
+</body>
+</html>

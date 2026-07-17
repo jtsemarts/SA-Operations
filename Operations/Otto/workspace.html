@@ -1,0 +1,856 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Semantic Arts Workspace</title><style>
+:root{--navy:#1F3864;--line:#dce3ec;--bg:#f6f8fb;--muted:#6b7280;}
+*{box-sizing:border-box}body{margin:0;font:14px/1.5 -apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#1c2430;background:var(--bg)}
+header{background:var(--navy);color:#fff;padding:12px 20px}header h1{margin:0;font-size:18px}header .sub{opacity:.8;font-size:12px;margin-top:2px}
+.tabs{display:flex;gap:4px;background:var(--navy);padding:0 16px}
+.tab{cursor:pointer;color:#cdd7e6;padding:10px 18px;font-size:14px;font-weight:600;border-bottom:3px solid transparent}
+.tab.on{color:#fff;border-bottom-color:#fff;background:rgba(255,255,255,.08)}
+.panel{display:none}.panel.on{display:block}
+.toolbar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#q{flex:1;min-width:180px;padding:8px 12px;border:1px solid #c4cede;border-radius:8px;font-size:14px}
+.chip{cursor:pointer;border:1px solid #c4cede;background:#fff;padding:3px 10px;border-radius:20px;font-size:12px;user-select:none}
+.chip.on{color:#fff;border-color:transparent}.chip.prio.on{background:#444}
+.grp{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.grp .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-right:2px}
+.btn{cursor:pointer;border:1px solid #c4cede;background:#fff;padding:6px 10px;border-radius:8px;font-size:12px}
+.cols{display:flex;gap:14px;padding:16px 20px;align-items:flex-start;overflow-x:auto}
+.col{flex:1;min-width:260px;background:#eef2f7;border-radius:12px;padding:10px}
+.col h2{margin:2px 4px 10px;font-size:13px;color:var(--navy);text-transform:uppercase;letter-spacing:.04em}.col h2 .n{color:var(--muted);font-weight:500}
+.card{background:#fff;border:1px solid var(--line);border-left:4px solid #c4cede;border-radius:9px;padding:9px 11px;margin:8px 0;box-shadow:0 1px 2px rgba(20,40,80,.05)}
+.card.done{opacity:.6}.card .title{font-weight:600;font-size:14px}.card.done .title{text-decoration:line-through;color:var(--muted)}
+.card .desc{color:#3a4453;font-size:12.5px;margin:4px 0}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
+.tag{font-size:11px;font-weight:600;color:#fff;padding:2px 8px;border-radius:20px}
+.due{font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:#eef1f6;color:#556}
+.due.over{background:#fde8e6;color:#b0281a}.due.soon{background:#fff3d6;color:#8a5a00}
+.owner{font-size:11px;color:var(--muted)}.subs{margin:6px 0 0;padding-left:16px}.subs li{font-size:12px;color:#4a5568;margin:1px 0}
+.pdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.empty{color:var(--muted);font-size:12px;padding:6px;font-style:italic}
+.viewbtn{cursor:pointer;border:1px solid #c4cede;background:#fff;padding:4px 10px;border-radius:8px;font-size:12px}
+.viewbtn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.list{display:block;padding:16px 20px;max-width:900px}
+.listgrp{margin-bottom:14px}
+.cathdr{font-size:13px;color:var(--navy);text-transform:uppercase;letter-spacing:.04em;border-left:4px solid #c4cede;padding-left:8px;margin:16px 0 6px}
+.cathdr .n{color:var(--muted);font-weight:500}
+.cal{max-width:1000px;margin:0 auto;padding:20px 26px}
+.cal h1{color:var(--navy);font-size:20px}.cal h2{color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:4px;margin-top:26px;font-size:16px}
+.cal h3{color:#2E4D7B;font-size:14px;margin-top:16px}
+.cal table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13px}
+.cal th,.cal td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+.cal th{background:var(--navy);color:#fff}.cal tr:nth-child(even) td{background:#f2f6fb}
+.cal code{background:#eef1f6;padding:1px 5px;border-radius:4px;font-size:12px}
+</style></head><body><header><h1>Semantic Arts Workspace</h1><div class="sub">Otto &middot; generated July 16, 2026 17:12</div></header><div class="tabs"><div class="tab on" data-tab="board" onclick="showTab('board')">Task Board</div><div class="tab" data-tab="cal" onclick="showTab('cal')">Calendar</div></div><div class="panel on" id="panel-board"><div class="toolbar"><input id="q" type="search" placeholder="Search tasks, tags, people…"><div class="grp"><span class="lbl">Tags</span><span id="tagfilters"></span></div><div class="grp"><span class="lbl">Priority</span><span class="chip prio" data-p="high">High</span><span class="chip prio" data-p="med">Med</span><span class="chip prio" data-p="low">Low</span></div><div class="grp"><span class="lbl">View</span><span class="viewbtn on" data-v="board">Board</span><span class="viewbtn" data-v="due">Today &amp; Overdue</span><span class="viewbtn" data-v="category">By Category</span></div><span class="btn" id="sortDue">Sort by due date</span><span class="btn" id="hideDone">Hide completed</span><span class="btn" id="clear">Clear</span></div><div class="cols" id="cols"></div></div><div class="panel" id="panel-cal"><div class="cal"><h1>Semantic Arts — Company Calendar</h1>
+<p><strong>Maintained by:</strong> Otto (for JT Metcalf, COO)
+<strong>Type:</strong> Living document · <strong>Version:</strong> 1.8 · <strong>Last updated:</strong> July 6, 2026</p>
+<p>A recurring calendar of deadlines and standing reminders: tax and compliance dates plus annual operating rituals (review job descriptions, run salary surveys, refresh insurance, etc.). Otto will suggest new entries as they come up in our work; JT confirms before anything is added.</p>
+<h2>How to use this</h2>
+<ul>
+<li>Entries are grouped two ways: a <strong>recurring-cadence overview</strong> (annual / quarterly / monthly) and a <strong>month-by-month</strong> list of dated deadlines.</li>
+<li>Tags: <code>[TAX]</code> <code>[PAYROLL]</code> <code>[COMPLIANCE]</code> <code>[HR]</code> <code>[OPS]</code> <code>[FINANCE]</code> <code>[CLIENT]</code> <code>[BENEFITS]</code>.</li>
+<li><strong>Dates roll:</strong> when a federal deadline falls on a weekend or holiday, it moves to the next business day. Confirm the exact day each year.</li>
+</ul>
+<h2>Assumptions (confirm / correct)</h2>
+<ul>
+<li>Entity: <strong>S-corporation</strong> (Form 1120-S), <strong>calendar tax year</strong>.</li>
+<li>HQ: Fort Collins, Colorado; operations and/or payroll touch <strong>many US states</strong> (state deadlines vary — see the state section).</li>
+<li>Some items (retirement-plan Form 5500, ACA reporting, state annual reports) apply only if relevant to the firm. They are marked <em>(if applicable)</em>.</li>
+<li>These dates are general scheduling reminders, not tax advice. Confirm specifics with the firm's accountant (the COO coordinates with the firm accountant per the governance matrix).</li>
+</ul>
+<hr />
+<h2>Recurring-Cadence Overview</h2>
+<h3>Annual rituals (HR / Ops — suggested timing, set by JT)</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>Suggested timing</th>
+<th>Owner (per governance matrix)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Review and refresh executive &amp; staff job descriptions</td>
+<td>[HR]</td>
+<td>Q1 (Jan–Feb)</td>
+<td>President + COO</td>
+</tr>
+<tr>
+<td>Run salary / compensation surveys</td>
+<td>[HR]</td>
+<td>Before annual comp review</td>
+<td>COO (input), President (sets rates)</td>
+</tr>
+<tr>
+<td>Annual performance review cycle</td>
+<td>[HR]</td>
+<td>Set by JT</td>
+<td>President + COO</td>
+</tr>
+<tr>
+<td>Benefits open enrollment</td>
+<td>[HR]</td>
+<td>Q4 (typical)</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Review &amp; update employee handbook</td>
+<td>[HR]</td>
+<td>Annual</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Review business insurance coverage &amp; seek bids</td>
+<td>[OPS]</td>
+<td>Annual</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Review incentive / bonus program &amp; profit distribution</td>
+<td>[FINANCE]</td>
+<td>Year-end</td>
+<td>Governance Committee + President</td>
+</tr>
+<tr>
+<td>Team Summit</td>
+<td>[OPS]</td>
+<td>Annual</td>
+<td>COO coordinates</td>
+</tr>
+<tr>
+<td>Annual budget setting</td>
+<td>[FINANCE]</td>
+<td>Q4 for next year</td>
+<td>CEO/President/COO</td>
+</tr>
+<tr>
+<td>Review agent charters (Otto, Legal, Brand)</td>
+<td>[OPS]</td>
+<td>Quarterly (also annual)</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Review &amp; update Operations Playbook</td>
+<td>[OPS]</td>
+<td>Quarterly</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>HR end-of-year checklist</td>
+<td>[HR]</td>
+<td>Dec 1</td>
+<td>COO / HR agent</td>
+</tr>
+<tr>
+<td>Vacation / PTO analysis</td>
+<td>[HR]</td>
+<td>End of December</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Review all recurring meeting invites &amp; build next year's calendar</td>
+<td>[OPS]</td>
+<td>Dec 1</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Update HR/payroll in Spark (positions, rates)</td>
+<td>[HR]</td>
+<td>Jan 1</td>
+<td>COO</td>
+</tr>
+<tr>
+<td>Insurance audit</td>
+<td>[OPS]</td>
+<td>Jan 6</td>
+<td>COO</td>
+</tr>
+</tbody>
+</table>
+<h3>Quarterly</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>Due</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Form 941 (employer payroll tax)</td>
+<td>[PAYROLL]</td>
+<td>Apr 30, Jul 31, Oct 31, Jan 31</td>
+</tr>
+<tr>
+<td>Estimated tax payments (shareholders / individual)</td>
+<td>[TAX]</td>
+<td>Apr 15, Jun 15, Sep 15, Jan 15</td>
+</tr>
+<tr>
+<td>Financial &amp; operational reporting to Governance Committee</td>
+<td>[FINANCE]</td>
+<td>End of each quarter (cadence set by JT)</td>
+</tr>
+<tr>
+<td>Operations Playbook + charter review</td>
+<td>[OPS]</td>
+<td>Each quarter</td>
+</tr>
+<tr>
+<td>Trust distributions (3% of gross earned revenue; accrued each payroll, remitted via KeyNavigator)</td>
+<td>[GOVERNANCE]</td>
+<td>Quarterly</td>
+</tr>
+<tr>
+<td>Trustee stipends ($500 each, 3 trustees; Abhishek held)</td>
+<td>[GOVERNANCE]</td>
+<td>Quarterly</td>
+</tr>
+<tr>
+<td>Standing GC–trustee meeting: GC shares a fixed set of financials with the trustees and answers questions</td>
+<td>[GOVERNANCE]</td>
+<td>Quarterly</td>
+</tr>
+<tr>
+<td>Prepare quarterly trustee-meeting financials (Amanda prepares, COO reviews, shared to GC)</td>
+<td>[GOVERNANCE]</td>
+<td>Start of each quarter</td>
+</tr>
+</tbody>
+</table>
+<h3>Monthly</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>Timing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Payroll runs &amp; payroll-tax deposits</td>
+<td>[PAYROLL]</td>
+<td>Per schedule (monthly/semiweekly per IRS deposit rules)</td>
+</tr>
+<tr>
+<td>Bookkeeping close &amp; cash-flow projection</td>
+<td>[FINANCE]</td>
+<td>Month-end</td>
+</tr>
+<tr>
+<td>Spending vs. budget review</td>
+<td>[FINANCE]</td>
+<td>Month-end</td>
+</tr>
+<tr>
+<td>Review clients due for a 1:1 satisfaction check-in call (flag contracts near their midpoint)</td>
+<td>[CLIENT]</td>
+<td>1st of month — Ops Manager (Amanda)</td>
+</tr>
+<tr>
+<td><strong>Reminder to JT:</strong> check which satisfaction calls need coordinating/scheduling</td>
+<td>[CLIENT]</td>
+<td>1st of month</td>
+</tr>
+<tr>
+<td>Prepare trustee financial reports</td>
+<td>[FINANCE]</td>
+<td>1st of month</td>
+</tr>
+<tr>
+<td>Otto reviews the calendar for recurring tasks due this week and adds them to the task board</td>
+<td>[OPS]</td>
+<td>Weekly (Monday, recurring task)</td>
+</tr>
+<tr>
+<td><strong>Manual backup of the Agents workspace to SharePoint</strong> (added redundancy; iCloud is the primary backup)</td>
+<td>[OPS]</td>
+<td>Monthly — 28th — JT / IT</td>
+</tr>
+</tbody>
+</table>
+<h3>Benefits &amp; health-plan compliance (if applicable)</h3>
+<p>These apply to employers offering group health / prescription-drug coverage; several are handled by the insurer or TPA, but confirming the deadlines is the firm's responsibility. Note: employer ACA 1094-C/1095-C filing applies only to Applicable Large Employers (50+ full-time-equivalent employees); at ~30 people Semantic Arts is likely below that threshold, so confirm ALE status before relying on the ACA filing dates.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>Timing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Medicare Part D creditable-coverage disclosure to CMS</td>
+<td>[BENEFITS]</td>
+<td>Within 60 days of plan-year start (Mar 1 for calendar-year plans)</td>
+</tr>
+<tr>
+<td>ACA 1095-C / 1095-B furnished to employees</td>
+<td>[BENEFITS]</td>
+<td>Early March (~Mar 3) — if applicable</td>
+</tr>
+<tr>
+<td>ACA 1094 / 1095 filing to IRS</td>
+<td>[BENEFITS]</td>
+<td>Feb 28 (paper) / Mar 31 (electronic) — if an ALE</td>
+</tr>
+<tr>
+<td>RxDC prescription-drug data collection reporting</td>
+<td>[BENEFITS]</td>
+<td>June 1</td>
+</tr>
+<tr>
+<td>Form 5500 (retirement plan)</td>
+<td>[COMPLIANCE]</td>
+<td>July 31 (calendar-year plans) — if applicable</td>
+</tr>
+</tbody>
+</table>
+<p>Subsidiary-specific: <strong>CAN 2200 forms</strong> (Canada) — March. UK National Insurance is deducted automatically from pay. Confirm regional filings per subsidiary.</p>
+<h3>Recurring operational tasks (migrated from Faithful Steward, July 2026)</h3>
+<p>Migrated from JT's Faithful Steward list per the July 2026 task migration. Owner is JT unless noted. Otto's weekly Monday review surfaces the ones due that week into the task board.</p>
+<p>Each item has a hard-date anchor so it lands on the board with a real deadline. Weekdays follow the Thursday-to-Friday workweek.</p>
+<p><strong>Weekly</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>When (hard date)</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QuickBooks (QB) export</td>
+<td>[FINANCE]</td>
+<td>Weekly — Thursday</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Email Pride — planned remit</td>
+<td>[FINANCE]</td>
+<td>Weekly — Monday</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Update the evaluation spreadsheet</td>
+<td>[OPS]</td>
+<td>Weekly — Monday</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Archive the cash plan</td>
+<td>[FINANCE]</td>
+<td>Weekly — Monday</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Update the cash &amp; staff plan</td>
+<td>[GOVERNANCE]</td>
+<td>Weekly — Monday</td>
+<td>JT (includes the AR-schedule bank info)</td>
+</tr>
+<tr>
+<td>Update the Financial Evaluation Dashboard</td>
+<td>[FINANCE]</td>
+<td>Weekly — Monday</td>
+<td>JT (Otto prompts for the numbers; see the dashboard SOP)</td>
+</tr>
+<tr>
+<td>Verify the SA-Operations nightly backup ran</td>
+<td>[IT]</td>
+<td>Weekly — Friday</td>
+<td>JT (glance at <code>~/Library/Logs/sa-ops-backup.log</code>; Otto helps interpret)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Daily (weekday)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>When (hard date)</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Check Zoho for tasks</td>
+<td>[SALES]</td>
+<td>Weekday (Mon-Fri)</td>
+<td>JT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Every 4 weeks</strong> (exact dates in the "2026 pay periods" table below)</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>When (hard date)</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Check and approve Expensify expense reports</td>
+<td>[FINANCE]</td>
+<td>Monday of the payroll-run week (Run payroll Fri − 4 days)</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Enter approved expense reports into the spreadsheet</td>
+<td>[FINANCE]</td>
+<td>Wednesday before period end — the "Expense review (Wed)" column</td>
+<td>Amanda</td>
+</tr>
+<tr>
+<td>Move approved expenses into the payroll spreadsheet</td>
+<td>[PAYROLL]</td>
+<td>At payroll run — the "Run payroll (Fri)" column</td>
+<td>Amanda</td>
+</tr>
+<tr>
+<td>Run payroll (President approves)</td>
+<td>[PAYROLL]</td>
+<td>Day after period end — the "Run payroll (Fri)" column</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Payroll finishing tasks</td>
+<td>[PAYROLL]</td>
+<td>Monday after period end — the "Payroll finishing (Mon)" column</td>
+<td>JT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Monthly</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>When (hard date)</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Send Amanda the Key Bank line-of-credit payment amount</td>
+<td>[FINANCE]</td>
+<td>Monthly — 15th</td>
+<td>JT → Amanda</td>
+</tr>
+<tr>
+<td>Send Amanda the Canada bank statement</td>
+<td>[FINANCE]</td>
+<td>Monthly — 24th</td>
+<td>JT → Amanda</td>
+</tr>
+<tr>
+<td>Send Amanda the MS invoices</td>
+<td>[FINANCE]</td>
+<td>Monthly — 24th</td>
+<td>JT → Amanda</td>
+</tr>
+<tr>
+<td>Review upcoming monthly invoices</td>
+<td>[FINANCE]</td>
+<td>Monthly — 25th</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Coaches meeting</td>
+<td>[HR]</td>
+<td>Monthly — 3rd Friday</td>
+<td>JT (chairs)</td>
+</tr>
+<tr>
+<td>Ask a coach to prepare 2 discussion questions</td>
+<td>[HR]</td>
+<td>Monthly — Monday before the 3rd Friday</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Email the coaches agenda</td>
+<td>[HR]</td>
+<td>Monthly — Thursday before the 3rd Friday</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Prep the AI &amp; Cyber Task Force agenda</td>
+<td>[IT]</td>
+<td>Monthly — Monday before the 3rd Thursday (meeting is the 3rd Thursday; next prep 2026-08-17)</td>
+<td>JT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Quarterly</strong> (note: overlaps the existing quarterly lines above — treat as the same obligations, not duplicates)</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tag</th>
+<th>When (hard date)</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Remit trust &amp; trustee payments ($500 ACH per trustee; Dave may fund the trust)</td>
+<td>[FINANCE]</td>
+<td>Quarterly — 6th (next 2026-10-06)</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>GC financial report</td>
+<td>[GOVERNANCE]</td>
+<td>Quarterly — early (next 2026-10-02)</td>
+<td>Amanda</td>
+</tr>
+<tr>
+<td>Quarterly checklist tasks</td>
+<td>[OPS]</td>
+<td>Quarterly (next 2026-10-02)</td>
+<td>JT</td>
+</tr>
+<tr>
+<td>Review lost deals for potential nurturing</td>
+<td>[SALES]</td>
+<td>Quarterly — 15th (Feb / May / Aug / Nov; next 2026-08-15)</td>
+<td>JT</td>
+</tr>
+</tbody>
+</table>
+<h3>2026 pay periods (payroll runs every 4 weeks; 13 periods)</h3>
+<p>Payroll is <strong>every 4 weeks, not monthly (13 periods/year)</strong>. The <strong>workweek runs Thursday to Friday</strong> — a week ends Thursday at midnight and starts Friday morning — so each period <strong>starts on a Friday and ends on a Thursday</strong>. Action dates key off the period-end Thursday: <strong>JT approves Expensify expense reports</strong> = the <strong>Monday of the payroll-run week</strong> (Run payroll Fri − 4 days); <strong>Amanda enters the approved reports into the spreadsheet</strong> = the <strong>Wednesday before</strong> the period ends (the Expense review column); <strong>Run payroll</strong> = the <strong>day after</strong> the period ends (the Friday Process date), when <strong>Amanda also moves the approved expenses into the payroll spreadsheet</strong>; <strong>Payroll finishing tasks</strong> = the <strong>Monday after</strong> the period ends. Pay lands ~10-11 days after the period ends. All exact dates are in the table below (use these hard dates, not a generic cadence).</p>
+<table>
+<thead>
+<tr>
+<th>Period</th>
+<th>Start (Fri)</th>
+<th>End (Thu)</th>
+<th>Expense review (Wed)</th>
+<th>Run payroll (Fri)</th>
+<th>Payroll finishing (Mon)</th>
+<th>Paid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2025-12-12</td>
+<td>2026-01-08</td>
+<td>2026-01-07</td>
+<td>2026-01-09</td>
+<td>2026-01-12</td>
+<td>2026-01-19</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2026-01-09</td>
+<td>2026-02-05</td>
+<td>2026-02-04</td>
+<td>2026-02-06</td>
+<td>2026-02-09</td>
+<td>2026-02-16</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2026-02-06</td>
+<td>2026-03-05</td>
+<td>2026-03-04</td>
+<td>2026-03-06</td>
+<td>2026-03-09</td>
+<td>2026-03-16</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2026-03-06</td>
+<td>2026-04-02</td>
+<td>2026-04-01</td>
+<td>2026-04-03</td>
+<td>2026-04-06</td>
+<td>2026-04-13</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2026-04-03</td>
+<td>2026-04-30</td>
+<td>2026-04-29</td>
+<td>2026-05-01</td>
+<td>2026-05-04</td>
+<td>2026-05-11</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2026-05-01</td>
+<td>2026-05-28</td>
+<td>2026-05-27</td>
+<td>2026-05-29</td>
+<td>2026-06-01</td>
+<td>2026-06-08</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2026-05-29</td>
+<td>2026-06-25</td>
+<td>2026-06-24</td>
+<td>2026-06-26</td>
+<td>2026-06-29</td>
+<td>2026-07-06</td>
+</tr>
+<tr>
+<td>8</td>
+<td>2026-06-26</td>
+<td>2026-07-23</td>
+<td>2026-07-22</td>
+<td>2026-07-24</td>
+<td>2026-07-27</td>
+<td>2026-08-03</td>
+</tr>
+<tr>
+<td>9</td>
+<td>2026-07-24</td>
+<td>2026-08-20</td>
+<td>2026-08-19</td>
+<td>2026-08-21</td>
+<td>2026-08-24</td>
+<td>2026-08-31</td>
+</tr>
+<tr>
+<td>10</td>
+<td>2026-08-21</td>
+<td>2026-09-17</td>
+<td>2026-09-16</td>
+<td>2026-09-18</td>
+<td>2026-09-21</td>
+<td>2026-09-28</td>
+</tr>
+<tr>
+<td>11</td>
+<td>2026-09-18</td>
+<td>2026-10-15</td>
+<td>2026-10-14</td>
+<td>2026-10-16</td>
+<td>2026-10-19</td>
+<td>2026-10-26</td>
+</tr>
+<tr>
+<td>12</td>
+<td>2026-10-16</td>
+<td>2026-11-12</td>
+<td>2026-11-11</td>
+<td>2026-11-13</td>
+<td>2026-11-16</td>
+<td>2026-11-23</td>
+</tr>
+<tr>
+<td>13</td>
+<td>2026-11-13</td>
+<td>2026-12-10</td>
+<td>2026-12-09</td>
+<td>2026-12-11</td>
+<td>2026-12-14</td>
+<td>2026-12-21</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Month-by-Month Deadlines (calendar-year S-corp)</h2>
+<h3>January</h3>
+<ul>
+<li><strong>Jan 15</strong> — <code>[TAX]</code> Q4 (prior year) estimated tax payment due (individual shareholders).</li>
+<li><strong>Jan 31</strong> — <code>[PAYROLL]</code> W-2s furnished to employees and filed with the SSA; 1099-NEC furnished to contractors and filed with the IRS.</li>
+<li><strong>Jan 31</strong> — <code>[PAYROLL]</code> Form 940 (FUTA) annual return; Form 941 for Q4 (prior year).</li>
+<li><strong>Jan 1</strong> — <code>[HR]</code> Update HR/payroll in Spark (positions, rates) for the new year.</li>
+<li><strong>Jan 6</strong> — <code>[OPS]</code> Insurance audit.</li>
+<li>ACA employee forms are due in early March, not January (see Benefits &amp; health-plan compliance) — <em>if applicable</em>.</li>
+</ul>
+<h3>February</h3>
+<ul>
+<li><code>[HR]</code> Suggested window to <strong>review job descriptions</strong> ahead of the comp cycle.</li>
+<li><code>[OPS]</code> Confirm state annual-report / registered-agent renewal dates for the year <em>(see state section)</em>.</li>
+</ul>
+<h3>March</h3>
+<ul>
+<li><strong>Mar 15</strong> — <code>[TAX]</code> <strong>Form 1120-S</strong> (S-corporation return) due, with <strong>Schedule K-1s</strong> to shareholders. File <strong>Form 7004</strong> for a 6-month extension (to Sep 15) if needed.</li>
+<li><code>[HR]</code> Suggested window to <strong>run salary surveys</strong> before setting rates.</li>
+</ul>
+<h3>April</h3>
+<ul>
+<li><strong>Apr 15</strong> — <code>[TAX]</code> Individual returns (Form 1040) for shareholders; <strong>Q1 estimated tax</strong> payment.</li>
+<li><strong>Apr 30</strong> — <code>[PAYROLL]</code> Form 941 for Q1.</li>
+</ul>
+<h3>May</h3>
+<ul>
+<li><code>[OPS]</code> Mid-year insurance / vendor contract check-in (placeholder).</li>
+</ul>
+<h3>June</h3>
+<ul>
+<li><strong>Jun 15</strong> — <code>[TAX]</code> <strong>Q2 estimated tax</strong> payment.</li>
+</ul>
+<h3>July</h3>
+<ul>
+<li><strong>Jul 31</strong> — <code>[PAYROLL]</code> Form 941 for Q2.</li>
+<li><strong>Jul 31</strong> — <code>[COMPLIANCE]</code> Form 5500 (retirement plan) for calendar-year plans <em>(if applicable)</em>.</li>
+</ul>
+<h3>August</h3>
+<ul>
+<li><code>[OPS]</code> Suggested planning window for Q4 benefits open enrollment.</li>
+</ul>
+<h3>September</h3>
+<ul>
+<li><strong>Sep 15</strong> — <code>[TAX]</code> Extended <strong>Form 1120-S</strong> due (if extension filed); <strong>Q3 estimated tax</strong> payment.</li>
+</ul>
+<h3>October</h3>
+<ul>
+<li><strong>Oct 31</strong> — <code>[PAYROLL]</code> Form 941 for Q3.</li>
+<li><code>[HR]</code> Benefits open-enrollment window (typical).</li>
+</ul>
+<h3>November</h3>
+<ul>
+<li><code>[FINANCE]</code> Begin <strong>annual budget</strong> setting for next year.</li>
+<li><code>[FINANCE]</code> Begin <strong>bonus / profit-distribution</strong> review (Governance Committee + President).</li>
+</ul>
+<h3>December</h3>
+<ul>
+<li><strong>Dec 1</strong> — <code>[HR]</code> HR end-of-year checklist.</li>
+<li><strong>Dec 1</strong> — <code>[OPS]</code> Review all recurring meeting invites and build next year's calendar/events.</li>
+<li><code>[FINANCE]</code> Year-end financial close prep; confirm W-9s on file for all contractors before January 1099 filing.</li>
+<li><code>[HR]</code> Finalize comp decisions and any year-end bonuses.</li>
+<li><code>[HR]</code> Vacation / PTO analysis (end of month).</li>
+</ul>
+<hr />
+<h2>State &amp; Multi-Jurisdiction (placeholders — confirm per registration)</h2>
+<p>Because Semantic Arts operates across many states, several recurring obligations vary by jurisdiction. Fill these in per the states where the firm is registered, has employees, or has tax nexus. (Legal can help flag which states create obligations; the COO coordinates filings.)</p>
+<ul>
+<li><code>[COMPLIANCE]</code> <strong>Colorado periodic report</strong> (Secretary of State) — due in the anniversary month of formation; confirm exact month.</li>
+<li><code>[COMPLIANCE]</code> <strong>Foreign-qualification annual reports</strong> in each registered state — dates vary.</li>
+<li><code>[COMPLIANCE]</code> <strong>Registered-agent renewals</strong> per state.</li>
+<li><code>[TAX]</code> <strong>State S-corp / pass-through entity returns</strong> (incl. any PTE-tax elections) — dates vary, many mirror the federal Mar 15 / Sep 15.</li>
+<li><code>[PAYROLL]</code> <strong>State payroll withholding &amp; unemployment</strong> filings for each state with employees.</li>
+<li><code>[TAX]</code> <strong>State sales/use tax</strong> filings where economic nexus is triggered <em>(if applicable)</em>.</li>
+</ul>
+<hr />
+<h2>Change Log</h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>2026-06-30</td>
+<td>Initial scaffold: S-corp federal deadlines, recurring HR/Ops rituals, state placeholders.</td>
+</tr>
+<tr>
+<td>1.1</td>
+<td>2026-07-03</td>
+<td>Added monthly (1st) client satisfaction check-in review (Ops Manager) and a monthly reminder to JT to coordinate calls. Added the [CLIENT] tag. Linked to the mid-contract check-in SOP.</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>2026-07-03</td>
+<td>Added: 1st-of-month trustee financial reports; first-Monday task-suggestion review; quarterly trust distributions/stipends/GC-to-trustees; annual items from the internal checklist (HR EOY, vacation analysis, recurring-invite/next-year setup on Dec 1, Spark update Jan 1, insurance audit Jan 6); a Benefits &amp; health-plan compliance section (Medicare Part D/creditable coverage, ACA, RxDC, 5500) with ALE caveat; and subsidiary (CAN 2200) note. Added [BENEFITS] tag.</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>2026-07-06</td>
+<td>Migrated 15 recurring tasks from Faithful Steward into a new "Recurring operational tasks" section (weekly, every-4-weeks, monthly, quarterly). Changed Otto's review from first-Monday-monthly to weekly (surfaces recurring items due that week into the task board).</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td>2026-07-06</td>
+<td>Added a monthly manual SharePoint backup of the Agents workspace (redundancy; iCloud remains the primary backup while SharePoint use is not yet permitted).</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>2026-07-06</td>
+<td>Documented that payroll runs every 4 weeks (13 periods/year, not monthly) and the Thursday-to-Friday workweek; added the dated 2026 pay-period schedule (Start/End/Process/Paid). Payroll actions key off the Process date.</td>
+</tr>
+<tr>
+<td>1.6</td>
+<td>2026-07-06</td>
+<td>Assigned hard dates to the payroll-cycle tasks: Review expense reports = Wednesday before period end; Run payroll = day after period end (Friday); Payroll finishing = Monday after period end. Added these as columns in the pay-period table.</td>
+</tr>
+<tr>
+<td>1.7</td>
+<td>2026-07-06</td>
+<td>Split the expense-reimbursement flow across the pay cycle: JT approves Expensify reports on the Monday of the payroll-run week; Amanda enters approved reports into the spreadsheet the Wednesday before period end; Amanda moves approved expenses into the payroll spreadsheet at the Friday payroll run.</td>
+</tr>
+<tr>
+<td>1.7</td>
+<td>2026-07-06</td>
+<td>Gave every recurring task a hard-date anchor (a "When" column): weekly items pinned to a weekday (Thu/Mon), monthly items to a day-of-month (LOC 15th; Canada statement &amp; MS invoices 24th; SharePoint backup 28th), quarterly items to an anchor date. So each lands on the board with a real deadline.</td>
+</tr>
+<tr>
+<td>1.8</td>
+<td>2026-07-06</td>
+<td>Moved "Update bank info in the AR schedule" to Monday (grouped with the Monday cash &amp; staff work); added a monthly "Review upcoming monthly invoices" on the 25th.</td>
+</tr>
+<tr>
+<td>1.9</td>
+<td>2026-07-13</td>
+<td>Deduped: removed the standalone weekly "Update bank info in the AR schedule" (it duplicates the Monday cash &amp; staff plan work); folded the note into the cash &amp; staff plan row.</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>2026-07-13</td>
+<td>Added weekly Monday "Update the Financial Evaluation Dashboard" (new Finance SOP; Otto prompts the COO for the required numbers).</td>
+</tr>
+<tr>
+<td>2.1</td>
+<td>2026-07-14</td>
+<td>Added quarterly "Review lost deals for potential nurturing" on the 15th (Feb / May / Aug / Nov; next 2026-08-15).</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>2026-07-14</td>
+<td>Added weekly Friday "Verify the SA-Operations nightly backup ran" (glance at the backup log; Otto interprets).</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td>2026-07-16</td>
+<td>Added monthly "Prep the AI &amp; Cyber Task Force agenda" (Monday before the 3rd Thursday; next 2026-08-17). The meeting is the 3rd Thursday monthly and stays in JT's own calendar.</td>
+</tr>
+</tbody>
+</table></div></div><script>const TASKS=[{"section": "Active", "done": false, "title": "Run the 2-week Productivity + HR plugin trial", "desc": "connector-free; complete the go/no-go review.", "tags": ["Ops"], "due": "2026-07-17", "prio": "high", "owners": [], "subs": ["Compare against our SOP-driven workflows; capture time saved."]}, {"section": "Active", "done": false, "title": "Make pay changes in Spark", "desc": "HR/payroll system.", "tags": ["HR"], "due": "2026-07-24", "prio": "high", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Talk with Amanda about Paylocity and the implementation plan", "desc": "payroll provider transition.", "tags": ["HR"], "due": "2026-07-20", "prio": "med", "owners": ["Amanda"], "subs": []}, {"section": "Active", "done": false, "title": "Think through the monthly ops update", "desc": "shape the monthly operations update.", "tags": ["Ops"], "due": "2026-07-20", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Schedule a marketing strategy session with Dave and Rebecca", "desc": "set up the working session.", "tags": ["Marketing"], "due": "2026-07-20", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Discuss capping the company share of a BYOD purchase with Rebecca", "desc": "for the Thursday check-in.", "tags": ["HR"], "due": "2026-07-23", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Active", "done": false, "title": "Resurface corporate structure / employment docs with Rebecca", "desc": "held pending the lawyer's input and pricing.", "tags": ["Governance"], "due": "2026-07-30", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Active", "done": false, "title": "Talk to Dave about Brian Schulte", "desc": "SA HR.", "tags": ["HR"], "due": "2026-07-17", "prio": "med", "owners": ["Dave"], "subs": []}, {"section": "Active", "done": false, "title": "Colton baby gift", "desc": "team/HR gesture (confirmed SA).", "tags": ["HR"], "due": "2026-07-20", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Figure out the CAN accounting in QB and write out a plan", "desc": "Canada entity bookkeeping in QuickBooks.", "tags": ["Finance"], "due": "2026-07-17", "prio": "high", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Box quantity of each book", "desc": "inventory.", "tags": ["Ops"], "due": "2026-08-01", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Talk with Bill about Databricks with FedScale", "desc": "SA Sales.", "tags": ["Sales"], "due": "", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Dig into AIXM and write up moving it to an ontology", "desc": "Aeronautical Information Exchange Model; how it would be represented as an ontology (relates to DNI / DOT opportunity).", "tags": ["Sales"], "due": "2026-07-20", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Look into SWIM (FAA)", "desc": "System Wide Information Management, the FAA data-sharing broker for aviation data; how it accesses and serves data (relates to DNI).", "tags": ["Sales"], "due": "2026-07-20", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Set up the sales to-do list for the nurturing pipeline", "desc": "build out the nurturing-pipeline sales task list/process.", "tags": ["Sales"], "due": "", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Add projects to the nurturing pipeline", "desc": "accounts to move into nurturing.", "tags": ["Sales"], "due": "", "prio": "med", "owners": [], "subs": ["Factset; Eurofins; Broadridge; J&J; Bayer; Craxel (Mythos); ISG at MS; Threatconnect"]}, {"section": "Active", "done": false, "title": "Put Dylan at BNY on the nurturing list", "desc": "add to the nurturing pipeline.", "tags": ["Sales"], "due": "2026-07-17", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Review lost deals from the last 12 months to resurrect", "desc": "identify closed-lost deals worth reviving.", "tags": ["Sales"], "due": "2026-07-17", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Review AIM Services draft webpage content", "desc": "from AIM. Doc: Documents/AIM_Services_draft_webpage_content.docx", "tags": ["Sales"], "due": "2026-07-17", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Check and approve Expensify expense reports", "desc": "recurring (every pay cycle, Monday before payroll), from the calendar.", "tags": ["Finance"], "due": "2026-07-20", "prio": "high", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Close Beta", "desc": "close the Beta project.", "tags": ["Finance"], "due": "2026-07-17", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Back up the Agents workspace to SharePoint", "desc": "monthly redundancy backup (iCloud is the primary backup).", "tags": ["IT"], "due": "2026-07-31", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Roll out a company-wide password manager", "desc": "select vendor, enact the policy, deploy. Research doc in progress.", "tags": ["IT"], "due": "", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Roll out a business VPN", "desc": "select vendor, enact the remote-access / public-wifi policy, deploy. Research doc in progress.", "tags": ["IT"], "due": "", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Schedule time to work on IT posture", "desc": "block time to work through security settings and the IT reference materials.", "tags": ["IT"], "due": "2026-07-17", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Contact Jason (external IT) re: Microsoft & Box backup procedures", "desc": "document backup procedures for M365 and Box with our external IT help.", "tags": ["IT"], "due": "2026-07-29", "prio": "med", "owners": [], "subs": []}, {"section": "Active", "done": false, "title": "Verify the SA-Operations nightly backup ran", "desc": "weekly check of the backup log; recurring, from the calendar.", "tags": ["IT"], "due": "2026-07-17", "prio": "low", "owners": [], "subs": []}, {"section": "Waiting On", "done": false, "title": "Ratify the executive decision-rights model", "desc": "final sign-off.", "tags": ["Governance"], "due": "", "prio": "high", "owners": ["CEO", "President"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Remind Dave to contact Abhi re: MS Map turnover after the rate increase", "desc": "SA Sales.", "tags": ["Sales"], "due": "2026-08-05", "prio": "med", "owners": ["Dave"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Margin queries from Dave", "desc": "awaiting Dave's margin questions/answers; follow up next Tuesday.", "tags": ["Finance"], "due": "2026-07-21", "prio": "med", "owners": ["Dave"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Commission assignment from Rebecca", "desc": "confirm commission assignment.", "tags": ["Sales"], "due": "2026-07-17", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Microsoft integration decision (Rebecca)", "desc": "read-only M365 email/calendar/Teams connection decision.", "tags": ["IT"], "due": "2026-07-17", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Dashlane bundled VPN \u2014 decision (Rebecca)", "desc": "whether Dashlane's bundled VPN covers our needs (avoiding a separate VPN subscription) or we go with a dedicated VPN.", "tags": ["IT"], "due": "2026-07-20", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Waiting On", "done": false, "title": "Confirm Microsoft Graph (Rebecca)", "desc": "awaiting Rebecca's confirmation on Microsoft Graph.", "tags": ["IT"], "due": "2026-07-20", "prio": "med", "owners": ["Rebecca"], "subs": []}, {"section": "Someday", "done": false, "title": "Populate remaining [DRAFT] SOP placeholders", "desc": "in the Operations Playbook.", "tags": ["Ops"], "due": "", "prio": "low", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Check Zoho for tasks (done:2026-07-16) #Sales", "desc": "Check Zoho for tasks", "tags": ["Sales"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Email the coaches agenda (done:2026-07-16) #HR", "desc": "Email the coaches agenda", "tags": ["HR"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "QuickBooks export (done:2026-07-16) #Finance", "desc": "QuickBooks export", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Create an SOP for accessing QuickBooks and doing the export (done:2026-07-16) #Finance", "desc": "Create an SOP for accessing QuickBooks and doing the export", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Rebecca check-in (agenda cleared; commission & MS integration moved to Fri 7/17) (done:2026-07-15) #Governance", "desc": "Rebecca check-in (agenda cleared; commission & MS integration moved to Fri 7/17)", "tags": ["Governance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Review revised Exec Roles / RACI with CEO & President (done:2026-07-15) #Governance", "desc": "Review revised Exec Roles / RACI with CEO & President", "tags": ["Governance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Send Amanda the Key Bank line-of-credit payment amount (done:2026-07-15) #Finance", "desc": "Send Amanda the Key Bank line-of-credit payment amount", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "PDF the Expensify reports (done:2026-07-15) #Finance", "desc": "PDF the Expensify reports", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Ask a coach to prepare 2 discussion questions (done:2026-07-15) #HR", "desc": "Ask a coach to prepare 2 discussion questions", "tags": ["HR"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Reimburse SA $822.66 (done:2026-07-15) #Finance", "desc": "Reimburse SA $822.66", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Hover domain transfer (done:2026-07-14) #IT", "desc": "Hover domain transfer", "tags": ["IT"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Set up an SOP for PDFing the Expensify reports (done:2026-07-14) #Ops", "desc": "Set up an SOP for PDFing the Expensify reports", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Work with Lucas on the lead-nurturing plan (done:2026-07-14) #Marketing", "desc": "Work with Lucas on the lead-nurturing plan", "tags": ["Marketing"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Talk with Lucas on the pay-to-play position (done:2026-07-14) #Marketing", "desc": "Talk with Lucas on the pay-to-play position", "tags": ["Marketing"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Talk with Lucas about semantic substrate (done:2026-07-14) #Marketing", "desc": "Talk with Lucas about semantic substrate", "tags": ["Marketing"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Nurturing pipeline from Lucas (done:2026-07-14) #Marketing", "desc": "Nurturing pipeline from Lucas", "tags": ["Marketing"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "MQL nurturing from Lucas (done:2026-07-14) #Marketing", "desc": "MQL nurturing from Lucas", "tags": ["Marketing"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Update the Financial Evaluation Dashboard (wk 916) (done:2026-07-14) #Finance", "desc": "Update the Financial Evaluation Dashboard (wk 916)", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Check Zoho for tasks (done:2026-07-14) #Sales", "desc": "Check Zoho for tasks", "tags": ["Sales"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Archive the cash plan (done:2026-07-14) #Finance", "desc": "Archive the cash plan", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Draft slides for the company update (done:2026-07-14) #Governance", "desc": "Draft slides for the company update", "tags": ["Governance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Email Pride \u2014 planned remit (done:2026-07-14) #Finance", "desc": "Email Pride \u2014 planned remit", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Update the cash & staff plan (done:2026-07-14) #Governance", "desc": "Update the cash & staff plan", "tags": ["Governance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Work on the cash spreadsheet (checking & savings) (done:2026-07-14) #Finance", "desc": "Work on the cash spreadsheet (checking & savings)", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Update the evaluation spreadsheet (done:2026-07-14) #Ops", "desc": "Update the evaluation spreadsheet", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Response from Paylocity (done:2026-07-14) #HR", "desc": "Response from Paylocity", "tags": ["HR"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Email Bonnie re: Amanda open enrollment (done:2026-07-14) #HR", "desc": "Email Bonnie re: Amanda open enrollment", "tags": ["HR"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "PCORI fees from Moody (done:2026-07-10) #Finance", "desc": "PCORI fees from Moody", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "QuickBooks export (done:2026-07-10) #Finance", "desc": "QuickBooks export", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Remit trust & trustee payments (quarterly) (done:2026-07-07) #Finance", "desc": "Remit trust & trustee payments (quarterly)", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Work on the evaluation spreadsheet (done:2026-07-06) #Ops", "desc": "Work on the evaluation spreadsheet", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "AIM partnership: website + joint materials (The Connected Customer) (done:2026-07-06) #Sales", "desc": "AIM partnership: website + joint materials (The Connected Customer)", "tags": ["Sales"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Research federal sales (done:2026-07-06) #Sales", "desc": "Research federal sales", "tags": ["Sales"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Update the evaluation spreadsheet (done:2026-07-06) #Ops", "desc": "Update the evaluation spreadsheet", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Pay policy document (done:2026-07-06) #HR", "desc": "Pay policy document", "tags": ["HR"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Close the NFR project (done:2026-07-06) #Finance", "desc": "Close the NFR project", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Close the OMICS Q2 project (done:2026-07-06) #Finance", "desc": "Close the OMICS Q2 project", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Archive the cash plan (done:2026-07-06) #Finance", "desc": "Archive the cash plan", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Finish payroll (catch-up) (done:2026-07-06) #HR", "desc": "Finish payroll (catch-up)", "tags": ["HR"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "CAN journal entry (done:2026-07-06) #Finance", "desc": "CAN journal entry", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Send the Beta invoice (done:2026-07-06) #Finance", "desc": "Send the Beta invoice", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Decide whether to deploy the Life Sciences JD (done:2026-07-06) #HR", "desc": "Decide whether to deploy the Life Sciences JD", "tags": ["HR"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Update bank info in the AR schedule (done:2026-07-06) #Finance", "desc": "Update bank info in the AR schedule", "tags": ["Finance"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Reorganize the file system into per-agent folders (done:2026-07-03) #Ops", "desc": "Reorganize the file system into per-agent folders", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Promote Otto to Chief of Staff; create EA + five specialists (done:2026-07-03) #Ops", "desc": "Promote Otto to Chief of Staff; create EA + five specialists", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Build the 10 agent knowledge bases + shared context profile (done:2026-07-03) #Research", "desc": "Build the 10 agent knowledge bases + shared context profile", "tags": ["Research"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Fold the AI Usage Policy into Legal; resolve both compliance flags (done:2026-07-03) #Legal", "desc": "Fold the AI Usage Policy into Legal; resolve both compliance flags", "tags": ["Legal"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Decide which new-agent SOP & calendar recommendations to adopt (done:2026-07-06) #Ops", "desc": "Decide which new-agent SOP & calendar recommendations to adopt", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Mark up the SOP & calendar recommendations (done:2026-07-06) #Ops", "desc": "Mark up the SOP & calendar recommendations", "tags": ["Ops"], "due": "", "prio": "", "owners": [], "subs": []}, {"section": "Done", "done": true, "title": "Revoke the retired Faithful Steward service-account key (done:2026-07-06) #IT", "desc": "Revoke the retired Faithful Steward service-account key", "tags": ["IT"], "due": "", "prio": "", "owners": [], "subs": []}];const PALETTE={"Finance": "#0F6B3C", "HR": "#8A5A00", "Sales": "#1F6FB2", "Marketing": "#6A1B9A", "IT": "#B03A2E", "Data": "#0B6E99", "Research": "#2E4D7B", "Legal": "#555F6E", "Brand": "#C2185B", "Ops": "#1F3864", "Client": "#00796B", "Governance": "#4E342E", "Personal": "#546E7A"};const PRIO={"high": "#c0392b", "med": "#c98a00", "low": "#3a7d3a"};
+function showTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.tab===t));document.getElementById('panel-board').classList.toggle('on',t==='board');document.getElementById('panel-cal').classList.toggle('on',t==='cal');}
+const SECT=["Active","Waiting On","Someday","Done"];const today=new Date();today.setHours(0,0,0,0);
+let selTags=new Set(),selPrio=new Set(),sortDue=false,hideDone=false;
+function dueClass(d){if(!d)return"";const dt=new Date(d+"T00:00:00");const diff=(dt-today)/86400000;if(diff<0)return"over";if(diff<=3)return"soon";return"";}
+function tagColor(t){return PALETTE[t]||"#8894a6";}
+function el(h){const d=document.createElement('div');d.innerHTML=h;return d.firstElementChild;}
+const present=new Set();TASKS.forEach(t=>t.tags.forEach(x=>present.add(x)));
+const tagOrder=Object.keys(PALETTE).filter(t=>present.has(t)).concat([...present].filter(t=>!PALETTE[t]));
+const tf=document.getElementById('tagfilters');
+tagOrder.forEach(t=>{const c=el('<span class="chip" data-t="'+t+'">'+t+'</span>');c.style.borderColor=tagColor(t);c.addEventListener('click',()=>{if(selTags.has(t)){selTags.delete(t);c.classList.remove('on');c.style.background='';}else{selTags.add(t);c.classList.add('on');c.style.background=tagColor(t);}render();});tf.appendChild(c);});
+document.querySelectorAll('.chip.prio').forEach(c=>c.addEventListener('click',()=>{const p=c.dataset.p;if(selPrio.has(p)){selPrio.delete(p);c.classList.remove('on');}else{selPrio.add(p);c.classList.add('on');}render();}));
+document.getElementById('sortDue').addEventListener('click',function(){sortDue=!sortDue;this.style.background=sortDue?'#dbe4f0':'#fff';render();});
+document.getElementById('hideDone').addEventListener('click',function(){hideDone=!hideDone;this.style.background=hideDone?'#dbe4f0':'#fff';render();});
+document.getElementById('clear').addEventListener('click',()=>{selTags.clear();selPrio.clear();sortDue=false;hideDone=false;document.getElementById('q').value='';document.querySelectorAll('.chip.on').forEach(c=>{c.classList.remove('on');c.style.background='';});document.getElementById('sortDue').style.background='#fff';document.getElementById('hideDone').style.background='#fff';render();});
+document.getElementById('q').addEventListener('input',render);
+function match(t){const q=document.getElementById('q').value.toLowerCase().trim();if(hideDone&&t.done)return false;if(selTags.size&&!t.tags.some(x=>selTags.has(x)))return false;if(selPrio.size&&!(t.prio&&selPrio.has(t.prio)))return false;if(q){const hay=(t.title+' '+t.desc+' '+t.tags.join(' ')+' '+t.owners.join(' ')+' '+t.subs.join(' ')).toLowerCase();if(hay.indexOf(q)<0)return false;}return true;}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function card(t){const pc=PRIO[t.prio]||'#c4cede';const c=document.createElement('div');c.className='card'+(t.done?' done':'');c.style.borderLeftColor=pc;let h='';h+='<div class="title">'+(t.prio?'<span class="pdot" style="background:'+pc+'" title="'+t.prio+'"></span>':'')+esc(t.title)+'</div>';if(t.desc)h+='<div class="desc">'+esc(t.desc)+'</div>';h+='<div class="row">';t.tags.forEach(x=>h+='<span class="tag" style="background:'+tagColor(x)+'">'+esc(x)+'</span>');if(t.due)h+='<span class="due '+dueClass(t.due)+'">due '+t.due+'</span>';t.owners.forEach(o=>h+='<span class="owner">@'+esc(o)+'</span>');h+='</div>';if(t.subs.length){h+='<ul class="subs">';t.subs.forEach(s=>h+='<li>'+esc(s)+'</li>');h+='</ul>';}c.innerHTML=h;return c;}
+let view='board';
+document.querySelectorAll('.viewbtn').forEach(b=>b.addEventListener('click',function(){document.querySelectorAll('.viewbtn').forEach(x=>x.classList.remove('on'));this.classList.add('on');view=this.dataset.v;render();}));
+function byDue(a,b){return (a.due||'9999')<(b.due||'9999')?-1:1;}
+function grp(title,arr,host,color){const g=el('<div class="listgrp"></div>');g.appendChild(el('<h3 class="cathdr"'+(color?' style="border-color:'+color+'"':'')+'>'+esc(title)+' <span class="n">('+arr.length+')</span></h3>'));arr.forEach(t=>g.appendChild(card(t)));host.appendChild(g);}
+function render(){const host=document.getElementById('cols');host.innerHTML='';host.className=(view==='board')?'cols':'list';
+ if(view==='board'){SECT.forEach(sec=>{let items=TASKS.filter(t=>t.section===sec&&match(t));if(sortDue)items=items.slice().sort(byDue);const col=document.createElement('div');col.className='col';col.innerHTML='<h2>'+sec+' <span class="n">('+items.length+')</span></h2>';if(!items.length)col.appendChild(el('<div class="empty">Nothing here</div>'));items.forEach(t=>col.appendChild(card(t)));host.appendChild(col);});}
+ else if(view==='due'){const items=TASKS.filter(t=>match(t)&&!t.done&&t.due);const isToday=t=>{const d=new Date(t.due+'T00:00:00');return (d-today)===0;};const mine=items.filter(t=>t.section!=='Waiting On');const wait=items.filter(t=>t.section==='Waiting On');const over=mine.filter(t=>dueClass(t.due)==='over').sort(byDue);const tod=mine.filter(isToday).sort(byDue);const waitDue=wait.filter(t=>dueClass(t.due)==='over'||isToday(t)).sort(byDue);if(over.length)grp('Overdue',over,host);if(tod.length)grp('Due today',tod,host);if(!over.length&&!tod.length)host.appendChild(el('<div class="empty">Nothing overdue or due today.</div>'));if(waitDue.length)grp('Waiting on — to follow up',waitDue,host,'#7a5c00');}
+ else{const items=TASKS.filter(t=>match(t)&&!t.done);const groups={};items.forEach(t=>{(t.tags.length?t.tags:['(untagged)']).forEach(tag=>{(groups[tag]=groups[tag]||[]).push(t);});});const ord=Object.keys(PALETTE).filter(k=>groups[k]).concat(Object.keys(groups).filter(k=>!PALETTE[k]));if(!ord.length)host.appendChild(el('<div class="empty">No tasks.</div>'));ord.forEach(tag=>grp(tag,groups[tag].slice().sort(byDue),host,tagColor(tag)));}
+}
+render();
+</script></body></html>

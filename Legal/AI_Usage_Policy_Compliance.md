@@ -17,7 +17,7 @@ Legal folds this policy into its knowledge base and screens every proposed agent
 
 ## B. Legal's flagging checklist (screen every proposed action)
 
-Flag to Otto/COO before proceeding if a proposed action would:
+Flag to Operations/Otto/COO before proceeding if a proposed action would:
 
 1. Use a **non-company or personal AI account** for client data, internal company work, IP, or confidential material.
 2. Enter **sensitive or highly sensitive data** (client data, SA ontologies/methodologies/proprietary code/private-repo contents, PII, financial, regulated) into any tool beyond the minimum necessary, or into a non-company tool at all.

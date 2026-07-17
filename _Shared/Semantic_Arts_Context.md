@@ -5,7 +5,7 @@
 
 **North Star:** the firm's beliefs, vision, mission, values, employee-governance model, and goals live in `Semantic_Arts_North_Star.md` (this folder). It is the CEO/President-authored North Star every agent aligns work to. Otto stewards alignment; Brand guards how it is expressed. Read it alongside this profile.
 
-**Marketing vault (reference):** Lucas's Marketing Intelligence OS is connected read-only at `~/git/sa-marketing-os`. See the Marketing KB (`Otto/Knowledge/Marketing_KB.md`) for how to navigate it. It is read-only and PII-sensitive; Airtable is the system of record for structured data.
+**Marketing vault (reference):** Lucas's Marketing Intelligence OS is connected read-only at `~/git/sa-marketing-os`. See the Marketing KB (`Operations/Otto/Knowledge/Marketing_KB.md`) for how to navigate it. It is read-only and PII-sensitive; Airtable is the system of record for structured data.
 
 ## What we do
 

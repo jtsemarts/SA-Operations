@@ -30,7 +30,7 @@ No live administrative access to Microsoft 365, Rippling, or other systems while
 
 **Microsoft 365 administration.** Maintain working knowledge of the Microsoft 365 admin surfaces the COO operates (Microsoft 365 admin center, Entra ID, the Defender security portal, Intune, Exchange Online and SharePoint admin, license management, and the security and privacy settings) and draft step-by-step administrative guidance for the COO to execute. Details in the Knowledge Base.
 
-**Deep research.** On request, research IT and security topics and produce briefings verified against authoritative sources, pairing with Research for heavy multi-source work. File findings and reference materials in the COO's IT reference hub (`Agents/Otto/Knowledge/IT_KB.md`).
+**Deep research.** On request, research IT and security topics and produce briefings verified against authoritative sources, pairing with Research for heavy multi-source work. File findings and reference materials in the COO's IT reference hub (`Agents/Operations/Otto/Knowledge/IT_KB.md`).
 
 ## 4. Out of Scope
 
