@@ -6,15 +6,15 @@
      Indented sub-bullets = description / subtasks. Recurring tasks live in the Company Calendar. -->
 
 ## Active
-- [ ] **Run the 2-week Productivity + HR plugin trial** - connector-free; complete the go/no-go review. #Ops !high due:2026-07-17
-  - Compare against our SOP-driven workflows; capture time saved.
 - [ ] **Make pay changes in Spark** - HR/payroll system. #HR !high due:2026-07-24
+- [ ] **Email from the office re: gist meeting attendance** - send from the office account asking why people aren't coming to the gist meetings and whether a different time would be preferred. #Marketing !med due:2026-07-20
+  - Ask: (1) would they like a rotating facilitator; (2) why they aren't attending; (3) if it's a timing issue, suggest a few alternative times that might work better.
 - [ ] **Talk with Amanda about Paylocity and the implementation plan** - payroll provider transition. #HR !med due:2026-07-20 @Amanda
 - [ ] **Think through the monthly ops update** - shape the monthly operations update. #Ops !med due:2026-07-20
 - [ ] **Schedule a marketing strategy session with Dave and Rebecca** - set up the working session. #Marketing !med due:2026-07-20
 - [ ] **Discuss capping the company share of a BYOD purchase with Rebecca** - for the Thursday check-in. @Rebecca #HR !med due:2026-07-23
 - [ ] **Resurface corporate structure / employment docs with Rebecca** - held pending the lawyer's input and pricing. @Rebecca #Governance !med due:2026-07-30
-- [ ] **Talk to Dave about Brian Schulte** - SA HR. #HR !med due:2026-07-17 @Dave
+- [ ] **Talk to Dave about Brian Schulte** - SA HR. #HR !med due:2026-07-20 @Dave
 - [ ] **Colton baby gift** - team/HR gesture (confirmed SA). #HR !med due:2026-07-20
 - [ ] **Figure out the CAN accounting in QB and write out a plan** - Canada entity bookkeeping in QuickBooks. #Finance !high due:2026-07-17
 - [ ] **Box quantity of each book** - inventory. #Ops !med due:2026-08-01
@@ -24,17 +24,14 @@
 - [ ] **Set up the sales to-do list for the nurturing pipeline** - build out the nurturing-pipeline sales task list/process. #Sales !med
 - [ ] **Add projects to the nurturing pipeline** - accounts to move into nurturing. #Sales !med
   - Factset; Eurofins; Broadridge; J&J; Bayer; Craxel (Mythos); ISG at MS; Threatconnect
-- [ ] **Put Dylan at BNY on the nurturing list** - add to the nurturing pipeline. #Sales !med due:2026-07-17
 - [ ] **Review lost deals from the last 12 months to resurrect** - identify closed-lost deals worth reviving. #Sales !med due:2026-07-17
-- [ ] **Review AIM Services draft webpage content** - from AIM. Doc: Documents/AIM_Services_draft_webpage_content.docx #Sales !med due:2026-07-17
+- [ ] **Review AIM Services draft webpage content** - from AIM. Doc: Documents/AIM_Services_draft_webpage_content.docx #Sales !med due:2026-07-20
 - [ ] **Check and approve Expensify expense reports** - recurring (every pay cycle, Monday before payroll), from the calendar. #Finance !high due:2026-07-20
-- [ ] **Close Beta** - close the Beta project. #Finance !med due:2026-07-17
+- [ ] **Close Beta** - close the Beta project. #Finance !med due:2026-07-20
 - [ ] **Back up the Agents workspace to SharePoint** - monthly redundancy backup (iCloud is the primary backup). #IT !med due:2026-07-31
 - [ ] **Roll out a company-wide password manager** - select vendor, enact the policy, deploy. Research doc in progress. #IT !med
 - [ ] **Roll out a business VPN** - select vendor, enact the remote-access / public-wifi policy, deploy. Research doc in progress. #IT !med
-- [ ] **Schedule time to work on IT posture** - block time to work through security settings and the IT reference materials. #IT !med due:2026-07-17
 - [ ] **Contact Jason (external IT) re: Microsoft & Box backup procedures** - document backup procedures for M365 and Box with our external IT help. #IT !med due:2026-07-29
-- [ ] **Verify the SA-Operations nightly backup ran** - weekly check of the backup log; recurring, from the calendar. #IT !low due:2026-07-17
 
 ## Waiting On
 - [ ] **Ratify the executive decision-rights model** - final sign-off. @CEO @President #Governance !high
@@ -49,6 +46,10 @@
 - [ ] **Populate remaining [DRAFT] SOP placeholders** in the Operations Playbook. #Ops !low
 
 ## Done
+- [x] ~~Schedule time to work on IT posture~~ (done:2026-07-17) #IT
+- [x] ~~Verify the SA-Operations nightly backup ran (pushed 2026-07-16 20:30)~~ (done:2026-07-17) #IT
+- [x] ~~Put Dylan at BNY on the nurturing list~~ (done:2026-07-17) #Sales
+- [x] ~~Run the 2-week Productivity + HR plugin trial (go/no-go: successful)~~ (done:2026-07-17) #Ops
 - [x] ~~Check Zoho for tasks~~ (done:2026-07-16) #Sales
 - [x] ~~Email the coaches agenda~~ (done:2026-07-16) #HR
 - [x] ~~QuickBooks export~~ (done:2026-07-16) #Finance
