@@ -63,8 +63,8 @@ A recurring calendar of deadlines and standing reminders: tax and compliance dat
 | Payroll runs & payroll-tax deposits | [PAYROLL] | Per schedule (monthly/semiweekly per IRS deposit rules) |
 | Bookkeeping close & cash-flow projection | [FINANCE] | Month-end |
 | Spending vs. budget review | [FINANCE] | Month-end |
-| Review clients due for a 1:1 satisfaction check-in call (flag contracts near their midpoint) | [CLIENT] | 1st of month — Ops Manager (Amanda) |
-| **Reminder to JT:** check which satisfaction calls need coordinating/scheduling | [CLIENT] | 1st of month |
+| **Reminder to JT:** verify which clients are due for a satisfaction check-in this month and notify Amanda | [CLIENT] | 1st of month |
+| Amanda emails the selected clients (President check-in template) and schedules the calls | [CLIENT] | 1st of month — Ops Manager (Amanda), after JT's list |
 | Prepare trustee financial reports | [FINANCE] | 1st of month |
 | Otto reviews the calendar for recurring tasks due this week and adds them to the task board | [OPS] | Weekly (Monday, recurring task) |
 | **Manual backup of the Agents workspace to SharePoint** (added redundancy; iCloud is the primary backup) | [OPS] | Monthly — 28th — JT / IT |
@@ -260,3 +260,4 @@ Because Semantic Arts operates across many states, several recurring obligations
 | 2.1 | 2026-07-14 | Added quarterly "Review lost deals for potential nurturing" on the 15th (Feb / May / Aug / Nov; next 2026-08-15). |
 | 2.2 | 2026-07-14 | Added weekly Friday "Verify the SA-Operations nightly backup ran" (glance at the backup log; Otto interprets). |
 | 2.3 | 2026-07-16 | Added monthly "Prep the AI & Cyber Task Force agenda" (Monday before the 3rd Thursday; next 2026-08-17). The meeting is the 3rd Thursday monthly and stays in JT's own calendar. |
+| 2.4 | 2026-07-20 | Reworded the monthly (1st) client satisfaction items to match the SOP: JT verifies which clients are due and notifies Amanda; Amanda emails the selected clients (President check-in template) and schedules the calls. |

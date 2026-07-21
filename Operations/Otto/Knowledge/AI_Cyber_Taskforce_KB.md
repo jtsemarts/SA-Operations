@@ -1,6 +1,6 @@
 # Knowledge Base — AI & Cyber Task Force
 
-**Maintained by:** Otto (for the COO) · **Living document** · **Last updated:** 2026-07-14
+**Maintained by:** Otto (for the COO) · **Living document** · **Last updated:** 2026-07-17
 **Sensitivity:** Internal (security-sensitive; keep specific vulnerability or incident detail minimal, per the AI Usage Policy)
 **Related:** Operations Playbook (IT & Access Management; AI policy); Meeting Intelligence KB; Company Calendar.
 
@@ -70,7 +70,7 @@ Newest first. Copy the block below for each meeting.
 
 ## 2026-07-16 (Kickoff)
 - Attendees: JT (chair), Rebecca, Lucas, Neil, Brett, Steven, Jamie
-- Agenda: Kickoff. (1) Welcome (Rebecca); (2) how we'll operate (JT); (3) cyber topics: Microsoft protections beyond MFA, zero-trust (understand offering, vendors, timing); (4) AI topics: MCP connectors and integrations; (5) action items, including: all members review the AI policy before the next meeting and bring notes; (6) next meeting and close. Doc: `AI_Cyber_Taskforce_Agenda_2026-07-16.docx`. Note: password manager and VPN are already underway and are being handled directly by the COO (on the COO task board), so they are out of task-force scope, not deferred.
+- Agenda: Kickoff. (1) Welcome (Rebecca); (2) how we'll operate (JT); (3) cyber topics: Microsoft protections beyond MFA, zero-trust (understand offering, vendors, timing); (4) AI topics: MCP connectors and integrations; (5) action items, including: all members review the AI policy before the next meeting and bring notes; (6) next meeting and close. Doc: `AI_Cyber_Taskforce_Agenda_2026-07-16.docx`. Note: password manager and VPN are an executive decision owned by the **COO and the President** (shortlist, pricing, and the decision brief live in the IT KB; sales calls are on the COO task board), so they are out of task-force scope.
 - Updates: (to log after the meeting)
 - Recommendations: (to log after the meeting; note who each is routed to)
 - New action items: (to add to the tracker after the meeting)
@@ -97,3 +97,4 @@ Recommendations the group makes, and where they went for a decision.
 | 2026-07-14 | Clarified authority: the group is advisory (research, discuss, recommend), not a decision body. Final decisions with the President (AI policy) or the COO (internal infrastructure). Renamed the decisions log to a recommendations log. Logged the 7/16 kickoff agenda. |
 | 2026-07-14 | Added Jamie as a member. Added the group goal statement. On the shared agenda, simplified the decision note to "final decisions made by the executive team." |
 | 2026-07-16 | Set cadence to monthly (3rd Thursday); added the monthly agenda-prep calendar reminder (Monday before). Reformatted the standing agenda template to JT's preferred structure: Welcome; Action items from last meeting (SharePoint/Teams and ops notes, exec decisions since last meeting); New topics (AI-policy discussion, MCP/third-party connectors, possible Monthly Company Update presentation); Action items and owners; Next meeting. Future agendas follow this. |
+| 2026-07-17 | Confirmed the password-manager / VPN vendor decision is executive (COO and President), not a task-force decision. Moved the vendor shortlist and pricing to the IT KB and restored the out-of-scope note here. |

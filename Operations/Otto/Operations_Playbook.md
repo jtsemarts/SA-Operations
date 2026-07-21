@@ -44,19 +44,32 @@ The single source of truth for how Semantic Arts runs internally: standard opera
 
 ### SOP: Mid-contract client satisfaction check-in (keep / stop / start)
 - Status: [ACTIVE]
-- Owner: Operations Manager (Amanda) runs the check-in; President owns overall client satisfaction and handles escalations; COO (JT) runs the monthly review.
-- Trigger / frequency: Roughly the midpoint of each client contract. Caught via a monthly review on the 1st (see Company Calendar) that flags contracts reaching their midpoint.
-- Purpose: A light, structured check-in with the client sponsor partway through an engagement, to catch issues early and confirm the client is happy.
+- Owner: President (Rebecca) has the check-in chat with the client and owns overall client satisfaction and escalations; Operations Manager (Amanda) coordinates and schedules; COO (JT) runs the monthly review and selects which clients to contact.
+- Trigger / frequency: The intent is for the President to connect briefly with each client over the course of the year. Caught via a monthly review on the 1st (see Company Calendar) that flags clients due for a check-in (for example contracts reaching their midpoint).
+- Purpose: A light, brief chat (15-30 minutes) with each client during the year to hear what we are doing well, what we could improve, and any other comments or concerns, so issues are caught early.
 - Steps:
-  1. On the 1st of each month, review active contracts and flag any near their midpoint that are due for a check-in. Otto surfaces this in the monthly calendar reminder; JT confirms the list.
-  2. The Operations Manager emails the sponsor using the standard check-in email template (**to be drafted**) to request a brief call.
-  3. Coordinate calendars and schedule the 1:1 call.
-  4. On the call, ask the three questions: what should we **keep** doing, what should we **stop** doing, and what should we **start** doing.
+  1. On the 1st of each month, JT reviews the client list and confirms which clients should receive an outreach this month, then notifies Amanda.
+  2. Amanda emails each selected client using the template below, offering two time options for a brief chat with Rebecca.
+  3. Amanda schedules the call and sends the calendar invite once the client picks a time.
+  4. On the call, Rebecca asks the three questions: what should we **keep** doing, what should we **stop** doing, and what should we **start** doing.
   5. Capture the responses and make an explicit read on whether the client is happy. Log the outcome and any follow-up actions.
   6. Escalate any red flags to the President (owner of client satisfaction and final negotiator on contentious issues).
-- Tools / templates: Client check-in email template (**to be drafted**, placeholder). Log outcomes alongside the engagement record.
+- Email template (Amanda sends; fill in `[First Name]` and two `[TIME AND DATE]` options):
+
+  > Hello [First Name]
+  >
+  > My name is Amanda Griffith and I am the operations manager here at Semantic Arts.
+  >
+  > We are implementing a new practice of coordinating some time for our president, Rebecca Younes, to connect briefly with each of our clients over the course of the year. The goal is simple, to have a quick chat on what we might be doing well, could improve, or any other comments or concerns you might have. We anticipate these to only take 15-30 minutes of your day.
+  >
+  > Would you have some time at [TIME AND DATE] or [TIME AND DATE] that I could send a calendar invite?
+  >
+  > Best,
+  > Amanda
+
+- Tools / templates: the check-in email template above. Log outcomes alongside the engagement record.
 - Related: Company Calendar (1st-of-month review and JT coordination reminder); SOP: Client satisfaction & NPS (backlog).
-- Last updated: 2026-07-03
+- Last updated: 2026-07-20
 
 **Backlog (to write):** Engagement kickoff & client onboarding · Project & status management · Deliverable QA & review · Scope-change / change-order management · Client satisfaction & NPS · Project closeout & lessons learned.
 
@@ -491,6 +504,7 @@ Everything else is captured in the per-section **Backlog (to write)** lists abov
 | 1.8 | 2026-07-10 | Trimmed the empty [DRAFT] SOP placeholders into compact per-section "Backlog (to write)" lists, keeping all [ACTIVE] SOPs verbatim. Reduces document size while preserving the roadmap. Added an "Index of active SOPs". |
 | 1.9 | 2026-07-13 | Added Finance SOP "Financial Evaluation Dashboard weekly update" ([ACTIVE]): the metric list required to fully update the dashboard each Monday and the operating rule that Otto prompts the COO for those numbers, edits the inputs, verifies, and presents. Points to the operator card checklist. |
 | 2.0 | 2026-07-14 | Expanded the Expense reimbursement SOP with the full flow: approval against the Confluence Travel & Expense Policy, direct rectification of violations with staff, saving approved reports as PDFs to the SharePoint Expenses folder, and the Operations Manager reconciling PDFs into the Expense Master Spreadsheet (Wednesday before payroll) which feeds the payroll spreadsheet. |
+| 2.5 | 2026-07-20 | Completed the "Mid-contract client satisfaction check-in" SOP: added the real outreach email template (Amanda sends), and clarified the workflow — JT selects which clients each month and notifies Amanda; Amanda emails and schedules; the President (Rebecca) has the 15-30 minute chat (keep/stop/start). Updated the matching Company Calendar reminders. |
 | 2.4 | 2026-07-16 | Added Finance SOP "QuickBooks mechanics (access and export)" ([ACTIVE]): access the QB machine ("Plotter" / "SA-PC") in office by PIN or remotely via Chrome Remote Desktop on the company Google account (machine PINs in the password manager; each user signs into QB with their own unique credentials); export via Transaction Pro to the SharePoint QB Extracts folder, then notify Eddie and Colton on Teams. Working in QB is out of scope (separate Finance SOP). |
 | 2.3 | 2026-07-15 | Added Finance SOP "Project setup (operational onboarding)" ([ACTIVE]): Spark and QuickBooks setup, invoice procedure, PO where the client requires it, add to the AR Schedule, verify insurance and add the client as additional insured, and update the staff plan. Pairs with Project closing. |
 | 2.2 | 2026-07-15 | Added a "Physical IT resources" reference note under IT & Access Management: QuickBooks server ("Plotter", password in LastPass), Meraki VPN/switch via web interface, other office servers managed by Jamie (out of scope). |

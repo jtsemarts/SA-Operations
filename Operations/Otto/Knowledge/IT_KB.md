@@ -1,6 +1,6 @@
 # Knowledge Base — IT (COO reference and professional development)
 
-**Maintained by:** Otto (for the COO) · **Living document** · **Last updated:** 2026-07-15
+**Maintained by:** Otto (for the COO) · **Living document** · **Last updated:** 2026-07-17
 **Sensitivity:** Internal
 **Related:** AI & Cyber Task Force KB (`AI_Cyber_Taskforce_KB.md`); IT specialist agent (`Agents/IT/`); Operations Playbook (IT & Access Management).
 
@@ -22,7 +22,21 @@ These live in the Documents folder.
 | `VPN_Vendor_Research_and_Policy.docx` | Six-vendor comparison plus a draft VPN policy (ExpressVPN for Teams preferred). |
 | `Microsoft_Defender_Capabilities_and_Priorities.docx` | The Defender product family, licensing paths, and what to prioritize. |
 
-> **Note — potential consolidation:** Dashlane Business ($8/user/mo) bundles a VPN, so choosing Dashlane could cover both the password-manager and VPN needs in one service, avoiding a second subscription. Weigh the bundled VPN's coverage against a dedicated VPN (e.g., ExpressVPN for Teams) before finalizing.
+## Vendor selection — password manager / VPN
+
+**Decision owners: the COO and the President.** This is an executive decision. The AI & Cyber Task Force may help research, but it does not own or make it.
+
+Shortlist (narrowed 2026-07-17):
+
+| Vendor | Password manager | VPN | Business price (per user/mo) | Note |
+|---|---|---|---|---|
+| Nord (NordPass + NordLayer) | Yes | Yes | NordPass $3.59; NordLayer from ~$8 | Only true "both" with a real business VPN; two products / consoles. |
+| 1Password | Yes | No | $7.99 (annual; some listings $8.99) | Strongest password manager; no VPN, so pair with a dedicated one. |
+| Dashlane | Yes | Bundled (Hotspot Shield) | $8 (Password Management tier) | One price covers both, but the bundled VPN is consumer-grade. |
+
+Open question: consolidate the password manager and VPN with one vendor (Nord) or run best-of-breed (1Password plus a dedicated VPN). Dashlane bundles a VPN in a single price, but it is consumer-grade, so it likely still needs a dedicated VPN alongside it.
+
+Decision brief: `IT/Work/Password_VPN_Vendor_Brief_Nord_1Password_Dashlane.docx`. Fuller six-vendor research: `Password_Manager_Vendor_Research_and_Policy.docx` and `VPN_Vendor_Research_and_Policy.docx`. Next step: sales calls with all three (on the COO task board). Pricing verified July 2026; reconfirm at purchase.
 
 ## Admin consoles and tools
 
@@ -69,3 +83,4 @@ Otto routes IT and security questions to the **IT specialist agent** (`Agents/IT
 | 2026-07-15 | Created. Linked the five cyber reference documents, the Microsoft 365 security-settings console, and a topics-to-understand backlog. Cross-referenced the AI & Cyber Task Force KB and the IT agent. |
 | 2026-07-15 | Added Box (box.com) as the store for archived/sensitive information; noted the open item to document Microsoft 365 and Box backup procedures with Jason (external IT). |
 | 2026-07-15 | Added a runbook for releasing a restricted (blocked) account after an employee is hacked: check the restricted-entities list, delete malicious inbox rules, release via the lock email and Microsoft guide, then test. |
+| 2026-07-17 | Added the "Vendor selection — password manager / VPN" section: shortlist (Nord, 1Password, Dashlane) with 2026 business pricing, the consolidate-vs-best-of-breed question, and the decision brief pointer. Recorded that the decision is the COO's and President's. Moved this here from the AI & Cyber Task Force KB. |

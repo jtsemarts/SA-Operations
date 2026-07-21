@@ -16,7 +16,8 @@
 - [ ] **Resurface corporate structure / employment docs with Rebecca** - held pending the lawyer's input and pricing. @Rebecca #Governance !med due:2026-07-30
 - [ ] **Talk to Dave about Brian Schulte** - SA HR. #HR !med due:2026-07-20 @Dave
 - [ ] **Colton baby gift** - team/HR gesture (confirmed SA). #HR !med due:2026-07-20
-- [ ] **Figure out the CAN accounting in QB and write out a plan** - Canada entity bookkeeping in QuickBooks. #Finance !high due:2026-07-17
+- [ ] **Figure out the CAN accounting in QB and write out a plan** - Canada entity bookkeeping in QuickBooks. #Finance !high due:2026-07-20
+- [ ] **Schedule sales calls with Nord, 1Password, and Dashlane** - password-manager / VPN vendor shortlist; book a call with each vendor's sales team. Brief: IT/Work/Password_VPN_Vendor_Brief_Nord_1Password_Dashlane.docx #IT !med due:2026-07-20
 - [ ] **Box quantity of each book** - inventory. #Ops !med due:2026-08-01
 - [ ] **Talk with Bill about Databricks with FedScale** - SA Sales. #Sales !med
 - [ ] **Dig into AIXM and write up moving it to an ontology** - Aeronautical Information Exchange Model; how it would be represented as an ontology (relates to DNI / DOT opportunity). #Sales !med due:2026-07-20
@@ -24,7 +25,7 @@
 - [ ] **Set up the sales to-do list for the nurturing pipeline** - build out the nurturing-pipeline sales task list/process. #Sales !med
 - [ ] **Add projects to the nurturing pipeline** - accounts to move into nurturing. #Sales !med
   - Factset; Eurofins; Broadridge; J&J; Bayer; Craxel (Mythos); ISG at MS; Threatconnect
-- [ ] **Review lost deals from the last 12 months to resurrect** - identify closed-lost deals worth reviving. #Sales !med due:2026-07-17
+- [ ] **Review lost deals from the last 12 months to resurrect** - identify closed-lost deals worth reviving. #Sales !med due:2026-07-20
 - [ ] **Review AIM Services draft webpage content** - from AIM. Doc: Documents/AIM_Services_draft_webpage_content.docx #Sales !med due:2026-07-20
 - [ ] **Check and approve Expensify expense reports** - recurring (every pay cycle, Monday before payroll), from the calendar. #Finance !high due:2026-07-20
 - [ ] **Close Beta** - close the Beta project. #Finance !med due:2026-07-20
@@ -37,8 +38,8 @@
 - [ ] **Ratify the executive decision-rights model** - final sign-off. @CEO @President #Governance !high
 - [ ] **Remind Dave to contact Abhi re: MS Map turnover after the rate increase** - SA Sales. @Dave #Sales !med due:2026-08-05
 - [ ] **Margin queries from Dave** - awaiting Dave's margin questions/answers; follow up next Tuesday. @Dave #Finance !med due:2026-07-21
-- [ ] **Commission assignment from Rebecca** - confirm commission assignment. @Rebecca #Sales !med due:2026-07-17
-- [ ] **Microsoft integration decision (Rebecca)** - read-only M365 email/calendar/Teams connection decision. @Rebecca #IT !med due:2026-07-17
+- [ ] **Commission assignment from Rebecca** - confirm commission assignment. @Rebecca #Sales !med due:2026-07-20
+- [ ] **Microsoft integration decision (Rebecca)** - read-only M365 email/calendar/Teams connection decision. @Rebecca #IT !med due:2026-07-20
 - [ ] **Dashlane bundled VPN — decision (Rebecca)** - whether Dashlane's bundled VPN covers our needs (avoiding a separate VPN subscription) or we go with a dedicated VPN. @Rebecca #IT !med due:2026-07-20
 - [ ] **Confirm Microsoft Graph (Rebecca)** - awaiting Rebecca's confirmation on Microsoft Graph. @Rebecca #IT !med due:2026-07-20
 
